@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>instructBrain - step by step plan - IB-PLAN-001 Rev 2</title>
+<title>instructBrain - step by step plan - IB-PLAN-001 Rev 3</title>
 <style>
  :root{--navy:#0b1b3a;--accent:#57FF00;--ink:#0e1626;--line:#d7dde8;--muted:#5b6b85;--bg:#f6f8fb}
  *{box-sizing:border-box}
@@ -48,107 +48,127 @@
  code{background:#f1f4f9;border:1px solid #e2e8f2;border-radius:3px;padding:1px 4px;font-size:11.5px}
  .callout{background:#f2fff8;border:1px solid #a9ebc8;border-left:4px solid var(--accent);padding:11px 13px;font-size:13px;margin:16px 0}
  .callout b{color:#0a6b3d}
+ .linkbox{display:flex;gap:14px;align-items:center;background:#f7f9fc;border:1px solid var(--line);
+  border-left:4px solid var(--navy);border-radius:5px;padding:11px 13px;margin:14px 0;page-break-inside:avoid;break-inside:avoid}
+ .linkbox img{width:74px;height:74px;border:1px solid var(--line);border-radius:4px;background:#fff;padding:3px}
+ .linkbox .lt{font-size:12.5px;color:#2f3d52}
+ .linkbox .lt b{display:block;font-size:13px;color:var(--ink);margin-bottom:3px}
+ .linkbox a{color:#1c3f7a;word-break:break-all}
  footer{background:#0b1b3a;color:#8ea0bd;font-size:11.5px;padding:13px 30px;border-top:3px solid var(--accent)}
  @page{size:A4;margin:11mm}
  @media print{
-  body{background:#fff;font-size:11.5px} .sheet{max-width:none}
-  header{padding:14px 0 12px;border-bottom-width:3px} .meta div{padding:5px 16px 5px 0} main{padding:0}
-  h1{font-size:21px} .step-head{padding:4.5px 9px} .step-head .t{font-size:11.4px} .step{margin-bottom:8px}
-  .kv th{padding:3px 9px;width:96px;font-size:8.8px} .kv td{padding:3px 9px 3px 0;font-size:10.1px}
-  table.sum td{padding:3.2px 7px;font-size:10.1px} table.sum th{padding:4px 7px;font-size:8.6px}
-  h2{margin:11px 0 6px;font-size:11.6px}
-  *,header,table.sum th,.badge,.step-head,footer,.callout{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff;font-size:11px} .sheet{max-width:none}
+  header{padding:13px 0 11px;border-bottom-width:3px} .meta div{padding:4px 15px 4px 0} main{padding:0}
+  h1{font-size:20px} .step-head{padding:4px 8px} .step-head .t{font-size:11.2px} .step{margin-bottom:7px}
+  .kv th{padding:2.6px 8px;width:104px;font-size:8.6px} .kv td{padding:2.6px 8px 2.6px 0;font-size:9.8px}
+  table.sum td{padding:3.2px 7px;font-size:10px} table.sum th{padding:4px 7px;font-size:8.6px}
+  h2{margin:10px 0 6px;font-size:11.4px} .callout{font-size:10.4px;padding:8px 10px;margin:10px 0}
+  .linkbox{padding:8px 10px;margin:10px 0} .linkbox img{width:64px;height:64px} .linkbox .lt{font-size:10.4px}
+  *,header,table.sum th,.badge,.step-head,footer,.callout,.linkbox{-webkit-print-color-adjust:exact;print-color-adjust:exact}
  }
 </style></head>
 <body><div class="sheet">
 <header>
   <div class="brand">instruct<span>Brain</span></div>
-  <div class="ref">IB-PLAN-001 &middot; Rev 2 &middot; action plan</div>
+  <div class="ref">IB-PLAN-001 &middot; Rev 3 &middot; action plan</div>
   <h1>What we do next, in order</h1>
-  <div class="sub">Eleven steps &mdash; four fixed and pushed today, three waiting on you, the rest mine</div>
+  <div class="sub">Published, verified on the live site and written up &mdash; three decisions left with you</div>
 </header>
 <div class="meta">
-  <div><b>Issued</b>7 Oct 2026 (Rev 2)</div>
+  <div><b>Issued</b>7 Oct 2026 (Rev 3)</div>
   <div><b>Owner</b>D. Hopwood</div>
   <div><b>Product</b>instructBrain</div>
-  <div><b>Repository</b><code>7a2e6a4</code> on main, origin level</div>
+  <div><b>Repository</b><code>b826212</code> on main, origin level</div>
+  <div><b>CI</b>run 37663006724, green</div>
 </div>
 <main>
-  <div class="callout"><b>One thing is holding everything up, and it is one click.</b> The four fixes are
-  committed and pushed to <code>main</code> as <code>7a2e6a4</code> &mdash; they are in the repository, not yet on
-  your site. Press <b>Publish &rarr; Update</b> in Lovable, tell me, and I will re-walk every screen and report
-  what actually changed.</div>
+  <div class="callout"><b>Everything fixed is now published and checked on the live site &mdash; and that is where the
+  last bug was found.</b> Rev 2 said four fixes were sitting in the repository waiting on a publish. They are live,
+  verified in the code your site serves <i>and</i> on the screens, signed in read-only. The one thing reading the code
+  could not tell us was that the first dashboard fix only half worked; walking it did. That is fixed, confirmed, and
+  written up.</div>
 
   <h2><span class="k">1</span>The whole plan, at a glance</h2>
   <table class="sum">
     <thead><tr><th>#</th><th>Step</th><th>Status</th><th>Why it matters</th></tr></thead>
-    <tbody><tr><td class="n">0</td><td>Press Publish &rarr; Update in Lovable</td><td class="badge-cell"><span class="badge you">DONE</span></td><td class="note">Published and verified live: Pro, and the Finding labels</td></tr><tr><td class="n">1</td><td>Location: one prompt, not two</td><td class="badge-cell"><span class="badge me">FIXED &middot; 0bb939b</span></td><td class="note">The one you keep hitting</td></tr><tr><td class="n">2</td><td>Letterhead stops repeating itself</td><td class="badge-cell"><span class="badge me">FIXED &middot; 1565772</span></td><td class="note">Two identical lines on every report header</td></tr><tr><td class="n">3</td><td>Dashboard stops hiding the work</td><td class="badge-cell"><span class="badge me">FIXED &middot; bd59448</span></td><td class="note">Recent reports and Overdue now open themselves</td></tr><tr><td class="n">4</td><td>All reports gets a create action</td><td class="badge-cell"><span class="badge me">FIXED &middot; 8654714</span></td><td class="note">No way to start a report from the list</td></tr><tr><td class="n">5</td><td>Tests, lint, push</td><td class="badge-cell"><span class="badge me">DONE</span></td><td class="note">504 tests pass, lint 0 errors, CI green, pushed</td></tr><tr><td class="n">6</td><td>The two old reports both saying 001</td><td class="badge-cell"><span class="badge both">EXPLAINED &middot; 7a2e6a4</span></td><td class="note">Note added on screen; whether to reissue them is still your call</td></tr><tr><td class="n">7</td><td>Delivery webhooks not configured</td><td class="badge-cell"><span class="badge you">NEEDS YOU</span></td><td class="note">Bounces are not recorded today</td></tr><tr><td class="n">8</td><td>Sign-in emails on a shared sender</td><td class="badge-cell"><span class="badge you">NEEDS YOU</span></td><td class="note">Lovable paid route, or Supabase SMTP via Resend (free)</td></tr><tr><td class="n">9</td><td>IB-WALK-002 - the write-up</td><td class="badge-cell"><span class="badge me">NOT STARTED</span></td><td class="note">Say when and I will write it</td></tr><tr><td class="n">10</td><td>Re-walk after publishing</td><td class="badge-cell"><span class="badge me">WAITING ON YOU</span></td><td class="note">Proof, not an assumption - the moment you publish</td></tr></tbody>
+    <tbody><tr><td class="n">0</td><td>Press Publish &rarr; Update in Lovable</td><td class="badge-cell"><span class="badge you">DONE</span></td><td class="note">Published twice today; both checked on the live site, not on the button</td></tr><tr><td class="n">1</td><td>Location: one prompt, not two</td><td class="badge-cell"><span class="badge me">LIVE &middot; 0bb939b</span></td><td class="note">The one you keep hitting</td></tr><tr><td class="n">2</td><td>Letterhead stops repeating itself</td><td class="badge-cell"><span class="badge me">LIVE &middot; 1565772</span></td><td class="note">Two identical lines on every report header</td></tr><tr><td class="n">3</td><td>Dashboard stops hiding the work</td><td class="badge-cell"><span class="badge me">LIVE &middot; bd59448 + b826212</span></td><td class="note">Two commits: the sections open themselves, and they open when the count arrives</td></tr><tr><td class="n">4</td><td>All reports gets a create action</td><td class="badge-cell"><span class="badge me">LIVE &middot; 8654714</span></td><td class="note">No way to start a report from the list</td></tr><tr><td class="n">5</td><td>Tests, lint, push</td><td class="badge-cell"><span class="badge me">DONE</span></td><td class="note">504 tests pass, lint 0 errors, CI green on b826212</td></tr><tr><td class="n">6</td><td>The two old reports both saying 001</td><td class="badge-cell"><span class="badge both">EXPLAINED &middot; 7a2e6a4</span></td><td class="note">Note now shows on screen; reissuing them is still your call</td></tr><tr><td class="n">7</td><td>Delivery webhooks not configured</td><td class="badge-cell"><span class="badge you">NEEDS YOU</span></td><td class="note">Bounces are not recorded today</td></tr><tr><td class="n">8</td><td>Sign-in emails on a shared sender</td><td class="badge-cell"><span class="badge you">NEEDS YOU</span></td><td class="note">Lovable paid route, or Supabase SMTP via Resend (free)</td></tr><tr><td class="n">9</td><td>IB-WALK-002 &mdash; the walk, as a document</td><td class="badge-cell"><span class="badge me">DONE</span></td><td class="note">Two pages, before and after, hosted and filed</td></tr><tr><td class="n">10</td><td>Re-walk after publishing</td><td class="badge-cell"><span class="badge me">DONE</span></td><td class="note">Six checks, one bug caught and fixed, nothing changed</td></tr></tbody>
   </table>
 
-  <h2><span class="k">2</span>Done &mdash; shipped and published</h2>
+  <h2><span class="k">2</span>Published, and verified at the source</h2>
   
     <div class="step">
       <div class="step-head">
-        <span class="n">0</span><span class="t">Publish what was already built</span>
+        <span class="n">0</span><span class="t">Published - and verified at the source, not at the button</span>
         <span class="badge done">DONE</span>
-        <span class="size">1 minute</span>
+        <span class="size">done</span>
       </div>
-      <table class="kv"><tr><th>What</th><td>Fifteen commits from Mon 6 Oct were in the repository and invisible to your users.</td></tr><tr><th>Now</th><td>You published, and I checked the result rather than the button: the live pricing card says <b>Pro</b> where it said Practice, the served code says <b>Finding identification &amp; remedial schedule</b>, and <b>none</b> of 125 live chunks still says Snag. The database has definition v4 active with the Finding labels, v1&ndash;v3 retired, so nothing issued changes retrospectively.</td></tr></table>
+      <table class="kv"><tr><th>What was wrong</th><td>Fifteen commits from Mon 6 Oct were in the repository and invisible to your users.</td></tr><tr><th>Now</th><td>You published. I then checked the <b>result</b>: the live pricing card says <b>Pro</b> where it said Practice, the served code says <b>Finding identification &amp; remedial schedule</b>, <b>none</b> of 125 live chunks still says Snag, and the database holds definition v4 active with v1&ndash;v3 retired - so nothing already issued changes retrospectively.</td></tr></table>
     </div>
 
-  <h2><span class="k">3</span>Fixed today &mdash; in the repository, waiting on your publish</h2>
+  <h2><span class="k">3</span>Live on your site now</h2>
   
     <div class="step">
       <div class="step-head">
         <span class="n">1</span><span class="t">Location: one prompt, not two</span>
-        <span class="badge done">FIXED &middot; 0bb939b</span>
+        <span class="badge done">LIVE &middot; 0bb939b</span>
         <span class="size">small</span>
       </div>
-      <table class="kv"><tr><th>What was wrong</th><td>The photograph panel offered <b>&ldquo;Add a location tag (optional)&rdquo;</b> over a block holding the template's capture fields &mdash; and on every survey on the site one of those fields, <code>location</code>, is <b>required</b>, showing &ldquo;Required&rdquo; and &ldquo;Not yet completed&rdquo;. The same control contradicted itself, and nothing said how the optional tag and the required location related.</td></tr><tr><th>What I did</th><td>The block now describes what it holds, and one line under it says what the values are for: they are stamped on each photograph added from there and are what the report reads as the location for each finding. A template with no required field still reads as optional.</td></tr><tr><th>Where</th><td><code>photos-panel.tsx</code></td></tr></table>
+      <table class="kv"><tr><th>What was wrong</th><td>The photograph panel offered <b>&ldquo;Add a location tag (optional)&rdquo;</b> over a block holding the template's capture fields &mdash; and on every survey on the site one of those fields, <code>location</code>, is <b>required</b>. The same control contradicted itself.</td></tr><tr><th>What I did</th><td>The block now describes what it holds, and one line says what the values are for: they are stamped on each photograph added from there, and are what the report reads as the location for each finding.</td></tr><tr><th>Proof it is live</th><td>The wording is in the bundle your site serves, and prints on a real report screen. Not just in the repository.</td></tr></table>
     </div>
     <div class="step">
       <div class="step-head">
         <span class="n">2</span><span class="t">The report header stops printing the same words twice</span>
-        <span class="badge done">FIXED &middot; 1565772</span>
+        <span class="badge done">LIVE &middot; 1565772</span>
         <span class="size">small</span>
       </div>
-      <table class="kv"><tr><th>What was wrong</th><td>Every report raised from a template carries the template name inside its own title. The cover printed that same name again as an eyebrow above the title, so the header read &ldquo;SNAG IDENTIFICATION &amp; REMEDIAL SCHEDULE&rdquo; stacked on &ldquo;Snag identification &amp; remedial schedule &mdash; 6 Oct 2026&rdquo;.</td></tr><tr><th>What I did</th><td>One rule, in <code>src/lib/report/letterhead.ts</code>: if the title already opens with the template name, the eyebrow is suppressed. A title somebody typed (&ldquo;13 Bruton Street &mdash; photo update&rdquo;) does not name the template, so the eyebrow stays &mdash; which is also why a report issued before the relabel still shows the current template name. Applied to both covers and to the report workspace header, all three of which printed it. Six tests cover it.</td></tr></table>
+      <table class="kv"><tr><th>What was wrong</th><td>Every report raised from a template carries the template name inside its own title, and the cover printed that name again as an eyebrow above it.</td></tr><tr><th>What I did</th><td>One rule in <code>src/lib/report/letterhead.ts</code>: if the title already opens with the template name, the eyebrow is suppressed. Six tests cover it.</td></tr><tr><th>Proof it is live</th><td>Report <b>SNG-2026-10-001</b> carries the name <b>once</b>. The one case not proven on a screen &mdash; a title somebody typed, where the eyebrow stays &mdash; is covered by tests, because no report created since the relabel exists yet.</td></tr></table>
     </div>
     <div class="step">
       <div class="step-head">
         <span class="n">3</span><span class="t">The dashboard stops hiding your work</span>
-        <span class="badge done">FIXED &middot; bd59448</span>
-        <span class="size">small</span>
+        <span class="badge done">LIVE &middot; bd59448 + b826212</span>
+        <span class="size">two commits</span>
       </div>
-      <table class="kv"><tr><th>What was wrong</th><td>&ldquo;Recent reports (8)&rdquo; and &ldquo;Overdue items (3)&rdquo; both loaded collapsed behind a Show toggle, which left the field-app QR block as the biggest thing on the home screen.</td></tr><tr><th>What I did</th><td>A section opens itself when it holds something and stays shut when it is empty. The toggle remains for anyone who wants it out of the way.</td></tr></table>
+      <table class="kv"><tr><th>What was wrong</th><td>&ldquo;Recent reports (8)&rdquo; and &ldquo;Overdue items&rdquo; loaded collapsed behind a Show toggle, which left the field-app QR block as the biggest thing on the home screen.</td></tr><tr><th>First fix</th><td><b>bd59448</b> &mdash; a section opens itself when it holds something, and stays shut when it is empty.</td></tr><tr><th>What the walk caught</th><td>The first fix worked at the moment the screen loaded, and the count arrives <i>after</i> that. So &ldquo;Recent reports (8)&rdquo; still started collapsed while &ldquo;Overdue items&rdquo; opened. <b>Reading the code said it was fixed; the screen said otherwise.</b></td></tr><tr><th>Second fix</th><td><b>b826212</b> &mdash; until you touch the toggle the section follows its own count; once you touch it, your choice holds. Confirmed on the live site: both sections open, 2 toggles reading <i>Hide</i> and none reading <i>Show</i>.</td></tr></table>
     </div>
     <div class="step">
       <div class="step-head">
         <span class="n">4</span><span class="t">A report can be started from the list of reports</span>
-        <span class="badge done">FIXED &middot; 8654714</span>
+        <span class="badge done">LIVE &middot; 8654714</span>
         <span class="size">small</span>
       </div>
-      <table class="kv"><tr><th>What was wrong</th><td>All reports listed everything and offered bulk delete, but there was no way to start one from it.</td></tr><tr><th>What I did</th><td>A <b>New report</b> action sits in the page header next to the count, pointing at the one start screen. It wraps under the heading on a narrow phone screen.</td></tr></table>
+      <table class="kv"><tr><th>What was wrong</th><td>All reports listed everything and offered bulk delete, but there was no way to start one from it.</td></tr><tr><th>What I did</th><td>A <b>New report</b> action sits in the page header, pointing at the one start screen. On the live site it is there and points at <code>/reports/quick</code>.</td></tr></table>
     </div>
+  
     <div class="step">
       <div class="step-head">
         <span class="n">5</span><span class="t">Tests, lint, push</span>
         <span class="badge done">DONE</span>
         <span class="size">same day</span>
       </div>
-      <table class="kv"><tr><th>Local</th><td><b>504 tests pass</b> (6 new), 4 skipped &middot; <b>eslint 0 errors</b> (241 warnings, the pre-existing backlog, unchanged) &middot; five separate commits so any one can be reverted on its own.</td></tr><tr><th>CI</th><td>GitHub Actions run <b>37643690655</b> on <code>7a2e6a4</code>: Lint, Test and Build.</td></tr><tr><th>Honest caveat</th><td>There is <b>no full type check anywhere</b>: it cannot run on my box (the container is capped at 2&nbsp;GB and <code>tsc</code> is killed), and the workflow deliberately has no typecheck step. What I ran instead was a type check over the files I changed, <b>with and without my edits</b> &mdash; identical error sets apart from line numbers, so my edits added none. That is weaker than a full check and worth knowing.</td></tr><tr><th>Pushed</th><td><code>c8a2252 &rarr; 7a2e6a4</code>, origin level with local, nothing unpushed.</td></tr></table>
+      <table class="kv"><tr><th>Local</th><td><b>504 tests pass</b> (6 new), 4 skipped &middot; <b>eslint 0 errors</b> (241 warnings, the pre-existing backlog, unchanged) &middot; small separate commits so any one can be reverted on its own.</td></tr><tr><th>CI</th><td>GitHub Actions run <b>37663006724</b> on <code>b826212</code>: Lint, Test and Build, all green.</td></tr><tr><th>Honest caveat</th><td>There is <b>no full type check anywhere</b> in this project: it cannot run on my box (a 2&nbsp;GB container kills <code>tsc</code>) and the workflow deliberately has no typecheck step. What I ran instead was a type check over the changed files, <b>with and without my edits</b> &mdash; identical error sets. That is weaker than a full check and worth knowing.</td></tr></table>
     </div>
-  
     <div class="step">
       <div class="step-head">
         <span class="n">6</span><span class="t">The two old reports that both say &ldquo;001&rdquo;</span>
-        <span class="badge both">EXPLAINED &middot; 7a2e6a4</span>
-        <span class="size">one line + a decision</span>
+        <span class="badge done">EXPLAINED &middot; 7a2e6a4</span>
+        <span class="size">one line + a call</span>
       </div>
-      <table class="kv"><tr><th>The facts</th><td>Twenty-nine reports on the account; two still carry the reference <b>001</b>, both issued <b>before</b> references were built in the database.</td></tr><tr><th>What I did</th><td>The report header now adds one line saying the reference was recorded by hand and cannot be changed &mdash; the wording already existed in <code>reference.ts</code> and was never shown. Screen only: no issued document is altered and no row is touched.</td></tr><tr><th>Still yours</th><td>Whether to leave those two as they are (my recommendation), or reissue them with new references. Nothing more happens until you say.</td></tr></table>
+      <table class="kv"><tr><th>The facts</th><td>Two reports still carry the reference <b>001</b>, both issued <b>before</b> references were built in the database.</td></tr><tr><th>What I did</th><td>The report header now adds one line saying the reference was recorded by hand and cannot be changed. Screen only: no issued document is altered.</td></tr><tr><th>Proof it is live</th><td>The line shows on report <b>2e35c5ed</b>.</td></tr><tr><th>Still yours</th><td>Leave those two as they are (<b>my recommendation</b> - they are a record of what was issued), or reissue them with new references. Nothing happens until you say.</td></tr></table>
     </div>
 
-  <h2><span class="k">4</span>Waiting on a decision from you &mdash; nothing happens until you say</h2>
+  <h2><span class="k">4</span>The record of the walk</h2>
+  <p>IB-WALK-002 is the walk written up: what was checked, how each claim was proven, the dashboard
+  before and after, what the walk caught, and - on the face of the document - what it does <b>not</b>
+  cover. Two pages, hosted permanently, filed in your Drive.</p>
+  <div class="linkbox">
+    <img src="walk-qr.png" alt="QR code for IB-WALK-002">
+    <div class="lt"><b>IB-WALK-002 &mdash; post-publish verification walk</b>
+      <a href="https://darrenhopwood13-maker.github.io/instructbrain-plan/walk/">https://darrenhopwood13-maker.github.io/instructbrain-plan/walk/</a><br>
+      Scan the code, or tap the link. Screenshots are real captures, not mock-ups.</div>
+  </div>
+
+  <h2><span class="k">5</span>Waiting on a decision from you &mdash; nothing happens until you say</h2>
   
     <div class="step">
       <div class="step-head">
@@ -164,33 +184,13 @@
         <span class="badge you">NEEDS YOU</span>
         <span class="size">needs a decision</span>
       </div>
-      <table class="kv"><tr><th>What's wrong</th><td>Report emails are properly authenticated through Resend (SPF, feedback MX and DKIM all present on <code>instructbrain.com</code>). Sign-in emails are not: there is no <code>notify.</code> sending domain, so they run on the default sender with its hourly cap &mdash; the likely cause of Lovable&rsquo;s &ldquo;some users may see errors sending messages&rdquo;.</td></tr><tr><th>Two routes</th><td>(a) Lovable&rsquo;s own email feature &mdash; paid plans only, DNS handled for you. (b) Point Supabase Auth&rsquo;s SMTP at Resend &mdash; your auth already lives in your own Supabase project, the free tier covers it, and you already have the Resend account. <b>I recommend (b): it costs nothing.</b></td></tr></table>
+      <table class="kv"><tr><th>What's wrong</th><td>Report emails are properly authenticated through Resend (SPF, feedback MX and DKIM all present on <code>instructbrain.com</code>). Sign-in emails are not: there is no <code>notify.</code> sending domain, so they run on the default sender with its hourly cap.</td></tr><tr><th>Two routes</th><td>(a) Lovable&rsquo;s own email feature &mdash; paid plans only, DNS handled for you. (b) Point Supabase Auth&rsquo;s SMTP at Resend &mdash; your auth already lives in your own Supabase project, the free tier covers it, and you already have the Resend account. <b>I recommend (b): it costs nothing.</b></td></tr></table>
     </div>
 
-  <h2><span class="k">5</span>Mine, still to do</h2>
-  
-    <div class="step">
-      <div class="step-head">
-        <span class="n">9</span><span class="t">IB-WALK-002 &mdash; the walk, as a document</span>
-        <span class="badge mine">NOT STARTED</span>
-        <span class="size">half a day</span>
-      </div>
-      <table class="kv"><tr><th>What</th><td>Monday&rsquo;s read-only walk written up properly: what I did, what I saw, the screenshots, and what each item means. Hosted link and a copy in your Drive. <b>IB-WALK-001</b> is the existing one.</td></tr></table>
-    </div>
-    <div class="step">
-      <div class="step-head">
-        <span class="n">10</span><span class="t">Re-walk after you publish</span>
-        <span class="badge you">WAITING ON YOU</span>
-        <span class="size">same day</span>
-      </div>
-      <table class="kv"><tr><th>What</th><td>The moment the four fixes are live I walk the same screens again, signed in and read-only, and report what actually changed &mdash; with the evidence, including the parts that did not.</td></tr><tr><th>Why</th><td>Publishing is the step where things silently go wrong. Until I have looked, these are fixed in the repository, not on your site.</td></tr></table>
-    </div>
-
-  <p style="color:#5b6b85;font-size:12.5px">Nothing in the database was changed today; no product data was
-  touched. Two things I want to be plain about, because they are limits rather than opinions: there is
-  <b>no full type check</b> in this project &mdash; mine cannot run it (2&nbsp;GB container cap kills
-  <code>tsc</code>) and the workflow has no typecheck step, so what I ran was a changed-files check with and
-  without my edits; and the four fixes are <b>unproven against the live site</b> until you publish and I re-walk.</p>
+  <p style="color:#5b6b85;font-size:12.5px">No database row was changed and no issued document was altered today.
+  Limits worth stating plainly: there is <b>no full type check</b> in this project; the eyebrow rule is proven by
+  tests rather than by a screen, because no report created since the relabel exists yet; the walk was
+  <b>desktop-width and read-only</b>, so the issue action and the emailed PDF remain unexercised by it.</p>
 </main>
-<footer>instructBrain &middot; IB-PLAN-001 Rev 2 &middot; issued 7 Oct 2026 &middot; four fixed, three to decide, two for me to write up and prove</footer>
+<footer>instructBrain &middot; IB-PLAN-001 Rev 3 &middot; issued 7 Oct 2026 &middot; published, verified and written up &middot; three decisions left with you</footer>
 </div></body></html>
