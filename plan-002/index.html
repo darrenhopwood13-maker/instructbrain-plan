@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>instructBrain - three changes, planned - IB-PLAN-002 Rev 1</title>
+<title>instructBrain - three changes, planned - IB-PLAN-002 Rev 2</title>
 <style>
  :root{--navy:#0b1b3a;--accent:#57FF00;--ink:#0e1626;--line:#d7dde8;--muted:#5b6b85;--bg:#f6f8fb}
  *{box-sizing:border-box}
@@ -71,9 +71,9 @@
 <body><div class="sheet">
 <header>
   <div class="brand">instruct<span>Brain</span></div>
-  <div class="ref">IB-PLAN-002 &middot; Rev 1 &middot; plan, not code</div>
+  <div class="ref">IB-PLAN-002 &middot; Rev 2 &middot; plan, not code</div>
   <h1>Three changes, planned before a line is written</h1>
-  <div class="sub">Trade allocation as a switch &middot; one press to confirm &middot; pins on the photos carrying more than one finding</div>
+  <div class="sub">Trade allocation as a switch &middot; one press to confirm &middot; pins on the photos carrying more than one finding<br>Rev 2 adds <b>Annex A</b>: the viewer, the pins and the AI we could clone &mdash; and the ones we already own</div>
 </header>
 <div class="meta">
   <div><b>Issued</b>7 Oct 2026</div>
@@ -325,7 +325,7 @@
         forward.</td></tr>
       <tr><td class="n">4</td><td>Pins, zoom, crops</td><td class="size">1 to 1.5 sessions</td>
         <td class="note">Medium. New drawing in three places (screen, PDF, shared page) that must agree.</td>
-        <td class="note">Depends on 3. Drag-to-correct is part of this job, not a follow-up.</td></tr>
+        <td class="note">Depends on 3. Drag-to-correct is part of this job, not a follow-up. Annex A removes the design work from this one &mdash; the pin mechanics and palette already exist in instructSite &mdash; but not the verification, so the estimate stands as the worst case.</td></tr>
     </tbody>
   </table>
   <p class="note">A &ldquo;session&rdquo; is one working stretch of mine. Every one of them lands the same way:
@@ -343,6 +343,9 @@
         <td class="note"><b>A</b> &mdash; only where a photo carries more than one finding.</td></tr>
       <tr><td class="n">4</td><td>Do you want the region wiring pulled forward as a quick win?</td>
         <td class="note">Your call. It is half a session and it makes boxes appear in reports immediately.</td></tr>
+      <tr><td class="n">5</td><td>Do we build the pins from your own instructSite parts and keep the AI on Gemini?</td>
+        <td class="note"><b>Yes to both</b> &mdash; clone the pin canvas and palette, keep Gemini, revisit SAM only
+        after we have judged twenty real boxes.</td></tr>
     </tbody>
   </table>
 
@@ -353,6 +356,124 @@
   container is capped at 2&nbsp;GB and <code>tsc</code> is killed) and the build workflow has no typecheck
   step, so I check the files I change and say so. And the AI&rsquo;s image region is an estimate, which is
   exactly why job 3 ships with the ability to drag a pin, not after it.</div>
+
+  <h2><span class="k">A</span>Annex A &mdash; the viewer, the pins and the AI we could clone</h2>
+  <p>You asked two things: whether we could use a PDF viewer like the one in instructSite, and what
+  AI technology is out there that we could clone. I went through your own codebase first, then the
+  market. The short version: <b>you already own most of this, and the AI part needs no new spend.</b></p>
+
+  <div class="step">
+    <div class="step-head"><span class="n">A1</span><span class="t">The viewer in instructSite &mdash; and the pins you already built</span><span class="badge done">IN YOUR CODE</span><span class="size">verified</span></div>
+    <table class="kv">
+      <tr><th>PDF viewer</th><td><code>src/components/tooling/PdfViewer.tsx</code> &mdash; 94 lines. Built on <b>react-pdf 10.4.1</b> and
+        <b>pdfjs-dist 6.1.200</b> (Mozilla&rsquo;s engine), with page navigation, zoom, download, and the worker
+        wired up properly. It renders straight from bytes already in memory. That is the whole viewer &mdash;
+        small, and easy to lift.</td></tr>
+      <tr><th>The pins</th><td><code>src/components/project/DrawingCanvas.tsx</code> &mdash; 993 lines, and this is the part that
+        matters for job 3. It already does <b>pin-drop on a drawing</b>: a pin carries an x and a y as a
+        percentage of the image, there is a drop mode and a view mode, clicking a pin selects it, and the
+        active pin is highlighted. That is exactly the mechanic we planned for findings on a photograph.</td></tr>
+      <tr><th>The colours</th><td><code>src/lib/pin-color.ts</code> &mdash; a curated <b>12-hue palette, colour-blind aware</b>,
+        derived from a single key (a trade package or a subcontractor) so that &ldquo;pins, list rows and
+        cockpit chips stay in sync&rdquo;. Same idea we need: a finding&rsquo;s pin colour matching its item row.</td></tr>
+      <tr><th>Why it is cheap</th><td>Your instructBrain markup already stores positions the same way &mdash; x and y as a
+        fraction of the image, 0 to 1. So this is a <b>port, not a research project</b>. The design decisions
+        are made and the palette is chosen.</td></tr>
+      <tr><th>Honest note</th><td>The PDF viewer is a convenience for reading a published report inside the app. It does
+        <b>nothing</b> for the pin problem &mdash; photographs are not PDFs. I would clone the pin parts for job 3
+        and treat the PDF viewer as a separate, smaller decision.</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="n">A2</span><span class="t">The AI: you are already paying for the right one</span><span class="badge done">NO NEW COST</span><span class="size">one prompt change</span></div>
+    <table class="kv">
+      <tr><th>What runs today</th><td>Vision is <b>Gemini 2.5 Flash</b> as the triage pass and <b>Gemini 2.5 Pro</b> as the
+        escalation pass, Google direct (<code>src/lib/ai/config.ts</code>). That is how the 105 regions on your
+        findings were produced.</td></tr>
+      <tr><th>What Gemini can do</th><td>Google&rsquo;s own API documentation covers <b>points and 2D bounding boxes</b>
+        returned straight from the model, normalised 0&ndash;1000 in <code>[y_min, x_min, y_max, x_max]</code> form.
+        No extra service, no extra vendor, no GPU.</td></tr>
+      <tr><th>So</th><td>Job 3 needs <b>no new AI and no extra cost</b>. We ask the model we already call for a box on
+        every observation, keep it, and draw it. The 47% coverage we measured is a prompt and wiring gap,
+        not a capability gap.</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="n">A3</span><span class="t">If we ever want better pointing than Gemini</span><span class="badge both">OPEN MODELS</span><span class="size">all verified 7 Oct</span></div>
+    <table class="kv">
+      <tr><th>Molmo &mdash; Ai2</th><td><b>Pointing is its speciality.</b> Apache 2.0 licence, open weights (7B and 72B), trained on
+        a million curated image-text pairs. In the PointArena benchmarking, <b>Molmo-7B-D beat Gemini-2.5-Flash
+        by 196 Elo points</b> on pointing &mdash; so &ldquo;free and better at this one trick&rdquo; is a real possibility.
+        <b>Caveat I would not hide:</b> its model card says Apache 2.0 but &ldquo;intended for research and
+        educational use&rdquo;, which is a question for a commercial product, and it needs a GPU to run.</td></tr>
+      <tr><th>Qwen3-VL &mdash; Alibaba</th><td>Open weights, dense and MoE sizes, and its own documentation claims
+        <b>stronger 2D grounding</b> plus 3D position reasoning. Runs on vLLM or SGLang, or as a hosted API.
+        Licence varies by size, so it is a per-model check before commercial use. Also needs a GPU if self-hosted.</td></tr>
+      <tr><th>SAM 2 / SAM 3 &mdash; Meta</th><td><b>Apache 2.0</b> &mdash; I read the licence in the repository to be sure. It takes a
+        point or a box and returns a <b>precise outline</b> rather than a rectangle. That is the difference between
+        &ldquo;a box roughly round the defect&rdquo; and &ldquo;the crack outlined exactly&rdquo;, which would look superb in a
+        client report. Needs a GPU, or a paid per-image API.</td></tr>
+      <tr><th>Florence-2 &mdash; Microsoft</th><td>Small (0.77B) and does detection and segmentation from a text prompt,
+        which makes it cheap to run. Its licence was <b>not</b> verified in this pass, so treat it as a lead
+        rather than a decision.</td></tr>
+    </table>
+  </div>
+
+  <div class="step">
+    <div class="step-head"><span class="n">A4</span><span class="t">Web libraries worth standing on</span><span class="badge both">LICENCES CHECKED</span><span class="size">4 options</span></div>
+    <table class="kv">
+      <tr><th>pdf.js / react-pdf</th><td>Apache 2.0, Mozilla. Already in instructSite, so it is proven on your own
+        stack. The default answer for viewing a report in the browser.</td></tr>
+      <tr><th>OpenSeadragon 6.1.1</th><td><b>New BSD licence.</b> A high-resolution zoomable image viewer for desktop
+        and mobile, and it is the thing that makes &ldquo;tap the pin, the photo zooms to that patch&rdquo; feel right
+        on a phone. Worth it only if our own zoom feels sluggish on full-size site photos.</td></tr>
+      <tr><th>Annotorious</th><td><b>BSD 3-Clause</b>, with official React bindings, and it works on top of
+        OpenSeadragon. It is the closest thing to a drop-in for drawing and editing regions on an image &mdash;
+        which is what a person does when they drag a pin to the right place.</td></tr>
+      <tr><th>fresh-air-pdf</th><td>An open-source PDF.js-based React viewer with an annotation toolbar, form fields,
+        signatures and JSON import and export. <b>Version 0.1.5, six releases, no dependents</b> &mdash; interesting,
+        too young to build a product on. Filed for later.</td></tr>
+    </table>
+  </div>
+
+  <h3>What I recommend, in three tiers</h3>
+  <div class="pick"><b>Tier 1 &mdash; no new technology, no new spend.</b> <span class="badge rec">DO THIS</span><br>
+    Ask the Gemini model we already call for a box on every observation, keep it, draw it on the photo as a
+    numbered pin, and take the pin mechanics and the colour palette from instructSite. Job 3 then becomes:
+    wiring, a port, and the PDF-side crops.</div>
+  <div class="pick"><b>Tier 2 &mdash; small, if the photos feel heavy on a phone.</b> Add tap-to-zoom and pinch-zoom using
+    the pattern already in your own DrawingCanvas, and move to OpenSeadragon only if that is not enough.</div>
+  <div class="pick"><b>Tier 3 &mdash; deferred, and it has a cost.</b> SAM 2 behind each box for exact outlines, and a
+    pointing specialist like Molmo or Qwen3-VL if Gemini&rsquo;s boxes prove too loose on real site photos.
+    Both need GPU hosting &mdash; I would price that rather than guess, and I would not spend it until we have
+    looked at twenty real boxes and decided they are not good enough. <b>My recommendation: look first, spend later.</b></div>
+
+  <h3>Decision 5 &mdash; and it is the only new one</h3>
+  <div class="pick"><b>Do we build the pins from your own instructSite parts, and keep the AI on Gemini?</b><br>
+    My recommendation: <b>yes to both</b>. Clone the pin canvas and the colour palette, keep Gemini for the boxes,
+    and revisit SAM only after we have judged twenty real ones. Nothing in Tier 3 changes what a user sees today.</div>
+
+  <h2><span class="k">B</span>Sources &mdash; everything in Annex A, and where it came from</h2>
+  <table class="sum">
+    <thead><tr><th>Claim</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>instructSite viewer and pin system</td><td class="note"><code>is-repo</code>: <code>src/components/tooling/PdfViewer.tsx</code>,
+        <code>src/components/project/DrawingCanvas.tsx</code>, <code>src/lib/pin-color.ts</code>, <code>package.json</code> (react-pdf 10.4.1, pdfjs-dist 6.1.200).</td></tr>
+      <tr><td>instructBrain runs Gemini 2.5 Flash and Pro</td><td class="note"><code>ib-repo</code>: <code>src/lib/ai/config.ts</code> lines 193&ndash;194.</td></tr>
+      <tr><td>Gemini returns points and 2D bounding boxes</td><td class="note">ai.google.dev &mdash; Gemini API, spatial reasoning; and the Google Cloud bounding-box detection page
+        (<code>[y_min, x_min, y_max, x_max]</code>, normalised 0&ndash;1000).</td></tr>
+      <tr><td>Molmo is Apache 2.0, research and educational use noted</td><td class="note">huggingface.co/allenai/Molmo-7B-O-0924 &mdash; model card, licence and use section.</td></tr>
+      <tr><td>Molmo-7B-D beat Gemini-2.5-Flash by 196 Elo on pointing</td><td class="note">PointArena, arXiv 2505.09990.</td></tr>
+      <tr><td>Qwen3-VL does stronger 2D grounding</td><td class="note">github.com/QwenLM/Qwen3-VL &mdash; key enhancements; technical report arXiv 2511.21631.</td></tr>
+      <tr><td>SAM 2 is Apache 2.0</td><td class="note">github.com/facebookresearch/sam2 &mdash; LICENSE file, read directly.</td></tr>
+      <tr><td>OpenSeadragon is New BSD; Annotorious is BSD 3-Clause</td><td class="note">openseadragon.github.io licence section; github.com/annotorious/annotorious licence section.</td></tr>
+      <tr><td>fresh-air-pdf maturity</td><td class="note">npmjs.com/package/fresh-air-pdf &mdash; version 0.1.5, six versions, zero dependents.</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Two things I did not verify and am therefore not claiming: Florence-2&rsquo;s licence, and the licence
+  per Qwen3-VL model size. Both are marked above as checks outstanding rather than facts.</p>
 </main>
-<footer>instructBrain &middot; IB-PLAN-002 Rev 1 &middot; issued 7 Oct 2026 &middot; three jobs planned, none built &middot; four decisions open</footer>
+<footer>instructBrain &middot; IB-PLAN-002 Rev 2 &middot; issued 7 Oct 2026 &middot; three jobs planned, none built &middot; five decisions open &middot; Annex A: what we already own and what we could clone</footer>
 </div></body></html>
