@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>instructBrain - step by step plan - IB-PLAN-001</title>
+<style>
+ :root{--navy:#0b1b3a;--accent:#57FF00;--ink:#0e1626;--line:#d7dde8;--muted:#5b6b85;--bg:#f6f8fb}
+ *{box-sizing:border-box}
+ html,body{margin:0;padding:0}
+ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ink);font-size:15px;line-height:1.45;background:#eef1f6;-webkit-font-smoothing:antialiased}
+ .sheet{max-width:860px;margin:0 auto;background:#fff}
+ header{background:linear-gradient(150deg,#12305e 0%,#0b1b3a 100%);color:#fff;padding:24px 30px 20px;
+  border-bottom:4px solid var(--accent)}
+ .brand{font-size:20px;font-weight:700;letter-spacing:-.01em}
+ .brand span{color:var(--accent)}
+ .ref{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9fb4d4;font-weight:700;margin-top:10px}
+ h1{font-size:27px;margin:4px 0 4px}
+ .sub{color:#c6d4e8;font-size:13.5px}
+ .meta{display:flex;flex-wrap:wrap;background:var(--bg);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+ .meta div{padding:8px 22px 8px 30px;border-right:1px solid var(--line)}
+ .meta div:last-child{border-right:0}
+ .meta b{display:block;color:var(--ink);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+ main{padding:22px 30px 30px}
+ h2{font-size:15px;margin:26px 0 10px}
+ h2 .k{display:inline-block;background:var(--navy);color:#fff;border-radius:3px;font-size:11px;padding:1px 7px;margin-right:8px}
+ p{margin:0 0 10px}
+ table{width:100%;border-collapse:collapse}
+ table.sum th{background:var(--navy);color:#fff;text-align:left;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:7px 9px}
+ table.sum td{padding:6.5px 9px;border-bottom:1px solid var(--line);font-size:12.5px;vertical-align:top}
+ table.sum tr:nth-child(even) td{background:#f8fafc}
+ td.n{color:var(--muted);font-variant-numeric:tabular-nums;width:26px}
+ .who{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;
+  padding:2px 6px;white-space:nowrap}
+ .who.you{background:#fff2e3;color:#a04d00;border:1px solid #ffd9b0}
+ .who.me{background:#e8fff1;color:#0a6b3d;border:1px solid #a9ebc8}
+ .size{color:var(--muted);font-size:12px;white-space:nowrap}
+ .note{color:var(--muted);font-size:12px}
+ .step{border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:5px;margin:0 0 12px;
+  page-break-inside:avoid;break-inside:avoid}
+ .step-head{display:flex;align-items:center;gap:9px;background:var(--bg);padding:9px 12px;
+  border-bottom:1px solid var(--line)}
+ .step-head .n{background:var(--navy);color:#fff;border-radius:3px;font-size:11px;font-weight:700;
+  padding:1px 7px;font-variant-numeric:tabular-nums}
+ .step-head .t{font-weight:700;font-size:14px;flex:1;min-width:0}
+ .kv th{text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  padding:6px 12px 6px 12px;width:118px;vertical-align:top;font-weight:700}
+ .kv td{padding:6px 12px 6px 0;font-size:12.8px;vertical-align:top;border-bottom:1px solid #eef1f6}
+ .kv tr:last-child td{border-bottom:0}
+ code{background:#f1f4f9;border:1px solid #e2e8f2;border-radius:3px;padding:1px 4px;font-size:11.5px}
+ .callout{background:#f2fff8;border:1px solid #a9ebc8;border-left:4px solid var(--accent);padding:9px 12px;
+  font-size:12.6px;margin:14px 0}
+ .callout b{color:#0a6b3d}
+ footer{background:#0b1b3a;color:#8ea0bd;font-size:11.5px;padding:13px 30px;border-top:3px solid var(--accent)}
+ @page{size:A4;margin:11mm}
+ @media print{
+  body{background:#fff;font-size:11.5px} .sheet{max-width:none}
+  header{padding:14px 0 12px;border-bottom-width:3px}
+  .meta div{padding:5px 16px 5px 0} main{padding:0}
+  h1{font-size:21px}
+  .step-head{padding:4.5px 9px} .step-head .t{font-size:11.4px} .step{margin-bottom:8px}
+  .kv th{padding:3px 9px;width:96px;font-size:8.8px} .kv td{padding:3px 9px 3px 0;font-size:10.1px}
+  table.sum td{padding:3.2px 7px;font-size:10.1px} table.sum th{padding:4px 7px;font-size:8.6px}
+  h2{margin:11px 0 6px;font-size:11.6px}
+  *,header,table.sum th,.who,.step-head,footer,.callout{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ }
+</style></head>
+<body><div class="sheet">
+<header>
+  <div class="brand">instruct<span>Brain</span></div>
+  <div class="ref">IB-PLAN-001 &middot; Rev 1 &middot; action plan</div>
+  <h1>What we do next, in order</h1>
+  <div class="sub">Eleven steps, each one listed separately, with whose job it is and when it is done</div>
+</header>
+<div class="meta">
+  <div><b>Issued</b>7 Oct 2026</div>
+  <div><b>Owner</b>D. Hopwood</div>
+  <div><b>Product</b>instructBrain</div>
+  <div><b>Source</b>Repo <code>c8a2252</code>, checked 7 Oct 2026</div>
+</div>
+<main>
+  <p>Two things to hold in mind before you start. <b>Nothing done on Mon 6 Oct is live yet</b> - it is all
+  in the repository, waiting on one Publish press. And every item below was checked against the code or
+  the live site today, not copied from last night's notes.</p>
+
+  <div class="callout"><b>Step 0 is the whole ballgame.</b> Fifteen commits - the findings wording, the Pro
+  plan name, the Finding labels - are pushed and invisible. Press <b>Publish &rarr; Update</b> in Lovable and
+  they are in front of your users. Everything else on this list is smaller than that one click.</div>
+
+  <h2><span class="k">1</span>The whole plan, at a glance</h2>
+  <table class="sum">
+    <thead><tr><th>#</th><th>Step</th><th>Who</th><th>Size</th><th>Why it matters</th></tr></thead>
+    <tbody><tr><td class="n">0</td><td>Press Publish &rarr; Update in Lovable</td><td class="who you">YOU</td><td class="size">1 min</td><td class="note">Goes live: findings copy, Pro plan, Finding labels</td></tr><tr><td class="n">1</td><td>Location: one prompt, not two</td><td class="who me">ME</td><td class="size">small</td><td class="note">The one you keep hitting</td></tr><tr><td class="n">2</td><td>Letterhead stops repeating itself</td><td class="who me">ME</td><td class="size">small</td><td class="note">Two identical lines on every report header</td></tr><tr><td class="n">3</td><td>Dashboard stops hiding the work</td><td class="who me">ME</td><td class="size">small</td><td class="note">Recent reports and Overdue load collapsed</td></tr><tr><td class="n">4</td><td>All reports gets a create action</td><td class="who me">ME</td><td class="size">small</td><td class="note">No way to start a report from the list</td></tr><tr><td class="n">5</td><td>Test, lint, push - then you publish</td><td class="who me">ME</td><td class="size">same day</td><td class="note">Four separate commits</td></tr><tr><td class="n">6</td><td>The two old reports both saying 001</td><td class="who you">YOU</td><td class="size">decision</td><td class="note">Pre-date the reference builder</td></tr><tr><td class="n">7</td><td>Delivery webhooks not configured</td><td class="who you">YOU</td><td class="size">needs a URL</td><td class="note">Bounces are not recorded today</td></tr><tr><td class="n">8</td><td>Sign-in emails on a shared sender</td><td class="who you">YOU</td><td class="size">needs SMTP</td><td class="note">Wants your own domain</td></tr><tr><td class="n">9</td><td>IB-WALK-002 - the write-up</td><td class="who me">ME</td><td class="size">half a day</td><td class="note">Branded document, hosted link</td></tr><tr><td class="n">10</td><td>Re-walk after publishing</td><td class="who me">ME</td><td class="size">same day</td><td class="note">Proof, not an assumption</td></tr></tbody>
+  </table>
+
+  <h2><span class="k">2</span>Now - one click</h2>
+  
+    <div class="step">
+      <div class="step-head">
+        <span class="n">0</span>
+        <span class="t">One click, and Monday's work goes live</span>
+        <span class="who you">YOU</span>
+        <span class="size">1 minute</span>
+      </div>
+      <table class="kv"><tr><th>What</th><td>Everything I finished on Mon 6 Oct is pushed to the repo but is <b>not in front of your users</b>. The live site is running an older build.</td></tr><tr><th>Proof</th><td>Your live pricing card still reads <b>&ldquo;Practice &pound;99&rdquo;</b>. The code says <b>Pro</b>. I checked both just now.</td></tr><tr><th>Do this</th><td>Open instructBrain in Lovable and press <b>Publish &rarr; Update</b>.</td></tr><tr><th>Done when</th><td>The pricing card says <b>Pro</b> and the app says <b>Finding</b> instead of Snag.</td></tr><tr><th>Then I check</th><td>I re-read the live bundle and confirm the words actually changed, rather than take the button's word for it.</td></tr></table>
+    </div>
+
+  <h2><span class="k">3</span>The four fixes I can do without you</h2>
+  
+    <div class="step">
+      <div class="step-head">
+        <span class="n">1</span>
+        <span class="t">Location: one prompt, not two</span>
+        <span class="who me">ME</span>
+        <span class="size">small</span>
+      </div>
+      <table class="kv"><tr><th>What's wrong</th><td>The photograph offers <b>&ldquo;Add a location tag (optional)&rdquo;</b>, but leave it blank and it shows an amber <b>&ldquo;Not yet completed&rdquo;</b> chip - so it reads as required. The report then derives its own location from those same fields. Two voices asking for one thing, with nothing explaining how they relate. This is the one that catches you every time.</td></tr><tr><th>Where</th><td><code>photos-panel.tsx:688</code>, <code>capture-fields-form.tsx:50</code>, <code>report-document-view.tsx:1088</code></td></tr><tr><th>What I'll do</th><td>Make the state honest and single-voiced: one place asks for the location, the chip stops contradicting the label, and the report says plainly where its location came from.</td></tr><tr><th>Done when</th><td>A tester cannot be confused about whether a location is needed, or which one the report will print.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">2</span>
+        <span class="t">Report letterhead stops printing the same words twice</span>
+        <span class="who me">ME</span>
+        <span class="size">small</span>
+      </div>
+      <table class="kv"><tr><th>What's wrong</th><td>The eyebrow prints the template name, and directly beneath it the title prints the <b>same template name again</b> plus the date.</td></tr><tr><th>Where</th><td><code>report-document-view.tsx:280</code> (eyebrow) against <code>:286-288</code> (h1 title)</td></tr><tr><th>What I'll do</th><td>Keep one of them. The eyebrow keeps the template, the title carries the date and the project - no repeat.</td></tr><tr><th>Done when</th><td>No report header shows the same sentence twice.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">3</span>
+        <span class="t">The dashboard stops hiding your work</span>
+        <span class="who me">ME</span>
+        <span class="size">small</span>
+      </div>
+      <table class="kv"><tr><th>What's wrong</th><td><b>&ldquo;Recent reports&rdquo;</b> and <b>&ldquo;Overdue items&rdquo;</b> both load collapsed behind a Show toggle, so the biggest thing on your home screen is the field-app QR block.</td></tr><tr><th>Where</th><td><code>dashboard.tsx:85</code> - <code>useState(false)</code> governs both sections</td></tr><tr><th>What I'll do</th><td>Give the sections sensible defaults: open when they hold something worth seeing, and keep the toggle for the user.</td></tr><tr><th>Done when</th><td>Landing on the dashboard shows the work without a click.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">4</span>
+        <span class="t">All reports gets a create action</span>
+        <span class="who me">ME</span>
+        <span class="size">small</span>
+      </div>
+      <table class="kv"><tr><th>What's wrong</th><td>The page lists every report and offers bulk delete, but there is <b>no way to start one from it</b>. The empty state tells you to go to the dashboard.</td></tr><tr><th>Where</th><td><code>reports.index.tsx</code> - 211 lines, no create control</td></tr><tr><th>What I'll do</th><td>Add a <b>New report</b> action in the page header pointing at the one start screen, so the list and the action live together.</td></tr><tr><th>Done when</th><td>You can start a report from the list of reports.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">5</span>
+        <span class="t">Test, lint, push - then you publish again</span>
+        <span class="who me">ME</span>
+        <span class="size">same day</span>
+      </div>
+      <table class="kv"><tr><th>What</th><td>The four fixes above go in as their own commits, tests and lint run first, then pushed to <code>main</code>.</td></tr><tr><th>Why separate</th><td>Small commits mean any single fix can be reverted on its own without unpicking the rest.</td></tr><tr><th>Done when</th><td>Tests green, lint clean, pushed, and I have shown you the commit list.</td></tr><tr><th>Then</th><td>You press <b>Publish &rarr; Update</b> in Lovable once more.</td></tr></table>
+    </div>
+
+  <h2><span class="k">4</span>Three things that need your decision, not my guess</h2>
+  
+    <div class="step">
+      <div class="step-head">
+        <span class="n">6</span>
+        <span class="t">The two old reports that both say &ldquo;Reference: 001&rdquo;</span>
+        <span class="who you">YOU</span>
+        <span class="size">decision</span>
+      </div>
+      <table class="kv"><tr><th>The facts</th><td>29 reports on the account. Two still carry the reference <b>001</b>. Both were issued <b>before</b> references were built in the database, so they hold the hand-typed value.</td></tr><tr><th>Why it matters</th><td>Two different issued reports are indistinguishable by reference. But a report that has already gone to a client is a record - rewriting it is not a small thing.</td></tr><tr><th>Your options</th><td>(a) Leave them and show a small &ldquo;recorded by hand&rdquo; note on screen - the wording already exists in the code; (b) reissue them with new references; (c) do nothing.</td></tr><tr><th>My recommendation</th><td>(a). It is honest, it changes no issued document, and it stops the next person being confused.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">7</span>
+        <span class="t">Delivery webhooks are not configured</span>
+        <span class="who you">YOU</span>
+        <span class="size">needs a URL</span>
+      </div>
+      <table class="kv"><tr><th>What's wrong</th><td>Settings says <b>&ldquo;Not configured - bounces will not be recorded&rdquo;</b>. So when a report email bounces, you never find out.</td></tr><tr><th>What I need from you</th><td>Where the bounce notifications should land - a provider (Resend, SendGrid, Svix) or an endpoint of your choosing.</td></tr><tr><th>What I'll do</th><td>Build the wiring and the test once I know the destination. I cannot invent the endpoint.</td></tr><tr><th>Done when</th><td>A test bounce is recorded and visible.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">8</span>
+        <span class="t">Sign-in emails still come from Supabase's shared sender</span>
+        <span class="who you">YOU</span>
+        <span class="size">needs SMTP</span>
+      </div>
+      <table class="kv"><tr><th>What's wrong</th><td>Password and sign-in emails go out from Supabase's shared sender rather than your own domain. That reads as less trustworthy to a client, and shared senders get throttled.</td></tr><tr><th>What I need from you</th><td>Which route - your own SMTP (for example Resend or SendGrid) plus the DNS records for <code>instructbrain.com</code>.</td></tr><tr><th>What I'll do</th><td>Wire it, send a test, and show you the headers.</td></tr><tr><th>Cost</th><td>Small monthly cost depending on volume. I will quote it before anything is signed up to.</td></tr></table>
+    </div>
+
+  <h2><span class="k">5</span>Write it up, then prove it</h2>
+  
+    <div class="step">
+      <div class="step-head">
+        <span class="n">9</span>
+        <span class="t">IB-WALK-002 - the walk, as a document</span>
+        <span class="who me">ME</span>
+        <span class="size">half a day</span>
+      </div>
+      <table class="kv"><tr><th>What</th><td>Last night's read-only walk written up properly: what I did, what I saw, the screenshots, and what each item means for the product. Hosted link and a copy in your Drive. <b>IB-WALK-001</b> is the existing one.</td></tr><tr><th>Why</th><td>So the findings can be shown to someone else without you narrating them, and so there is a dated record of what was true when.</td></tr><tr><th>Done when</th><td>You have a link that opens on a phone.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">10</span>
+        <span class="t">Re-walk after you publish</span>
+        <span class="who me">ME</span>
+        <span class="size">same day</span>
+      </div>
+      <table class="kv"><tr><th>What</th><td>Signed in as you, read-only, I walk the same screens again and report what actually changed - and what did not.</td></tr><tr><th>Why</th><td>Publishing is the step where things silently go wrong. The plan is only finished when the live site says so.</td></tr><tr><th>Done when</th><td>I can show you each item as fixed or still open, with the evidence.</td></tr></table>
+    </div>
+
+  <div class="callout"><b>Where I would start.</b> Press Publish, then let me take steps 1 to 5 - the four
+  fixes and the push. They are all small, they are all in code I have already read, and one of them is the
+  location confusion that catches you every time you build a report. Steps 6 to 8 need a decision from you
+  and nothing from me until then.</div>
+
+  <p style="color:#5b6b85;font-size:12.5px">Nothing on this list has been changed yet. No commits beyond
+  <code>c8a2252</code>, nothing unpushed, and no product data touched - the walk on Mon 6 Oct was read-only.</p>
+</main>
+<footer>instructBrain &middot; IB-PLAN-001 &middot; Rev 1 &middot; issued 7 Oct 2026 &middot; eleven steps: five to fix, three to decide, two to write up and prove</footer>
+</div></body></html>
