@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>instructBrain - three changes, planned - IB-PLAN-002 Rev 1</title>
+<style>
+ :root{--navy:#0b1b3a;--accent:#57FF00;--ink:#0e1626;--line:#d7dde8;--muted:#5b6b85;--bg:#f6f8fb}
+ *{box-sizing:border-box}
+ html,body{margin:0;padding:0}
+ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ink);font-size:15px;line-height:1.45;background:#eef1f6;-webkit-font-smoothing:antialiased}
+ .sheet{max-width:860px;margin:0 auto;background:#fff}
+ header{background:linear-gradient(150deg,#12305e 0%,#0b1b3a 100%);color:#fff;padding:24px 30px 20px;
+  border-bottom:4px solid var(--accent)}
+ .brand{font-size:20px;font-weight:700;letter-spacing:-.01em} .brand span{color:var(--accent)}
+ .ref{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9fb4d4;font-weight:700;margin-top:10px}
+ h1{font-size:26px;margin:4px 0 4px} .sub{color:#c6d4e8;font-size:13.5px}
+ .meta{display:flex;flex-wrap:wrap;background:var(--bg);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+ .meta div{padding:8px 22px 8px 30px;border-right:1px solid var(--line)}
+ .meta div:last-child{border-right:0}
+ .meta b{display:block;color:var(--ink);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+ main{padding:22px 30px 30px}
+ h2{font-size:15px;margin:24px 0 10px}
+ h2 .k{display:inline-block;background:var(--navy);color:#fff;border-radius:3px;font-size:11px;padding:1px 7px;margin-right:8px}
+ h3{font-size:13.5px;margin:16px 0 6px;color:var(--navy)}
+ p{margin:0 0 10px}
+ table{width:100%;border-collapse:collapse}
+ table.sum th{background:var(--navy);color:#fff;text-align:left;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:7px 9px}
+ table.sum td{padding:6.5px 9px;border-bottom:1px solid var(--line);font-size:12.5px;vertical-align:top}
+ table.sum tr:nth-child(even) td{background:#f8fafc}
+ td.n{color:var(--muted);font-variant-numeric:tabular-nums;width:26px}
+ .badge{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;
+  padding:2px 6px;white-space:nowrap;display:inline-block}
+ .badge.done{background:#e8fff1;color:#0a6b3d;border:1px solid #a9ebc8}
+ .badge.you{background:#fff2e3;color:#a04d00;border:1px solid #ffd9b0}
+ .badge.both{background:#eef4ff;color:#1c3f7a;border:1px solid #bcd2f5}
+ .badge.mine{background:#f4f6fa;color:#5b6b85;border:1px solid #d7dde8}
+ .badge.rec{background:#e8fff1;color:#0a6b3d;border:1px solid #a9ebc8}
+ .size{color:var(--muted);font-size:12px;white-space:nowrap}
+ .note{color:var(--muted);font-size:12px}
+ .step{border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:5px;margin:0 0 12px;
+  page-break-inside:avoid;break-inside:avoid}
+ .step-head{display:flex;align-items:center;gap:9px;background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--line)}
+ .step-head .n{background:var(--navy);color:#fff;border-radius:3px;font-size:11px;font-weight:700;padding:1px 7px;font-variant-numeric:tabular-nums}
+ .step-head .t{font-weight:700;font-size:14px;flex:1;min-width:0}
+ .kv th{text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  padding:6px 12px 6px 12px;width:118px;vertical-align:top;font-weight:700}
+ .kv td{padding:6px 12px 6px 0;font-size:12.8px;vertical-align:top;border-bottom:1px solid #eef1f6}
+ .kv tr:last-child td{border-bottom:0}
+ code{background:#f1f4f9;border:1px solid #e2e8f2;border-radius:3px;padding:1px 4px;font-size:11.5px}
+ .callout{background:#f2fff8;border:1px solid #a9ebc8;border-left:4px solid var(--accent);padding:11px 13px;font-size:13px;margin:16px 0}
+ .callout b{color:#0a6b3d}
+ .warn{background:#fff8f0;border:1px solid #ffd9b0;border-left:4px solid #e08a00;padding:11px 13px;font-size:13px;margin:16px 0}
+ .warn b{color:#a04d00}
+ ul{margin:6px 0 10px;padding-left:20px} li{margin:0 0 4px}
+ .pick{background:#f4f6fa;border:1px solid var(--line);border-radius:5px;padding:10px 12px;margin:0 0 10px;font-size:12.8px}
+ .pick b{color:var(--navy)}
+ footer{background:#0b1b3a;color:#8ea0bd;font-size:11.5px;padding:13px 30px;border-top:3px solid var(--accent)}
+ @page{size:A4;margin:11mm}
+ @media print{
+  body{background:#fff;font-size:11.5px} .sheet{max-width:none}
+  header{padding:14px 0 12px;border-bottom-width:3px} .meta div{padding:5px 16px 5px 0} main{padding:0}
+  h1{font-size:21px} .step-head{padding:4.5px 9px} .step-head .t{font-size:11.4px} .step{margin-bottom:8px}
+  .kv th{padding:3px 9px;width:96px;font-size:8.8px} .kv td{padding:3px 9px 3px 0;font-size:10.1px}
+  table.sum td{padding:3.2px 7px;font-size:10.1px} table.sum th{padding:4px 7px;font-size:8.6px}
+  h2{margin:11px 0 6px;font-size:11.6px} h3{font-size:10.6px;margin:8px 0 4px}
+  .pick{padding:6px 9px;font-size:10.1px}
+  *,header,table.sum th,.badge,.step-head,footer,.callout,.warn,.pick{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ }
+</style></head>
+<body><div class="sheet">
+<header>
+  <div class="brand">instruct<span>Brain</span></div>
+  <div class="ref">IB-PLAN-002 &middot; Rev 1 &middot; plan, not code</div>
+  <h1>Three changes, planned before a line is written</h1>
+  <div class="sub">Trade allocation as a switch &middot; one press to confirm &middot; pins on the photos carrying more than one finding</div>
+</header>
+<div class="meta">
+  <div><b>Issued</b>7 Oct 2026</div>
+  <div><b>Owner</b>D. Hopwood</div>
+  <div><b>Product</b>instructBrain</div>
+  <div><b>Repository</b><code>d930b4b</code> on main &middot; CI green</div>
+</div>
+<main>
+  <div class="callout"><b>Nothing in here is built yet.</b> This is the plan for the three jobs you
+  set, in the order you set them, with what each one touches, what it costs, and the four decisions
+  I need from you before I start. Everything below was measured against your live database this
+  evening, not guessed.</div>
+
+  <h2><span class="k">1</span>The three jobs, and what each one is really about</h2>
+  <table class="sum">
+    <thead><tr><th>#</th><th>Job</th><th>Size</th><th>Why it matters</th><th>Needs you</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td><b>Trade allocation becomes a switch</b></td><td class="size">1 session</td>
+        <td class="note">Today the trade layer is welded into the review screen, the publish gate, the
+        distribution screen and the PDF whether you use it or not. Across 28 reports, nobody has
+        filled in a directory template, and one trade link has ever been issued.</td>
+        <td><span class="badge you">DECISION 1</span></td></tr>
+      <tr><td class="n">2</td><td><b>One press to confirm everything</b></td><td class="size">1.5 to 2 sessions</td>
+        <td class="note">222 findings, 183 of them confirmed one press at a time, through five separate
+        confirmation surfaces that each write their own row. This is the daily friction.</td>
+        <td><span class="badge you">DECISION 2</span></td></tr>
+      <tr><td class="n">3</td><td><b>Pins on a photo with several findings</b></td><td class="size">1 to 2 sessions</td>
+        <td class="note">25 of your photographs carry more than one finding, and each finding renders
+        its own copy of the whole picture. The AI already knows which patch of the image it looked at,
+        and that patch is thrown away every time.</td>
+        <td><span class="badge you">DECISION 3</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="k">2</span>What I measured in your own data &mdash; 7 October 2026, live</h2>
+  <table class="sum">
+    <thead><tr><th>Measure</th><th>Number</th><th>What it tells us</th></tr></thead>
+    <tbody>
+      <tr><td>Findings on the account</td><td><b>222</b></td><td class="note">The unit of work in the review screen.</td></tr>
+      <tr><td>Confirmed by a person</td><td><b>183</b> (82%)</td><td class="note">Confirmation is happening, by hand, one item at a time.</td></tr>
+      <tr><td>Findings with a trade assigned</td><td><b>51</b></td><td class="note">The AI suggested a trade on 126. Only 51 have been settled by a person.</td></tr>
+      <tr><td>Findings carrying the AI&rsquo;s image region</td><td><b>105</b> of 222 (47%)</td><td class="note">The model already returns the patch of the photograph it read. It is stored and never used.</td></tr>
+      <tr><td>Saved regions on the photo links</td><td><b>0</b></td><td class="note">This is the gap. The drawing code looks at the photo link, the region sits on the finding, so no box is ever drawn.</td></tr>
+      <tr><td>Photographs</td><td><b>202</b></td><td class="note">Photos read by the AI.</td></tr>
+      <tr><td>Photos carrying more than one finding</td><td><b>25</b></td><td class="note">25 chances of the same picture appearing two, three, six times.</td></tr>
+      <tr><td>Hand-drawn markups on photos</td><td><b>0</b></td><td class="note">The markup tool exists and has never been used. It is not the answer on its own.</td></tr>
+      <tr><td>Reports</td><td><b>28</b></td><td class="note">13 published, 15 draft.</td></tr>
+      <tr><td>Project directory entries / contacts</td><td><b>2 / 2</b></td><td class="note">The trade feature has effectively never been set up.</td></tr>
+      <tr><td>Directory templates / trade links issued</td><td><b>0 / 1</b></td><td class="note">One subbie link in the life of the product.</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Read together: the trade layer costs every user a screen, a gate and a set of
+  buttons, and almost nobody uses it. The confirmation layer is used by everyone, every day, the
+  hard way. The region data that would fix the photo problem is already being paid for and binned.</p>
+
+  <h2><span class="k">3</span>Job 1 &mdash; trade allocation as a switch</h2>
+  <p>You asked for the whole feature to be an option: enable or disable. Here is what &ldquo;the whole
+  feature&rdquo; actually is, because it is wider than one screen.</p>
+  <div class="step">
+    <div class="step-head"><span class="n">1</span><span class="t">What is welded in today</span><span class="badge mine">MEASURED</span><span class="size">5 surfaces</span></div>
+    <table class="kv">
+      <tr><th>Review</th><td>The <b>Trade</b> card and the bulk <b>Confirm all trades</b> action appear whenever the
+        template says trades are required. The template flag is frozen into each survey definition, so it is
+        per-template and not something you can turn off from the screen.</td></tr>
+      <tr><th>Publish gate</th><td>Publishing is blocked while any finding has no trade, on templates that require
+        one. That gate lives in <code>issueBlockers()</code> in <code>src/lib/report/document.ts</code> and is read by
+        the report screen and the publish button.</td></tr>
+      <tr><th>Directories</th><td>Two screens: your organisation directory in Settings, and a project directory
+        per project, each with contacts. 857 lines in the project one.</td></tr>
+      <tr><th>Distribution</th><td>The send screen groups items by trade and fires one email per trade with its own
+        extract and its own live link. With no trades assigned, it collapses to one email &mdash; which is what
+        happened on the test send.</td></tr>
+      <tr><th>Trade portal</th><td>A public token page (<code>/trade/&lt;token&gt;</code>) where a subbie marks their
+        own items done. One has ever been issued.</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <div class="step-head"><span class="n">2</span><span class="t">What the switch would mean, exactly</span><span class="badge both">PROPOSED</span><span class="size">7 changes</span></div>
+    <table class="kv">
+      <tr><th>Off means</th><td>
+        <ul>
+          <li>No trade card and no trade gate in the review screen &mdash; the finding card is shorter and nothing asks you for a trade.</li>
+          <li>Publishing no longer blocked on a missing trade. Everything else about the gate is unchanged.</li>
+          <li>The organisation directory and project directory screens are hidden from navigation.</li>
+          <li>Distribution shows one whole-report row: no per-trade grouping, no per-trade extracts.</li>
+          <li>The per-trade extract route and the trade portal go quiet; existing links are honoured read-only, nothing breaks for a subbie holding one.</li>
+          <li>The PDF drops its per-trade appendix. The report itself is untouched.</li>
+          <li>Emails still work end to end &mdash; the whole-report send is unaffected.</li>
+        </ul>
+      </td></tr>
+      <tr><th>Off never means</th><td>Deleting anything. Directory rows, contacts and assigned trades stay in the
+        database and come back the moment the switch goes on. No published version is altered, and an
+        already-published report always reads the same as the day it was published.</td></tr>
+      <tr><th>Where it lives</th><td>A setting in Settings &rarr; Organisation, plus a per-report override, so
+        &ldquo;this job doesn&rsquo;t need trades&rdquo; is a switch on the day and not a global decision. Two new
+        database columns, one migration, additive only.</td></tr>
+      <tr><th>Why that shape</th><td>Most of the machinery already exists as a per-template flag. What is missing is
+        a control a person can reach. Per-template alone (today&rsquo;s behaviour) means you cannot turn it off
+        without a code change; organisation-only means one report cannot differ from the next.</td></tr>
+    </table>
+  </div>
+  <h3>Decision 1 &mdash; how far does the switch reach?</h3>
+  <div class="pick"><b>A. Organisation setting plus a per-report override.</b> <span class="badge rec">MY RECOMMENDATION</span><br>
+    Default on for existing accounts so nothing changes for anyone until they switch it off, one control
+    on the report for a job that does not need trades. Two columns, one migration, the honest cost is
+    about a session including tests.</div>
+  <div class="pick"><b>B. Per report only.</b> Smaller and safer: the switch travels with the job. But you would
+    still see the directory screens and the trade plumbing on every other report.</div>
+  <div class="pick"><b>C. Organisation only.</b> Simplest mental model, one switch for the account. The cost is that
+    a one-off custom report cannot opt out while the account stays on.</div>
+  <div class="pick"><b>D. Leave it as it is.</b> Nothing changes. Honest answer: the trade layer is nearly unused, so
+    this keeps costing every report a screen and a gate for the customers who do not need it.</div>
+
+  <h2><span class="k">4</span>Job 2 &mdash; one press to confirm everything</h2>
+  <p>This is the one you called the big thing, and I agree: it is not a button problem, it is a
+  &ldquo;how many decisions does a person make per report&rdquo; problem.</p>
+  <div class="step">
+    <div class="step-head"><span class="n">1</span><span class="t">How it works today &mdash; five ways to say yes</span><span class="badge mine">MEASURED</span><span class="size">1106-line screen</span></div>
+    <table class="kv">
+      <tr><th>The five</th><td>
+        <ul>
+          <li><b>Confirm</b> on a finding &mdash; accepts the AI&rsquo;s wording and status, one item at a time.</li>
+          <li><b>Confirm grade</b> on the condition card &mdash; a second, separate press for the same item.</li>
+          <li><b>Confirm assignment</b> on the trade card &mdash; a third press for the same item.</li>
+          <li><b>Confirm all trades 80% or over</b> &mdash; a bulk action that only covers trades the AI was confident about.</li>
+          <li><b>Confirm all findings</b> &mdash; a bulk action, but it skips exactly the items with the missing
+            trades that the publish gate is waiting for, so you can confirm everything and still be blocked.</li>
+        </ul>
+      </td></tr>
+      <tr><th>And then</th><td>The draft summary has its own confirmation, and the reading view carries its own
+        <b>Confirm this finding</b>. Six places in total, four of which are asking the same question at
+        different levels.</td></tr>
+      <tr><th>What goes wrong</th><td>You press Confirm all findings, the count says everything is accepted, and
+        publishing still refuses because a trade is missing. The number on the button and the number that
+        decides publishing are not the same number.</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <div class="step-head"><span class="n">2</span><span class="t">The proposal &mdash; one card, one button, one list of exceptions</span><span class="badge both">PROPOSED</span><span class="size">one screen change</span></div>
+    <table class="kv">
+      <tr><th>The card</th><td>At the top of the review screen, one line and one button:
+        <b>&ldquo;222 findings drafted, 183 accepted, 39 need you&rdquo;</b> and <b>Accept all 39</b>. That single press
+        settles status, grade, trade and wording for every item the AI was confident about, in one write.</td></tr>
+      <tr><th>The list</th><td>Under the button, only the exceptions &mdash; the items the AI was unsure about, the
+        ones it could not assess, the ones where two items were found in one photo. Each has one press to
+        settle, and the reason is written beside it in plain words.</td></tr>
+      <tr><th>The one rule</th><td>The number on the button always equals what will actually be written, and the
+        same number decides publishing. No more &ldquo;confirmed everything, still blocked&rdquo;.</td></tr>
+      <tr><th>Per item</th><td>One button per finding instead of three: accepting a card settles its grade and its
+        trade with the text. One undo, not three.</td></tr>
+    </table>
+  </div>
+  <h3>How it stays honest</h3>
+  <ul>
+    <li><b>Nothing is accepted that a person has not seen.</b> The card states the number it is about to
+      accept, before it is pressed, and the number is what gets written.</li>
+    <li><b>Not assessed items are never swept in.</b> That rule exists today and stays: an item the AI
+      could not read needs a human status, and one press cannot invent it.</li>
+    <li><b>The audit trail is unchanged.</b> Every accepted finding still records who confirmed it and
+      when, exactly as it does now &mdash; so the accountability the reports rely on is identical.</li>
+    <li><b>The AI&rsquo;s confidence decides what goes in the quick pile.</b> Three confidence scores are
+      already stored per finding (wording, grade, trade). Below the line? It goes on the list, not in
+      the bulk accept.</li>
+    <li><b>One undo.</b> Published versions already freeze a copy, so a mis-press can never reach a
+      published report.</li>
+  </ul>
+  <h3>Decision 2 &mdash; what does &ldquo;accept all&rdquo; include?</h3>
+  <div class="pick"><b>A. Accept everything the AI was confident about, list the rest.</b> <span class="badge rec">MY RECOMMENDATION</span><br>
+    One press for the bulk, a short list of genuine judgement calls. On your current data that is
+    roughly four in five findings settled in one press, with the doubtful fifth in front of you.</div>
+  <div class="pick"><b>B. Accept absolutely everything, flag the doubtful ones afterwards.</b> Fewest clicks,
+    fastest, and it puts AI guesses into a report you sign. I would not recommend it on a document that
+    goes to a client.</div>
+  <div class="pick"><b>C. Keep per-item confirmation, but make it one press per item.</b> A honest improvement,
+    about half the work, but it does not fix the thing you actually described.</div>
+
+  <h2><span class="k">5</span>Job 3 &mdash; the photo carrying six findings</h2>
+  <p>You asked whether we could enlarge the photo, drop a numbered pin per item and reference the pin
+  number. Yes &mdash; and the groundwork is closer than you would think.</p>
+  <div class="step">
+    <div class="step-head"><span class="n">1</span><span class="t">Why it repeats the picture today</span><span class="badge mine">MEASURED</span><span class="size">root cause</span></div>
+    <table class="kv">
+      <tr><th>What you see</th><td>25 of your photos carry more than one finding, and each finding draws its own
+        copy of the whole photograph. A wall with four defects appears four times, full width, and nothing
+        on the picture says which defect is which.</td></tr>
+      <tr><th>Why</th><td>The code that draws a box round the relevant part of a photo reads the region saved on
+        the finding&rsquo;s <b>photo link</b>. That column has <b>0 rows</b>. The AI&rsquo;s region is saved on the
+        finding instead, in a different column, and nothing reads it there.</td></tr>
+      <tr><th>So</th><td>The feature is half built and switched off by a wiring mistake. The box, the overlay and
+        the numbered marker tool all already exist. 105 of your findings are carrying a region nobody has
+        ever seen.</td></tr>
+    </table>
+  </div>
+  <div class="step">
+    <div class="step-head"><span class="n">2</span><span class="t">What I would build &mdash; your idea, plus four things</span><span class="badge both">PROPOSED</span><span class="size">5 parts</span></div>
+    <table class="kv">
+      <tr><th>Your idea</th><td><b>One photo, numbered pins.</b> The photograph is shown once. Every item the AI
+        found on it gets a numbered pin at the place it was read from, and the item list underneath reads
+        &ldquo;Pin 3 &middot; F-017 &middot; cracked render to north elevation&rdquo;. The number is the same on screen,
+        in the PDF, on the shared page and in the trade extract.</td></tr>
+      <tr><th>1. Zoom</th><td>Tapping a pin (or its item) zooms that patch full width. On paper, a small inset
+        of the patch is printed beside the item instead of the whole photograph again &mdash; that is what
+        takes pages out of the PDF.</td></tr>
+      <tr><th>2. Only your pins</th><td>In a trade extract, that trade&rsquo;s pins stay bright and the others
+        dim. A subbie holding a 40-item report sees the three things that are his, on the right photo.</td></tr>
+      <tr><th>3. Pins you can move</th><td>The region is the model&rsquo;s estimate, so it will sometimes be in the
+        wrong place. A person drags the pin; that becomes a saved markup on the photo, so the correction
+        survives into the published version. This is why the drag ships with the pins, not after them.</td></tr>
+      <tr><th>4. Honest absence</th><td>117 findings have no region at all. Where the AI gave nothing, no pin is
+        invented &mdash; the item appears in the list without a marker, and the photo is shown once. I would
+        rather show nothing than point confidently at the wrong place on a client report.</td></tr>
+    </table>
+  </div>
+  <h3>Is there anything better than pins? Two things.</h3>
+  <ul>
+    <li><b>Auto-crop beats a pin on paper.</b> Because the AI already knows the patch, the PDF can print a
+      tight crop of the defect instead of a wide site photo where the problem is 3% of the frame. A pin
+      says where to look; a crop means you do not have to look. I would do both: pins on the photo, crops
+      in the printed item list.</li>
+    <li><b>One photo instead of six is the real win.</b> Not just tidier &mdash; it cuts the report by
+      roughly a page per multi-item photograph and makes a snagging report readable on site, on a phone,
+      in the rain.</li>
+  </ul>
+  <h3>Decision 3 &mdash; pins everywhere, or only where they earn their place?</h3>
+  <div class="pick"><b>A. Pins only where a photo carries more than one finding.</b> <span class="badge rec">MY RECOMMENDATION</span><br>
+    A single-finding photo stays exactly as it looks today, big and clear. The new treatment appears
+    only where the problem is. Nothing you like changes.</div>
+  <div class="pick"><b>B. Pins on every photo.</b> More consistent, and it costs you the large single
+    photograph that reads best on a phone.</div>
+  <div class="pick"><b>C. Region wiring first, pins later.</b> Ship the wiring alone (a small job, half a session)
+    so the boxes appear in reports tomorrow, and decide the pins after you have looked at a real one.</div>
+
+  <h2><span class="k">6</span>Order, size, and what I would do first</h2>
+  <table class="sum">
+    <thead><tr><th>Order</th><th>Job</th><th>My time</th><th>Risk</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>Trade allocation switch</td><td class="size">1 session</td>
+        <td class="note">Low. Additive database change, one gate to re-read, surfaces to hide.</td>
+        <td class="note">Do this first as you asked. It removes work from the other two &mdash; with trades off,
+        the review card loses a whole row of buttons.</td></tr>
+      <tr><td class="n">2</td><td>One press to confirm</td><td class="size">1.5 to 2 sessions</td>
+        <td class="note">Medium. It rewrites the busiest screen in the product, and every write path is
+        covered by tests that will have to move with it.</td>
+        <td class="note">The biggest job, the biggest payoff. I would build the exception list first, then the
+        button, so the screen is never in a half-state.</td></tr>
+      <tr><td class="n">3</td><td>Region wiring</td><td class="size">half a session</td>
+        <td class="note">Low. Save the region the AI already returns, let the drawing code find it.</td>
+        <td class="note">Could slot in early as a quick visible win &mdash; say the word and I will move it
+        forward.</td></tr>
+      <tr><td class="n">4</td><td>Pins, zoom, crops</td><td class="size">1 to 1.5 sessions</td>
+        <td class="note">Medium. New drawing in three places (screen, PDF, shared page) that must agree.</td>
+        <td class="note">Depends on 3. Drag-to-correct is part of this job, not a follow-up.</td></tr>
+    </tbody>
+  </table>
+  <p class="note">A &ldquo;session&rdquo; is one working stretch of mine. Every one of them lands the same way:
+  tests, lint, build, a push, CI green, and a re-walk of the live screens after you publish.</p>
+
+  <h2><span class="k">7</span>What I need from you</h2>
+  <table class="sum">
+    <thead><tr><th>#</th><th>Decision</th><th>My recommendation</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>How far does the trade switch reach?</td>
+        <td class="note"><b>A</b> &mdash; organisation setting plus a per-report override.</td></tr>
+      <tr><td class="n">2</td><td>What does &ldquo;accept all&rdquo; include?</td>
+        <td class="note"><b>A</b> &mdash; everything the AI was confident about, doubtful items listed for you.</td></tr>
+      <tr><td class="n">3</td><td>Pins everywhere or only on multi-finding photos?</td>
+        <td class="note"><b>A</b> &mdash; only where a photo carries more than one finding.</td></tr>
+      <tr><td class="n">4</td><td>Do you want the region wiring pulled forward as a quick win?</td>
+        <td class="note">Your call. It is half a session and it makes boxes appear in reports immediately.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warn"><b>Limits, stated plainly.</b> Every number above was read from the live database on
+  7 October 2026 and will drift as you use the product. Times are my working sessions, not calendar days,
+  and they include tests and verification. Nothing here is built: no code has been written for any of the
+  three jobs. There is still <b>no full type check</b> in this project &mdash; my box cannot run one (the
+  container is capped at 2&nbsp;GB and <code>tsc</code> is killed) and the build workflow has no typecheck
+  step, so I check the files I change and say so. And the AI&rsquo;s image region is an estimate, which is
+  exactly why job 3 ships with the ability to drag a pin, not after it.</div>
+</main>
+<footer>instructBrain &middot; IB-PLAN-002 Rev 1 &middot; issued 7 Oct 2026 &middot; three jobs planned, none built &middot; four decisions open</footer>
+</div></body></html>
