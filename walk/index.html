@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8">
+<title>instructBrain - post-publish walk - IB-WALK-002</title>
+<style>
+ :root{--navy:#0b1b3a;--accent:#57FF00;--ink:#0e1626;--line:#d7dde8;--muted:#5b6b85;--bg:#f6f8fb}
+ *{box-sizing:border-box} html,body{margin:0;padding:0}
+ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ink);font-size:15px;line-height:1.45;background:#eef1f6;-webkit-font-smoothing:antialiased}
+ .sheet{max-width:860px;margin:0 auto;background:#fff}
+ header{background:linear-gradient(150deg,#12305e 0%,#0b1b3a 100%);color:#fff;padding:24px 30px 20px;
+  border-bottom:4px solid var(--accent)}
+ .brand{font-size:20px;font-weight:700} .brand span{color:var(--accent)}
+ .ref{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9fb4d4;font-weight:700;margin-top:10px}
+ h1{font-size:26px;margin:4px 0 4px} .sub{color:#c6d4e8;font-size:13.5px}
+ .meta{display:flex;flex-wrap:wrap;background:var(--bg);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+ .meta div{padding:8px 22px 8px 30px;border-right:1px solid var(--line)}
+ .meta div:last-child{border-right:0}
+ .meta b{display:block;color:var(--ink);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+ main{padding:22px 30px 30px}
+ h2{font-size:15px;margin:22px 0 10px}
+ h2 .k{display:inline-block;background:var(--navy);color:#fff;border-radius:3px;font-size:11px;padding:1px 7px;margin-right:8px}
+ p{margin:0 0 10px}
+ .step{border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:5px;margin:0 0 10px;
+  page-break-inside:avoid;break-inside:avoid}
+ .step-head{display:flex;align-items:center;gap:9px;background:var(--bg);padding:9px 12px;border-bottom:1px solid var(--line)}
+ .step-head .n{background:var(--navy);color:#fff;border-radius:3px;font-size:11px;font-weight:700;padding:1px 7px}
+ .step-head .t{font-weight:700;font-size:14px;flex:1;min-width:0}
+ .badge{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:3px;
+  padding:2px 6px;white-space:nowrap;display:inline-block}
+ .badge.live{background:#e8fff1;color:#0a6b3d;border:1px solid #a9ebc8}
+ .size{color:var(--muted);font-size:12px;white-space:nowrap}
+ .kv th{text-align:left;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  padding:6px 12px;width:96px;vertical-align:top;font-weight:700}
+ .kv td{padding:6px 12px 6px 0;font-size:12.8px;vertical-align:top}
+ code{background:#f1f4f9;border:1px solid #e2e8f2;border-radius:3px;padding:1px 4px;font-size:11.5px}
+ figure{margin:0 0 14px;page-break-inside:avoid;break-inside:avoid}
+ figure img{width:100%;border:1px solid var(--line);border-radius:4px;display:block}
+ figcaption{font-size:11.5px;color:var(--muted);padding-top:5px}
+ figcaption b{color:var(--ink)}
+ .callout{background:#f2fff8;border:1px solid #a9ebc8;border-left:4px solid var(--accent);padding:11px 13px;
+  font-size:13px;margin:14px 0}
+ .callout b{color:#0a6b3d}
+ .warn{background:#fffaf2;border:1px solid #ffd9b0;border-left:4px solid #f59e0b;padding:11px 13px;font-size:13px;margin:14px 0}
+ .warn b{color:#a04d00}
+ footer{background:#0b1b3a;color:#8ea0bd;font-size:11.5px;padding:13px 30px;border-top:3px solid var(--accent)}
+ @page{size:A4;margin:11mm}
+ @media print{
+  body{background:#fff;font-size:11px} .sheet{max-width:none}
+  header{padding:12px 0 10px;border-bottom-width:3px} .meta div{padding:4px 14px 4px 0} main{padding:0}
+  h1{font-size:20px} .step-head{padding:4px 8px} .step-head .t{font-size:11px} .step{margin-bottom:6px}
+  .kv th{padding:2.6px 8px;width:104px;font-size:8.5px} .kv td{padding:2.6px 8px 2.6px 0;font-size:9.7px}
+  h2{margin:9px 0 5px;font-size:11.2px} .callout,.warn{font-size:10.2px;padding:7px 9px;margin:9px 0}
+  figcaption{font-size:9.3px} figure{margin-bottom:7px}
+  *,header,.badge,.step-head,footer,.callout,.warn{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ }
+</style></head>
+<body><div class="sheet">
+<header>
+  <div class="brand">instruct<span>Brain</span></div>
+  <div class="ref">IB-WALK-002 &middot; verification walk &middot; post-publish</div>
+  <h1>What I did, and what I actually saw</h1>
+  <div class="sub">Signed in as the owner, read-only &mdash; six checks, one bug found, nothing changed</div>
+</header>
+<div class="meta">
+  <div><b>Issued</b>7 Oct 2026</div>
+  <div><b>Owner</b>D. Hopwood</div>
+  <div><b>Product</b>instructBrain</div>
+  <div><b>Build verified</b><code>b826212</code> on main</div>
+  <div><b>CI</b>run 37663006724, green</div>
+</div>
+<main>
+  <div class="callout"><b>Everything below was measured on the live site, after your publish.</b>
+  Not read out of the code, not assumed from a green tick. I signed in as you (one-time link, never a
+  password), opened existing records and looked at them. <b>I created, edited, issued and deleted nothing.</b></div>
+
+  <h2><span class="k">1</span>What I did</h2>
+  <p>Two passes. First the <b>served bundle</b>: pulled the 125 JavaScript chunks your site actually
+  delivers and checked the fixed code is in them, rather than in the repository. Then the <b>screens</b>:
+  a signed-in walk of the dashboard, the reports list, and two real reports, capturing every screen and
+  logging console errors and any request that came back 4xx or 5xx.</p>
+
+  <h2><span class="k">2</span>The checks, and how each one was proven</h2>
+  
+    <div class="step">
+      <div class="step-head">
+        <span class="n">1</span><span class="t">The location block stops contradicting itself</span>
+        <span class="badge live">LIVE</span><span class="size">0bb939b</span>
+      </div>
+      <table class="kv"><tr><th>Evidence</th><td>The served bundle carries the new copy (<i>Add the location and details for these photographs</i>) and the report screen prints it on a real report, not just in the repository.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">2</span><span class="t">The report header stops printing the same words twice</span>
+        <span class="badge live">LIVE</span><span class="size">1565772</span>
+      </div>
+      <table class="kv"><tr><th>Evidence</th><td>The suppression rule is present in the served bundle, and report <b>SNG-2026-10-001</b> now prints the template name <b>once</b>. Before, the cover stacked the same words above the title.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">3</span><span class="t">The dashboard stops hiding your work</span>
+        <span class="badge live">LIVE</span><span class="size">bd59448 + b826212</span>
+      </div>
+      <table class="kv"><tr><th>Evidence</th><td>Both sections open themselves with rows visible: <b>2</b> of the two toggles read <i>Hide</i> and <b>none</b> read <i>Show</i>, with 9 links under Recent reports and 5 under Overdue items. This needed a second fix - see below.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">4</span><span class="t">A report can be started from the list of reports</span>
+        <span class="badge live">LIVE</span><span class="size">8654714</span>
+      </div>
+      <table class="kv"><tr><th>Evidence</th><td>The <b>New report</b> control is on the page and points at <code>/reports/quick</code>, the one start screen.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">5</span><span class="t">The two old reports that both say 001</span>
+        <span class="badge live">LIVE</span><span class="size">7a2e6a4</span>
+      </div>
+      <table class="kv"><tr><th>Evidence</th><td>The hand-recorded note now shows on the screen of report <b>2e35c5ed</b> - the wording was in the code and never displayed. No issued document was altered.</td></tr></table>
+    </div>
+    <div class="step">
+      <div class="step-head">
+        <span class="n">6</span><span class="t">The walk itself</span>
+        <span class="badge live">0 ERRORS</span><span class="size">measured</span>
+      </div>
+      <table class="kv"><tr><th>Evidence</th><td><b>No console errors and no failed requests</b> across every screen walked. That is the cleanest signal that nothing regressed while fixing things.</td></tr></table>
+    </div>
+
+  <h2><span class="k">3</span>The dashboard, before and after</h2>
+  <figure>
+    <img src="fig1-before.png" alt="Dashboard before the fix">
+    <figcaption><b>Before.</b> &ldquo;Recent reports (8)&rdquo; was a header strip behind a <i>Show</i>
+    control &mdash; eight reports the owner could not see without clicking. Captured on the pre-publish build.</figcaption>
+  </figure>
+  <figure>
+    <img src="fig2-after.png" alt="Dashboard after the fix">
+    <figcaption><b>After.</b> The section opens itself with all eight cards visible, and
+    &ldquo;Overdue items (10)&rdquo; stays open above it. Same screen, same account, no click.</figcaption>
+  </figure>
+
+  <h2><span class="k">4</span>What the walk caught that reading the code did not</h2>
+  <div class="warn"><b>The first dashboard fix was only half working, and only the walk showed it.</b>
+  The section was set to open when it held something &mdash; but that decision was made once, when the screen
+  loaded, and the count arrives <i>after</i> the screen loads. So &ldquo;Recent reports (8)&rdquo; still started
+  collapsed while &ldquo;Overdue items&rdquo; opened. Fixed properly in <code>b826212</code>: until you touch the
+  toggle the section follows its own count, and once you touch it, your choice is what holds.</div>
+  <p>This is the whole argument for walking a live product rather than reading its source. The code looked
+  right; the screen was wrong.</p>
+
+  <h2><span class="k">5</span>What this walk does <i>not</i> cover</h2>
+  <table class="kv"><tr><th>No full type check exists in this project</th><td>It cannot run on my box - the container is capped at 2&nbsp;GB and <code>tsc</code> is killed - and the CI workflow deliberately has no typecheck step. What I ran was a check over the changed files, with and without my edits: identical error sets. That is weaker than a full check.</td></tr><tr><th>One rule is proven by tests, not by a screen</th><td>The eyebrow is suppressed only when a report's title already opens with the template name. No report created after the relabel exists yet, so that case is covered by six unit tests rather than by looking at a live page.</td></tr><tr><th>Issuing a report and the emailed PDF were not exercised</th><td>By design: this was a read-only walk. Nothing was created, edited, issued or deleted, so the issue action and the delivery path are unchanged and unproven by this walk.</td></tr><tr><th>Desktop width only</th><td>Measured at 1440&nbsp;px. Phone widths were not walked, so the narrow-screen wrapping of the new <b>New report</b> control is asserted from the code, not observed.</td></tr><tr><th>A point-in-time record</th><td>Everything here was true on 7 Oct 2026. The live site will move on; this document will not.</td></tr></table>
+
+  <h2><span class="k">6</span>Still waiting on you</h2>
+  <p>Unchanged by this walk, and listed so it stays visible: <b>where delivery bounces should be
+  reported</b> (a provider or an endpoint &mdash; I cannot invent the destination); <b>the sign-in email
+  sender</b> &mdash; my recommendation is Supabase Auth pointed at Resend, which costs nothing; and
+  <b>whether the two reports still showing reference 001 should be reissued</b> (my recommendation: leave them,
+  they are a record of what was issued).</p>
+
+  <p style="color:#5b6b85;font-size:12px">No database row was changed and no document was issued or
+  altered. Where a claim rests on a test rather than a screen, it says so above.</p>
+</main>
+<footer>instructBrain &middot; IB-WALK-002 &middot; issued 7 Oct 2026 &middot; signed-in read-only walk of b826212 &middot; screenshots as captured, not mock-ups</footer>
+</div></body></html>
