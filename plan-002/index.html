@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>instructBrain - three changes, planned - IB-PLAN-002 Rev 2</title>
+<title>instructBrain - three changes, planned, built and live - IB-PLAN-002 Rev 3</title>
 <style>
  :root{--navy:#0b1b3a;--accent:#57FF00;--ink:#0e1626;--line:#d7dde8;--muted:#5b6b85;--bg:#f6f8fb}
  *{box-sizing:border-box}
@@ -71,21 +71,21 @@
 <body><div class="sheet">
 <header>
   <div class="brand">instruct<span>Brain</span></div>
-  <div class="ref">IB-PLAN-002 &middot; Rev 2 &middot; plan, not code</div>
-  <h1>Three changes, planned before a line is written</h1>
-  <div class="sub">Trade allocation as a switch &middot; one press to confirm &middot; pins on the photos carrying more than one finding<br>Rev 2 adds <b>Annex A</b>: the viewer, the pins and the AI we could clone &mdash; and the ones we already own</div>
+  <div class="ref">IB-PLAN-002 &middot; Rev 3 &middot; plan and record</div>
+  <h1>Three changes, planned, built and live</h1>
+  <div class="sub">Trade allocation as a switch &middot; one press to confirm &middot; pins on the photos carrying more than one finding<br>Rev 2 added <b>Annex A</b>: the viewer, the pins and the AI we could clone. Rev 3 is the record: <b>all three jobs are built and live</b>, and the work a real report then asked for</div>
 </header>
 <div class="meta">
-  <div><b>Issued</b>7 Oct 2026</div>
+  <div><b>Issued</b>7 Oct 2026 &middot; Rev 3, 8 Oct</div>
   <div><b>Owner</b>D. Hopwood</div>
   <div><b>Product</b>instructBrain</div>
-  <div><b>Repository</b><code>d930b4b</code> on main &middot; CI green</div>
+  <div><b>Repository</b><code>f5e28e5</code> on main &middot; CI green &middot; live</div>
 </div>
 <main>
-  <div class="callout"><b>Nothing in here is built yet.</b> This is the plan for the three jobs you
-  set, in the order you set them, with what each one touches, what it costs, and the four decisions
-  I need from you before I start. Everything below was measured against your live database this
-  evening, not guessed.</div>
+  <div class="callout"><b>All three jobs are built and live.</b> Rev 1 planned them, Rev 2 added the
+  annex, and this revision is the record: what shipped, which decision was taken, what the numbers
+  said afterwards &mdash; and the work a real report asked for that no plan could have predicted.
+  Figures are measured; where something is a judgement rather than a measurement, it says so.</div>
 
   <h2><span class="k">1</span>The three jobs, and what each one is really about</h2>
   <table class="sum">
@@ -129,7 +129,7 @@
   buttons, and almost nobody uses it. The confirmation layer is used by everyone, every day, the
   hard way. The region data that would fix the photo problem is already being paid for and binned.</p>
 
-  <h2><span class="k">3</span>Job 1 &mdash; trade allocation as a switch</h2>
+  <h2><span class="k">3</span>Job 1 &mdash; trade allocation as a switch <span class="badge done">BUILT &amp; LIVE</span></h2>
   <p>You asked for the whole feature to be an option: enable or disable. Here is what &ldquo;the whole
   feature&rdquo; actually is, because it is wider than one screen.</p>
   <div class="step">
@@ -187,7 +187,7 @@
   <div class="pick"><b>D. Leave it as it is.</b> Nothing changes. Honest answer: the trade layer is nearly unused, so
     this keeps costing every report a screen and a gate for the customers who do not need it.</div>
 
-  <h2><span class="k">4</span>Job 2 &mdash; one press to confirm everything</h2>
+  <h2><span class="k">4</span>Job 2 &mdash; one press to confirm everything <span class="badge done">BUILT &amp; LIVE</span></h2>
   <p>This is the one you called the big thing, and I agree: it is not a button problem, it is a
   &ldquo;how many decisions does a person make per report&rdquo; problem.</p>
   <div class="step">
@@ -250,7 +250,7 @@
   <div class="pick"><b>C. Keep per-item confirmation, but make it one press per item.</b> A honest improvement,
     about half the work, but it does not fix the thing you actually described.</div>
 
-  <h2><span class="k">5</span>Job 3 &mdash; the photo carrying six findings</h2>
+  <h2><span class="k">5</span>Job 3 &mdash; the photo carrying six findings <span class="badge done">BUILT &amp; LIVE</span></h2>
   <p>You asked whether we could enlarge the photo, drop a numbered pin per item and reference the pin
   number. Yes &mdash; and the groundwork is closer than you would think.</p>
   <div class="step">
@@ -331,31 +331,147 @@
   <p class="note">A &ldquo;session&rdquo; is one working stretch of mine. Every one of them lands the same way:
   tests, lint, build, a push, CI green, and a re-walk of the live screens after you publish.</p>
 
-  <h2><span class="k">7</span>What I need from you</h2>
+  <h2><span class="k">7</span>The five decisions, as issued and as taken</h2>
   <table class="sum">
-    <thead><tr><th>#</th><th>Decision</th><th>My recommendation</th></tr></thead>
+    <thead><tr><th>#</th><th>Decision</th><th>My recommendation</th><th>Taken</th></tr></thead>
     <tbody>
       <tr><td class="n">1</td><td>How far does the trade switch reach?</td>
-        <td class="note"><b>A</b> &mdash; organisation setting plus a per-report override.</td></tr>
+        <td class="note"><b>A</b> &mdash; organisation setting plus a per-report override.</td><td><span class="badge done">A</span></td></tr>
       <tr><td class="n">2</td><td>What does &ldquo;accept all&rdquo; include?</td>
-        <td class="note"><b>A</b> &mdash; everything the AI was confident about, doubtful items listed for you.</td></tr>
+        <td class="note"><b>A</b> &mdash; everything the AI was confident about, doubtful items listed for you.</td><td><span class="badge done">A</span></td></tr>
       <tr><td class="n">3</td><td>Pins everywhere or only on multi-finding photos?</td>
-        <td class="note"><b>A</b> &mdash; only where a photo carries more than one finding.</td></tr>
+        <td class="note"><b>A</b> &mdash; only where a photo carries more than one finding.</td><td><span class="badge done">A</span></td></tr>
       <tr><td class="n">4</td><td>Do you want the region wiring pulled forward as a quick win?</td>
-        <td class="note">Your call. It is half a session and it makes boxes appear in reports immediately.</td></tr>
+        <td class="note">Your call. It is half a session and it makes boxes appear in reports immediately.</td><td><span class="badge done">YES</span></td></tr>
       <tr><td class="n">5</td><td>Do we build the pins from your own instructSite parts and keep the AI on Gemini?</td>
         <td class="note"><b>Yes to both</b> &mdash; clone the pin canvas and palette, keep Gemini, revisit SAM only
-        after we have judged twenty real boxes.</td></tr>
+        after we have judged twenty real boxes.</td><td><span class="badge done">YES</span></td></tr>
     </tbody>
   </table>
 
-  <div class="warn"><b>Limits, stated plainly.</b> Every number above was read from the live database on
-  7 October 2026 and will drift as you use the product. Times are my working sessions, not calendar days,
-  and they include tests and verification. Nothing here is built: no code has been written for any of the
-  three jobs. There is still <b>no full type check</b> in this project &mdash; my box cannot run one (the
-  container is capped at 2&nbsp;GB and <code>tsc</code> is killed) and the build workflow has no typecheck
-  step, so I check the files I change and say so. And the AI&rsquo;s image region is an estimate, which is
-  exactly why job 3 ships with the ability to drag a pin, not after it.</div>
+  <div class="warn"><b>Limits, stated plainly.</b> Sections 1 to 7 are the plan as issued on 7 October and the
+  database figures in section 2 are from that day; they will drift as you use the product. Sections 8 to 10 are the
+  record, measured on 8 October against the live app and the real PDFs. <b>The readability work costs paper and I am
+  not hiding it:</b> the 58-item report went from 39 pages to 58 and the 51-item report from 29 to 44. Nothing in that
+  is waste &mdash; every photograph holds a page and on 13 of 14 photograph pages the item that follows fills the room
+  left over &mdash; but it is a real cost of making a report reviewable. There is still <b>no full type check</b> in this
+  project &mdash; my box cannot run one (the container is capped at 2&nbsp;GB and <code>tsc</code> is killed) and the
+  build workflow has no typecheck step, so I check the files I change and say so. And the AI&rsquo;s image region remains
+  an estimate, which is exactly why the pins ship with the ability to drag one to the right place.</div>
+
+  <h2><span class="k">8</span>What shipped &mdash; the plan against the repo</h2>
+  <table class="sum">
+    <thead><tr><th>#</th><th>Job</th><th>Decision taken</th><th>Commits</th><th>State</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td><b>Trade allocation as a switch</b></td>
+        <td class="note"><b>A</b> &mdash; organisation setting plus a per-report override, exactly as recommended.
+          Two columns, one additive migration, applied to the live project and verified there.</td>
+        <td class="note"><code>81ac909</code></td>
+        <td><span class="badge done">LIVE</span></td></tr>
+      <tr><td class="n">2</td><td><b>One press to accept everything</b></td>
+        <td class="note"><b>A</b> &mdash; accept what the AI was confident about, list the rest with a reason in plain
+          words. One accept button on the screen, not five, and the redundant bulk-trade action removed.</td>
+        <td class="note"><code>318c4d1</code></td>
+        <td><span class="badge done">LIVE</span></td></tr>
+      <tr><td class="n">3</td><td><b>Pins on a photo carrying several findings</b></td>
+        <td class="note"><b>A</b> &mdash; pins only where a photo carries more than one finding, with the region wiring
+          pulled forward as you asked, and drag-to-correct shipped <i>with</i> the pins rather than after them.</td>
+        <td class="note"><code>b160f97</code> &middot; <code>3022c79</code> &middot; <code>2a8c9dc</code> &middot;
+          <code>1703e72</code> &middot; <code>379b51c</code></td>
+        <td><span class="badge done">LIVE</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Jobs 1 and 2 landed in the order you set and exactly as section 6 promised: tests, lint, build, a push,
+  CI green, then a walk of the live screens after you published. Job 3 took four phases &mdash; plus a fifth for a defect
+  found during verification, which is the job working as intended rather than a plan failure.</p>
+
+  <h3>Two things in the plan that changed, and why</h3>
+  <table class="kv">
+    <tr><th>Pins count only what is marked</th><td>The plan said an item list would read &ldquo;Pin 3 &middot; F-017&rdquo;.
+      Building it exposed a flaw the plan had not thought through: the first version numbered every item on a photograph, so
+      a photo with six items and two marked areas produced pins numbered 1, 2, 4, 5 &mdash; a total that lied and a set of
+      numbers nobody could count. <b>Pins now number only the marked items</b>, and an unmarked item reads &ldquo;Shown
+      above&rdquo;. Nothing had been published under the old rule, so no issued report changed.</td></tr>
+    <tr><th>Trade-extract pin dimming &mdash; dropped</th><td>Part 2 of job 3 (&ldquo;only your pins&rdquo;: a subbie sees
+      their pins bright and the rest dim) is <b>dropped, not deferred</b>. One trade link has ever been issued, so it would
+      be built for nobody. It comes back the day per-trade extracts go out at volume.</td></tr>
+  </table>
+
+  <h2><span class="k">9</span>What a real report then taught us</h2>
+  <p>No plan could have caught this, because it needed a finished document in front of a person. You read a published
+  report and told me what it was like to receive.</p>
+  <div class="warn"><b>In your words:</b> &ldquo;the photos with the boxes in them are all at the top of the report and
+  then all the findings at the bottom &mdash; it&rsquo;s practically impossible to review anything&hellip; we also have
+  reports with items spanning over two pages where the text is all broken mid extract.&rdquo;</div>
+  <p>Both were true. Both were then measured on your own documents rather than argued about.</p>
+  <table class="sum">
+    <thead><tr><th>Measured on the real PDF</th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>58-item report &mdash; the page the first finding appears on</td><td><b>10</b></td><td><b>3</b></td></tr>
+      <tr><td>58-item report &mdash; passages cut in half by a page break</td><td><b>4</b></td><td><b>0</b></td></tr>
+      <tr><td>58-item report &mdash; total pages</td><td>39</td><td>58 <span class="note">(the honest cost)</span></td></tr>
+      <tr><td>51-item report &mdash; the page the first finding appears on</td><td><b>8</b></td><td><b>3</b></td></tr>
+      <tr><td>51-item report &mdash; total pages</td><td>29</td><td>44</td></tr>
+      <tr><td>The width a photograph used, of 499pt available</td><td>226pt (45%)</td><td>up to 480pt (96%)</td></tr>
+      <tr><td>Items listed by pin under their photograph</td><td>0</td><td>54 and 48</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Your call on the layout &mdash; and it beat both of mine</h3>
+  <p>I offered two ways to fill the blank half of a photograph page, and warned that one of them re-committed the original
+  error. You gave a third.</p>
+  <div class="callout"><b>Your words:</b> &ldquo;with multiple findings in one photo we have photo per page with the
+  multiple findings listed by pin number below.&rdquo;</div>
+  <ul>
+    <li><b>Two photographs side by side</b> would halve the sheets, but packing them means batching photographs together
+      again, which puts them back above their items. That is the complaint this work exists to remove. <b>Rejected.</b></li>
+    <li><b>Photograph beside its item&rsquo;s text</b> fills the blank column with the words that describe the picture.
+      Honest, and I recommended it, but it reorders the schedule around the photographs. <b>Not adopted.</b></li>
+    <li><b>&#11088; A photograph takes a page of its own</b> &mdash; the picture as large as the page allows, a numbered pin
+      for every item found on it, and the items listed underneath in pin order. <b>Adopted</b>, and measured above.</li>
+  </ul>
+  <p class="note">The items under a photograph are listed by their title or opening description, not reproduced in full. The
+  schedule still carries the complete record, and duplicating it would double the document for no extra information.</p>
+
+  <h3>The five commits</h3>
+  <table class="kv">
+    <tr><th>A &mdash; never slice an item</th><td><code>98fecf5</code>. The PDF writer checked for room one line at a time,
+      so text walked off the bottom of the page mid-sentence. It now measures the whole item first and breaks <i>before</i>
+      an item rather than through it. An item longer than a page still flows, because refusing to break it would lose text.</td></tr>
+    <tr><th>B &mdash; a photograph joins its items</th><td><code>b41e0ca</code>. Each shared photograph is drawn with the
+      items that refer to it, instead of in a block at the front of the report.</td></tr>
+    <tr><th>C &mdash; and the same on screen</th><td><code>ef0ea8c</code>. The screen already carried
+      <code>break-inside-avoid</code>; the PDF did not, which is exactly why the damage only ever showed on the
+      client&rsquo;s copy.</td></tr>
+    <tr><th>D &mdash; a photograph owns its page</th><td><code>6dc46d2</code> and <code>520be06</code>. The photograph starts a
+      fresh page and takes its height from the room the words leave, rather than from a fixed cap &mdash; the cap left a
+      third of every photograph page blank, which is the same waste this work was fixing.</td></tr>
+    <tr><th>E &mdash; no pin a photograph cannot carry</th><td><code>f5e28e5</code>. See section 10.</td></tr>
+  </table>
+
+  <h2><span class="k">10</span>What the plan did not foresee</h2>
+  <p>Three defects, every one found by looking at live output rather than by running a test. They are recorded here because
+  a plan that only lists its own intentions is not a record.</p>
+  <table class="kv">
+    <tr><th>A platform admin saw reports with no pictures in them</th>
+      <td>Reports belonging to an organisation the viewer is not a member of rendered every photograph as
+      &ldquo;unavailable&rdquo;, while all 14 files were present in storage. The cause was one clause missing from four
+      storage rules: reports and findings both let a platform administrator through, their photographs did not. Fixed with an
+      additive policy that keeps the bucket gate and removes only the organisation gate, matching every public table
+      &mdash; <code>9d617d2</code>. Verified by walking the affected report: photographs <b>0 &rarr; 14</b>,
+      &ldquo;unavailable&rdquo; <b>14 &rarr; 0</b>, pins <b>0 &rarr; 48</b>.</td></tr>
+    <tr><th>A document promised pins it could not show</th>
+      <td>Where a photograph could not be read, the item rows still said &ldquo;Pin 2 of 6&rdquo; and &ldquo;shown
+      above&rdquo;. A pin points at a place on a picture, so no picture means no pin &mdash; and the row now says the
+      photograph could not be read instead &mdash; <code>379b51c</code>.</td></tr>
+    <tr><th>And then a caption promised a marked area that did not exist</th>
+      <td>Found on the published 44-page report, by reading it. A photograph carrying two items, neither with a recorded
+      area, was captioned &ldquo;the marked area indicates the item&rdquo;, while both of its rows said the photograph was
+      printed &ldquo;with its pins&rdquo;. Every clause of both sentences was false. The wording is now conditional on the
+      photograph actually carrying a pin, taken from one shared counter so the screen and the PDF cannot drift apart
+      &mdash; <code>f5e28e5</code>. The single remaining &ldquo;with its pins&rdquo; row in that report was checked against
+      its photograph: it has four items and three pins, so the claim is true.</td></tr>
+  </table>
 
   <h2><span class="k">A</span>Annex A &mdash; the viewer, the pins and the AI we could clone</h2>
   <p>You asked two things: whether we could use a PDF viewer like the one in instructSite, and what
@@ -475,5 +591,5 @@
   <p class="note">Two things I did not verify and am therefore not claiming: Florence-2&rsquo;s licence, and the licence
   per Qwen3-VL model size. Both are marked above as checks outstanding rather than facts.</p>
 </main>
-<footer>instructBrain &middot; IB-PLAN-002 Rev 2 &middot; issued 7 Oct 2026 &middot; three jobs planned, none built &middot; five decisions open &middot; Annex A: what we already own and what we could clone</footer>
+<footer>instructBrain &middot; IB-PLAN-002 Rev 3 &middot; issued 7 Oct 2026, revised 8 Oct 2026 &middot; three jobs planned, three built and live &middot; five decisions taken &middot; plus the readability work a real report asked for &middot; repository <code>f5e28e5</code>, CI green</footer>
 </div></body></html>
