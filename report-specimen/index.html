@@ -3,21 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>instructBrain - proposed report layout (specimen)</title>
+<title>instructBrain - report layout, now built in</title>
 <style>
   :root{--navy:#0f1c33;--brand:#24417b;--green:#57ff00;--muted:#697586;--line:#e2e6ec;--fill:#f4f6f9}
   *{box-sizing:border-box}
   body{margin:0;background:#fff;color:var(--navy);
        font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Manrope,Helvetica,Arial,sans-serif}
-  .wrap{max-width:860px;margin:0 auto;padding:44px 22px 90px}
+  .wrap{max-width:900px;margin:0 auto;padding:44px 22px 90px}
   .mark{font-weight:800;font-size:28px;letter-spacing:-.02em}
   .mark span{color:#16a34a}
   .sub{font-size:11px;letter-spacing:.14em;color:var(--muted);margin-top:4px;text-transform:uppercase}
   h1{font-size:clamp(26px,5vw,40px);line-height:1.1;letter-spacing:-.025em;margin:38px 0 10px;font-weight:800}
-  .lede{color:var(--muted);max-width:62ch;font-size:17px}
-  .spec{display:inline-block;margin:22px 0 6px;padding:7px 13px;border:1.5px solid #cf4b16;color:#cf4b16;
-        font-size:12px;font-weight:700;letter-spacing:.04em;border-radius:3px}
-  .cta{display:inline-block;margin:18px 0 8px;padding:15px 26px;background:var(--navy);color:#fff;
+  .lede{color:var(--muted);max-width:64ch;font-size:17px}
+  .cta{display:inline-block;margin:22px 0 8px;padding:15px 26px;background:var(--navy);color:#fff;
        text-decoration:none;font-weight:700;border-radius:4px}
   .cta:hover{background:var(--brand)}
   h2{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
@@ -29,12 +27,14 @@
      background:var(--fill);color:var(--navy);font-weight:800;font-size:14px;display:grid;place-items:center}
   ol b{display:block}
   ol .why{color:var(--muted);font-size:14.5px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0 8px}
-  .stat{background:var(--fill);border:1px solid var(--line);border-radius:6px;padding:14px}
-  .stat b{display:block;font-size:22px;font-weight:800}
-  .stat span{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .shots{display:grid;gap:14px;margin:18px 0 6px}
+  .shots img{width:100%;border:1px solid var(--line);border-radius:5px;display:block}
+  .shots figcaption{font-size:12.5px;color:var(--muted);margin-top:6px}
   .note{margin-top:34px;padding:16px 18px;background:var(--fill);border-left:3px solid var(--brand);
         font-size:14px;color:var(--muted);border-radius:0 5px 5px 0}
+  .warn{margin-top:18px;padding:16px 18px;background:#fff6f2;border-left:3px solid #cf4b16;
+        font-size:14px;color:#8a3311;border-radius:0 5px 5px 0}
+  code{background:var(--fill);padding:1px 5px;border-radius:3px;font-size:13px}
   footer{margin-top:60px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:13px}
 </style>
 </head>
@@ -43,55 +43,69 @@
   <div class="mark">instruct<span>Brain</span></div>
   <div class="sub">An instructSite company</div>
 
-  <h1>Proposed report layout</h1>
-  <p class="lede">A specimen of the improved finding and remedial schedule, built from the real
-     content of report SNG&#8209;2026&#8209;10&#8209;006. Four pages, so the change can be read
-     rather than argued about.</p>
+  <h1>Report layout, built in</h1>
+  <p class="lede">This is the <b>real renderer's output</b> &mdash; not a mock-up. It is the report
+     module from the instructBrain codebase, rendering the content of SNG&#8209;2026&#8209;10&#8209;006,
+     committed as <code>6637b5b</code>.</p>
 
-  <div class="spec">SPECIMEN &middot; PROPOSED LAYOUT FOR REVIEW &middot; NOT AN ISSUED REPORT</div>
-  <br>
-  <a class="cta" href="instructbrain-report-specimen.pdf">Open the specimen (PDF, 4 pages)</a>
+  <a class="cta" href="instructbrain-report-rendered.pdf">Open the rendered report (PDF, 23 pages)</a>
 
-  <h2>What was wrong</h2>
-  <div class="grid">
-    <div class="stat"><b>0</b><span>headlines on 18 items</span></div>
-    <div class="stat"><b>0</b><span>contents pages</span></div>
-    <div class="stat"><b>3</b><span>section headings, for 22 pages</span></div>
-    <div class="stat"><b>1</b><span>item torn across a page break</span></div>
+  <div class="shots">
+    <figure><img src="page-2.png" alt="Schedule of items">
+      <figcaption><b>Page 2 &mdash; the schedule of items.</b> Every item, once, with its title, trade,
+        severity, and the photograph and pin it refers to.</figcaption></figure>
+    <figure><img src="page-5.png" alt="An item">
+      <figcaption><b>Page 5 &mdash; an item.</b> The one-line title as the headline, the chips beneath it,
+        then the record, with the crop and its pin.</figcaption></figure>
   </div>
-  <p class="lede">Every finding already carries a short title, written and stored. The issued PDF never
-     printed it, so eighteen items read as a flat run of prose behind bare numbers &mdash; 17, 18, 15, 8, 6 &mdash;
-     grouped by severity but never sectioned, and never listed.</p>
 
-  <h2>What changes</h2>
+  <h2>What changed</h2>
   <ol>
-    <li><b>Print the title that already exists</b>
-        <span class="why">Every finding has a one-line snag title. It becomes the headline of the item,
-        with the full description underneath it. This is the single biggest change.</span></li>
-    <li><b>Add a schedule of items</b>
-        <span class="why">One row per item: number, title, trade, severity, and the photograph and pin it
-        refers to. Without it, finding item 5 means reading 22 pages.</span></li>
-    <li><b>Label the sections, worst first</b>
-        <span class="why">The items are already grouped; the grouping is just invisible, and it runs
-        cosmetic first. Make the headings explicit and lead with performance.</span></li>
-    <li><b>Keep each record whole</b>
-        <span class="why">Reserve the whole item before drawing it, so a heading never lands on one page and
-        its photograph and pin on the next.</span></li>
-    <li><b>State the photograph and pin in words</b>
-        <span class="why">"Photograph 6, pin 1" as a chip on the item, and as a column in the schedule, so
-        the pin is traceable without hunting the photograph pages.</span></li>
-    <li><b>Offer the by-trade view</b>
-        <span class="why">The product already builds this grouping. Printed, it is the sheet a site manager
-        hands to each subcontractor.</span></li>
+    <li><b>The photograph can no longer tear off its item</b>
+        <span class="why">The crop reserved 148&nbsp;points of space but only ever consumed 140. In the
+        eight points between the two, an item measured as fitting and its photograph was still pushed to
+        the next page &mdash; landing above the <i>following</i> item's heading. That is what put item 11's
+        cracked tile above &ldquo;Item 19&rdquo;.</span></li>
+    <li><b>The title is the headline</b>
+        <span class="why">Every finding already carried a one-line title. It was printed as one more line
+        of body text below the chips, or not at all. It now heads the item.</span></li>
+    <li><b>The schedule of items</b>
+        <span class="why">There was no contents page. Finding &ldquo;item 5&rdquo; meant reading
+        twenty-two pages.</span></li>
+    <li><b>Section bands, with counts</b>
+        <span class="why">Three plain headings over twenty-two pages became navy bands carrying the
+        number of items in each.</span></li>
+    <li><b>The pin, in words</b>
+        <span class="why">&ldquo;Photograph 6, pin 1&rdquo; on the item and in the schedule, so a pin can
+        be traced without hunting for the plate.</span></li>
+    <li><b>Branding, verified on the artifact</b>
+        <span class="why">The cover band, the section bands and the schedule all carry the fixed
+        instructBrain navy, white &ldquo;instruct&rdquo; and Laser Green &ldquo;Brain&rdquo;, with the
+        green rule and the credit on every page. Never an organisation override.</span></li>
   </ol>
 
+  <h2>What deliberately did not change</h2>
+  <p class="lede">The <b>order</b> of the sections. The severity scales run in both directions across the
+     product's definitions &mdash; snagging is declared cosmetic&#8209;first, while site walk, electrical,
+     mechanical, fit&#8209;out and damp are all declared most&#8209;serious&#8209;first. So
+     &ldquo;worst first&rdquo; is a property of each definition, not something the renderer may infer.
+     A uniform reversal was written, measured to reorder five of the seven the wrong way, and backed out.
+     A test now holds the printed order to the declared order.</p>
+
   <div class="note">
-    The specimen uses the fictional Riverside Court sample content. It is a design mock&#8209;up produced
-    outside the product, not output from instructBrain. Nothing here is issued and nothing is live.
+    The prose on the pages shown is filler from the test fixture, not the report's real finding text &mdash;
+    the layout is what is being shown. The item titles, trades, severities and pin references are real.
+  </div>
+
+  <div class="warn">
+    <b>Not live yet.</b> A push syncs the code into the Lovable editor. The live site and the PDFs it
+    generates do not change until <b>Publish &rarr; Update</b> is pressed. Report SNG&#8209;2026&#8209;10&#8209;006
+    was issued as version&nbsp;1 under the old layout; it keeps that frozen version, and a new version
+    would carry this one.
   </div>
 
   <footer>
-    instructBrain &middot; instructSite &middot; specimen prepared for internal review
+    instructBrain &middot; instructSite &middot; rendered from commit 6637b5b &middot; 607 tests pass, build green
   </footer>
 </div>
 </body>
