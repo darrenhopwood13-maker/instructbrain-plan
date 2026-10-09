@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Two films - instructBrain and instructSite</title>
+<meta name="theme-color" content="#0b1b3a">
+<meta name="description" content="Two new product films, built from real screens and real issued reports.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800" rel="stylesheet">
+<style>
+  :root{--navy:#0b1b3a;--deep:#071228;--green:#57FF00;--greenp:#d8ffbf;--orange:#FF770F;--orangep:#FFA852;
+        --font-d:'Sora',sans-serif;--font-s:'Manrope',sans-serif}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:radial-gradient(1200px 700px at 50% -8%,#16335f 0%,rgba(22,51,95,0) 62%),var(--navy);
+       color:#fff;font-family:var(--font-s);-webkit-font-smoothing:antialiased;min-height:100vh}
+  .bar{height:6px;background:linear-gradient(90deg,var(--green) 0 50%,var(--orange) 50% 100%)}
+  header{max-width:1200px;margin:0 auto;padding:34px 26px 0}
+  h1{font-family:var(--font-d);font-weight:800;font-size:clamp(26px,4vw,44px);letter-spacing:-.02em;margin:0 0 10px}
+  .sub{color:rgba(255,255,255,.78);font-size:clamp(14px,1.5vw,17px);line-height:1.55;max-width:70ch;margin:0}
+  main{max-width:1200px;margin:0 auto;padding:28px 26px 40px}
+  .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+  @media (max-width:900px){.pair{grid-template-columns:1fr}}
+  .card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:20px}
+  .card.brain{--a:var(--green);--ap:var(--greenp)}
+  .card.site{--a:var(--orange);--ap:var(--orangep)}
+  .wm{font-family:'Audiowide',var(--font-d);font-size:clamp(22px,3vw,30px);margin:0 0 4px;line-height:1}
+  .wm i{font-style:normal;color:#fff}
+  .wm b{color:var(--a)}
+  .meta{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ap);font-weight:700;margin:0 0 14px}
+  .film{border-radius:16px;overflow:hidden;background:#000;aspect-ratio:9/16;max-height:70vh;margin:0 auto 14px;
+        box-shadow:0 24px 60px -22px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.10)}
+  .film video{width:100%;height:100%;display:block;object-fit:cover}
+  .cap{font-family:var(--font-d);font-weight:700;font-size:17px;line-height:1.45;margin:0 0 12px}
+  .beats{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:7px}
+  .beats li{display:flex;gap:10px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.86)}
+  .beats li span{color:var(--a);font-weight:700;flex:none;font-variant-numeric:tabular-nums}
+  .links{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}
+  .links a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
+  .links a:hover{border-color:var(--a);color:var(--ap)}
+  h2{font-family:var(--font-d);font-size:clamp(18px,2.2vw,24px);margin:44px 0 14px}
+  .notes{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+  .notes li{position:relative;padding-left:22px;font-size:14px;line-height:1.6;color:rgba(255,255,255,.84)}
+  .notes li:before{content:"";position:absolute;left:0;top:9px;width:9px;height:9px;border-radius:50%;
+                   background:linear-gradient(180deg,var(--green),var(--orange))}
+  footer{max-width:1200px;margin:0 auto;padding:10px 26px 40px;font-size:12px;letter-spacing:.1em;
+         text-transform:uppercase;color:rgba(255,255,255,.45)}
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<header>
+  <h1>Two new films</h1>
+  <p class="sub">Rebuilt from real screens and real issued reports, not interface mockups. Both render at
+  2160&times;3840 and are delivered at 1080&times;1920, so text and product screens stay sharp. Captions are
+  burned in, so they read with the sound off.</p>
+</header>
+<main>
+  <div class="pair">
+    <section class="card brain">
+      <h3 class="wm"><i>instruct</i><b>Brain</b></h3>
+      <p class="meta">48 seconds &middot; portrait &middot; sound</p>
+      <div class="film"><video src="instructbrain-film.mp4" controls playsinline preload="metadata"></video></div>
+      <p class="cap">Photographs in. A referenced, issued report out the same afternoon.</p>
+      <ul class="beats">
+        <li><span>01</span> The site visit is the easy bit</li>
+        <li><span>02</span> Eighty photographs, written up from memory</li>
+        <li><span>03</span> Every shot carries its own time and place</li>
+        <li><span>04</span> It drafts the finding: severity, action, trade</li>
+        <li><span>05</span> It may only cite what is on the list</li>
+        <li><span>06</span> A referenced PDF, the same afternoon</li>
+        <li><span>07</span> Publish locks it, the issued version never changes</li>
+        <li><span>08</span> Close</li>
+      </ul>
+      <div class="links">
+        <a href="instructbrain-film.mp4" download>Download &middot; 1080&times;1920</a>
+        <a href="https://instructbrain.com" target="_blank" rel="noreferrer">instructbrain.com</a>
+      </div>
+    </section>
+
+    <section class="card site">
+      <h3 class="wm"><i>instruct</i><b>Site</b></h3>
+      <p class="meta">39 seconds &middot; portrait &middot; sound</p>
+      <div class="film"><video src="instructsite-film.mp4" controls playsinline preload="metadata"></video></div>
+      <p class="cap">Site knowledge, instantly - the command tools, scope audit and drawing intelligence.</p>
+      <ul class="beats">
+        <li><span>01</span> One brain. Zero ambiguity</li>
+        <li><span>02</span> The Oracle for the Construction Ecosystem</li>
+        <li><span>03</span> Ten command tools, one place</li>
+        <li><span>04</span> Scope identified, pre-con audit in 90 seconds</li>
+        <li><span>05</span> Drawings, compliance and method, understood</li>
+        <li><span>06</span> Built for people running more than one job</li>
+        <li><span>07</span> Close</li>
+      </ul>
+      <div class="links">
+        <a href="instructsite-film.mp4" download>Download &middot; 1080&times;1920</a>
+        <a href="https://instructsite.ai" target="_blank" rel="noreferrer">instructsite.ai</a>
+      </div>
+    </section>
+  </div>
+
+  <h2>What is real, and what is not</h2>
+  <ul class="notes">
+    <li><b>Real product screens.</b> Every instructSite frame is the live instructsite.ai, captured at
+    double resolution. The instructBrain frames are the product's own pages and its real issued report
+    pages, rendered from the source PDFs at 300&nbsp;DPI.</li>
+    <li><b>Real report pages.</b> The report imagery is from the sample reports, whose projects and
+    addresses are fictional by design. No client project appears in either film.</li>
+    <li><b>Synthetic.</b> The narration is machine-generated (edge-tts, British male). The music bed is
+    machine-generated too. The two short pieces of site footage are AI-generated - the figures are
+    wide or back-to-camera, never a face.</li>
+    <li><b>Every claim is the product's own.</b> The citation ceiling (12 Approved Documents, 6 British
+    and EN standards, 6 HSE instruments), "not assessed where the evidence does not support a
+    judgement", and instructSite's own lines are quoted from the products themselves.</li>
+    <li><b>Playing a video inside a chat app re-encodes it</b> and it will look softer there. These
+    files are the masters - watch them here or download them.</li>
+  </ul>
+</main>
+<footer>An Instruct family production</footer>
+</body>
+</html>
