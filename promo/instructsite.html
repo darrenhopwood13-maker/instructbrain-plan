@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>instructSite - the 33-second film</title>
+<meta name="theme-color" content="#123B5D">
+<meta name="description" content="instructSite in 33 seconds - the portrait film, at its original quality.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#123B5D; --deep:#08182A; --orange:#FF770F; --pale:#FFA852; --ink:#0A1A2B;
+         --font-display:"Sora",sans-serif; --font-sans:"Manrope",sans-serif; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{ background:radial-gradient(1100px 620px at 50% -6%, #1C5C8E 0%, rgba(28,92,142,0) 62%), var(--navy);
+        color:#fff;font-family:var(--font-sans);-webkit-font-smoothing:antialiased;min-height:100vh;
+        display:flex;flex-direction:column; }
+  .bar{height:5px;background:linear-gradient(90deg,var(--orange),var(--pale))}
+  header{padding:26px 30px 0}
+  .wordmark{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,3.4vw,32px);line-height:1;letter-spacing:-.02em}
+  .wordmark .b{color:var(--orange)}
+  main{flex:1;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);
+       align-items:center;max-width:1240px;width:100%;margin:0 auto;padding:clamp(24px,4vh,56px) 30px}
+  .film{position:relative;border-radius:20px;overflow:hidden;background:#000;
+        box-shadow:0 30px 80px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.10);
+        aspect-ratio:9/16;max-height:76vh;margin:0 auto;width:100%}
+  .film video{width:100%;height:100%;display:block;object-fit:cover}
+  h1{font-family:var(--font-display);font-weight:800;letter-spacing:-.02em;line-height:1.04;
+     font-size:clamp(30px,4.1vw,56px);margin:0 0 18px}
+  .lede{font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:rgba(255,255,255,.86);margin:0 0 24px;max-width:38ch}
+  .spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 26px;max-width:460px}
+  .spec div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px}
+  .spec b{display:block;font-family:var(--font-display);font-weight:800;font-size:clamp(20px,2.2vw,26px);color:var(--pale);line-height:1}
+  .spec span{font-size:13px;color:rgba(255,255,255,.78)}
+  .note{margin:0 0 24px;padding:14px 16px;border-left:3px solid var(--orange);background:rgba(255,255,255,.05);
+        border-radius:0 12px 12px 0;font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.85);max-width:52ch}
+  .note b{color:#fff}
+  .under{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:6px;font-size:14px;color:rgba(255,255,255,.72)}
+  .under a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
+  .under a:hover{border-color:var(--orange);color:var(--pale)}
+  .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pale);margin-bottom:16px}
+  footer{padding:22px 30px 30px;text-align:center;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  @media (max-width:900px){ main{grid-template-columns:1fr;gap:30px} .film{max-height:62vh;max-width:340px} }
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<header><span class="wordmark">instruct<span class="b">Site</span></span></header>
+<main>
+  <div class="film">
+    <video src="instructsite-promo.mp4" controls playsinline preload="metadata"></video>
+  </div>
+  <div>
+    <span class="tag">33 second film &middot; portrait &middot; sound</span>
+    <h1>Site knowledge.<br>Instantly.</h1>
+    <p class="lede">Capture, upload, understand. Risk found before it reaches site, drawings turned into decisive action, labour, materials and method planned - in the hand, on the site.</p>
+    <div class="spec">
+      <div><b>1080&times;1920</b><span>portrait, 30 fps</span></div>
+      <div><b>33 s</b><span>with sound</span></div>
+    </div>
+    <p class="note"><b>On quality, honestly:</b> this is the film's original file, at its full resolution. Playing a video in a chat app re-encodes it, so it can look softer there than it is here. The interface panels inside the film were rendered small and scaled up, so their fine text is soft in the source itself - no re-encode can add back detail that was never rendered. A re-render at 2&times; resolution is the only true fix.</p>
+    <div class="under">
+      <a href="instructsite-promo.mp4" download>Download the film &middot; 1080x1920</a>
+      <a href="https://instructsite.ai" target="_blank" rel="noreferrer">instructsite.ai</a>
+    </div>
+  </div>
+</main>
+<footer>An Instruct family product</footer>
+</body>
+</html>
