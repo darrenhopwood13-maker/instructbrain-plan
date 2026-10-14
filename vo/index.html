@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Help clip voice - instructBrain</title>
+<style>
+  :root { --navy:#203c72; --green:#57FF00; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#0b1220; color:#fff;
+         font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  .wrap { max-width:660px; margin:0 auto; padding:38px 18px 60px; }
+  h1 { font-size:21px; margin:0 0 6px; letter-spacing:.01em; }
+  .sub { color:#9fb0cc; font-size:14px; margin:0 0 26px; }
+  .card { background:#131f36; border:1px solid #22314f; border-radius:14px; padding:18px; margin:0 0 14px; }
+  .name { font-weight:640; font-size:17px; margin:0 0 3px; }
+  .who { color:var(--green); font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 12px; }
+  .say { color:#c7d3e6; font-size:14px; margin:0 0 14px; }
+  audio { width:100%; }
+  .foot { color:#7f8fae; font-size:13px; margin-top:26px; padding-top:16px; border-top:1px solid #1d2a44; }
+  .brand { color:#fff; font-weight:700; letter-spacing:.04em; }
+  .brand span { color:var(--green); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Help clip voice</h1>
+  <p class="sub">Same line, two voices. Tap play. This is the opening beat of the start-a-report clip.</p>
+
+  <div class="card">
+    <p class="name">George</p>
+    <p class="who">Warm British male</p>
+    <p class="say">&ldquo;Every report starts here. Pick the project, choose the survey type, and the checklist is ready before you walk the site. Tap a trade, and that subcontractor gets their own extract. Nothing is sent until you approve it.&rdquo;</p>
+    <audio controls preload="metadata" src="george.mp3"></audio>
+  </div>
+
+  <div class="card">
+    <p class="name">Alice</p>
+    <p class="who">Clear British female</p>
+    <p class="say">&ldquo;Every report starts here. Pick the project, choose the survey type, and the checklist is ready before you walk the site. Tap a trade, and that subcontractor gets their own extract. Nothing is sent until you approve it.&rdquo;</p>
+    <audio controls preload="metadata" src="alice.mp3"></audio>
+  </div>
+
+  <p class="foot"><span class="brand">instruct<span>Brain</span></span> &middot; thirteen help clips &middot; voice pick</p>
+</div>
+</body>
+</html>
