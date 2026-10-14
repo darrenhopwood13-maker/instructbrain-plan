@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<title>instructBrain — the reporting area: operator manual (IB-MAN-001)</title>
+<style>
+  @font-face { font-family:"Audiowide"; font-style:normal; font-weight:400; font-display:block; src:url("fonts/audiowide-400.woff2") format("woff2"); }
+  @font-face { font-family:"Sora"; font-style:normal; font-weight:700; font-display:block; src:url("fonts/sora-700.woff2") format("woff2"); }
+  @font-face { font-family:"Manrope"; font-style:normal; font-weight:400; font-display:block; src:url("fonts/manrope-400.woff2") format("woff2"); }
+  @font-face { font-family:"Manrope"; font-style:normal; font-weight:600; font-display:block; src:url("fonts/manrope-600.woff2") format("woff2"); }
+  @font-face { font-family:"Manrope"; font-style:normal; font-weight:700; font-display:block; src:url("fonts/manrope-700.woff2") format("woff2"); }
+</style>
+<style>
+  :root{
+    --navy:#203c72; --navy-deep:#1a3159; --ink:#111a2b; --body:#2f3d52;
+    --green:#57FF00; --green-ink:#2c6b12; --green-soft:#eafcd9;
+    --grey:#f4f6f9; --line:#e3e8ef; --amber:#f59e0b; --red:#b42318;
+  }
+  @page { size: A4; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--body); font-size:9.7pt; line-height:1.5; }
+  h1,h2,h3,h4,.wordmark { font-family:"Sora","Manrope",system-ui,sans-serif; color:var(--ink); }
+  .masthead { background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%); color:#fff; padding:16mm 14mm 12mm; }
+  .wordmark { font-family:"Audiowide",sans-serif; font-size:22pt; letter-spacing:.01em; line-height:1; }
+  .wordmark .i { color:#fff; } .wordmark .b { color:var(--green); }
+  .masthead .tag { margin-top:3mm; font-size:9pt; letter-spacing:.16em; text-transform:uppercase; color:var(--green); font-weight:600; }
+  .masthead h1 { color:#fff; font-size:24pt; margin:6mm 0 2mm; line-height:1.15; font-weight:700; }
+  .masthead p { margin:0; color:#cdd7e6; max-width:150mm; font-size:10pt; }
+  .content { padding:10mm 14mm 0; }
+  .meta { width:100%; border-collapse:collapse; margin:0 0 8mm; border:1px solid var(--line); }
+  .meta td { padding:2.2mm 3mm; border-bottom:1px solid var(--line); font-size:8.8pt; vertical-align:top; }
+  .meta td:nth-child(odd){ background:var(--grey); font-weight:600; color:var(--ink); width:26mm; white-space:nowrap; }
+  h2 { font-size:14pt; margin:9mm 0 2.5mm; padding-bottom:1.6mm; border-bottom:2.5px solid var(--green); font-weight:700; }
+  h2 .n { display:inline-flex; align-items:center; justify-content:center; min-width:8mm; height:8mm; border-radius:2mm; background:var(--navy); color:#fff; font-size:10pt; margin-right:3mm; }
+  h3 { font-size:11pt; margin:6mm 0 1.8mm; font-weight:700; }
+  h4 { font-size:9.8pt; margin:4mm 0 1.2mm; font-weight:700; color:var(--navy); }
+  p { margin:0 0 2.4mm; }
+  ul,ol { margin:0 0 2.6mm; padding-left:6mm; }
+  li { margin-bottom:1.2mm; }
+  table.data { width:100%; border-collapse:collapse; margin:2mm 0 4mm; }
+  table.data th { background:#0f172a; color:#fff; text-align:left; font-size:8.4pt; padding:2mm 2.4mm; font-weight:600; }
+  table.data td { padding:2mm 2.4mm; border-bottom:1px solid var(--line); font-size:8.9pt; vertical-align:top; }
+  table.data tr:nth-child(even) td { background:var(--grey); }
+  table.data td.k { font-weight:600; color:var(--ink); white-space:nowrap; }
+  .callout { border-left:3px solid var(--navy); background:var(--grey); padding:3mm 3.5mm; margin:3mm 0; }
+  .callout.green { border-left-color:var(--green-ink); background:var(--green-soft); }
+  .callout.amber { border-left-color:var(--amber); background:#fff8ec; }
+  .callout.red { border-left-color:var(--red); background:#fdf2f1; }
+  .callout p:last-child { margin-bottom:0; }
+  .callout .h { font-weight:700; color:var(--ink); display:block; margin-bottom:.8mm; }
+  code { font-family:ui-monospace,"SFMono-Regular",Consolas,monospace; font-size:8.6pt; background:#eef2f7; padding:.3mm 1mm; border-radius:1mm; }
+  .pill { display:inline-block; font-size:7.8pt; font-weight:700; padding:.5mm 1.6mm; border-radius:6mm; background:var(--navy); color:#fff; }
+  .pill.g { background:var(--green); color:#12310a; } .pill.a { background:#fde8c8; color:#7a4b00; } .pill.r { background:#fbd8d5; color:#7a1a12; } .pill.n { background:var(--line); color:#42536b; }
+  .sec { break-inside:auto; }
+  .pagebreak { break-before:page; }
+  .foot { margin-top:8mm; border-top:1px solid var(--line); padding-top:2.5mm; font-size:8pt; color:#5b6b82; }
+  .lead { font-size:10.5pt; color:var(--ink); }
+  .kv { font-weight:600; color:var(--ink); }
+  .two { display:flex; gap:5mm; } .two > * { flex:1; }
+  .nobreak { break-inside:avoid; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wordmark"><span class="i">instruct</span><span class="b">Brain</span></div>
+  <div class="tag">The Oracle for the Construction Ecosystem</div>
+  <h1>The reporting area</h1>
+  <p>How a report is made, reviewed, published and sent — written so that anyone handed this app, with nothing else, can run a report from the first photograph to the client's copy.</p>
+</header>
+
+<div class="content">
+
+<table class="meta">
+  <tr><td>Reference</td><td>IB-MAN-001 — the reporting area</td><td>Revision</td><td>1</td></tr>
+  <tr><td>Issued</td><td>14 October 2026</td><td>Owner</td><td>Darren Hopwood</td></tr>
+  <tr><td>Product</td><td>instructBrain — instructbrain.com</td><td>Applies to</td><td>The signed-in app: Reports, Projects, On site, the compliance register</td></tr>
+  <tr><td>Status</td><td>For information — operator manual, not a client document</td><td>Written against</td><td>The product as at 14 October 2026</td></tr>
+</table>
+
+<div class="callout">
+  <span class="h">What this manual is, and what it is not</span>
+  <p>It describes what the reporting area does and the order to do it in. It is not a substitute for reading a report before you send it, and it is not a legal document. Where the app cannot do something, this manual says so rather than leaving it to be discovered on site. Section 14 lists the limits in one place.</p>
+</div>
+
+<h2><span class="n">1</span>The reporting area in one page</h2>
+
+<p class="lead">A report is made in one loop, and the loop is always the same shape:</p>
+
+<ol>
+  <li><strong>Walk it and photograph it.</strong> Every photograph you take is kept with the report. Photographs upload as you go, so nothing waits until you get back.</li>
+  <li><strong>The app reads the photographs.</strong> It drafts a finding under each one — what it is, how serious, what to do about it, and which regulation is in play.</li>
+  <li><strong>You check every line and confirm it.</strong> The app never publishes its own opinion. Publishing is blocked until a person has confirmed each item.</li>
+  <li><strong>You publish.</strong> That freezes a copy of the document as version 1. The frozen copy is the report. It cannot change afterwards.</li>
+  <li><strong>You send it.</strong> A client gets a link that opens the finished PDF. Subcontractors get their own list of only their own items.</li>
+</ol>
+
+<div class="callout green">
+  <span class="h">The one rule worth remembering</span>
+  <p><strong>A published report has exactly one finished copy, and every way out of the app serves that copy.</strong> The link you send a client, the file you download, the PDF behind the link — all the same document, frozen at the moment you published it. If you correct something later you publish version 2; version 1 is kept exactly as it was, and nothing is ever overwritten.</p>
+</div>
+
+<h3>Which area am I in?</h3>
+<p>Everything in this manual lives behind the signed-in app. The navigation is the same everywhere: on a desktop it runs along the top, on a phone it is the bar across the bottom.</p>
+
+<table class="data">
+  <thead><tr><th style="width:26mm">Destination</th><th>What it is for</th></tr></thead>
+  <tbody>
+    <tr><td class="k">Dashboard</td><td>The overview. What is in flight, what needs your attention, and the way in to start something new.</td></tr>
+    <tr><td class="k">Reports</td><td>Every report the organisation holds, in whatever state it is in. This is the list you work from when a report is part-written.</td></tr>
+    <tr><td class="k">Projects</td><td>Reports grouped by the job they belong to, including the compliance register for that job.</td></tr>
+    <tr><td class="k">On site</td><td>The capture cockpit. Built for a phone, outdoors, one hand. Start a walk, shoot it, and the report is waiting on the dashboard when you are done.</td></tr>
+    <tr><td class="k">Directory</td><td>Who gets what: the trades and contacts that reports are distributed to. Only shown when the organisation uses trade allocation.</td></tr>
+  </tbody>
+</table>
+
+<h2 class="pagebreak"><span class="n">2</span>The twelve report templates</h2>
+
+<p>You choose a template before you start, and it decides what the app asks you for, what it grades, and what the finished document looks like. Templates sit in five families — the family tells you which part of the work you are recording, not which code it is.</p>
+
+<table class="data">
+  <thead><tr><th style="width:34mm">Family</th><th style="width:44mm">Template</th><th>What it is for</th></tr></thead>
+  <tbody>
+    <tr><td class="k" rowspan="2">Snagging &amp; handover</td><td class="k">Snagging</td><td>Every photograph becomes a finding: a trade, a severity and the fix. The one for a snagging list.</td></tr>
+    <tr><td class="k">Fit-out &amp; finishes quality</td><td>Finished work checked against the drawing and the specification, including tolerances and unresolved junctions.</td></tr>
+
+    <tr><td class="k" rowspan="3">Condition &amp; fabric</td><td class="k">Schedule of Condition</td><td>Condition of each building element on a four-step grade, A to D. It records; it does not ask for a fix.</td></tr>
+    <tr><td class="k">Weatherproofing membrane survey</td><td>Roof and membrane condition, with the membrane type named and whether water is getting in now.</td></tr>
+    <tr><td class="k">Damp, mould &amp; water ingress</td><td>Moisture read as active, historic or surface marking, with a meter reading. Mould where people live escalates.</td></tr>
+
+    <tr><td class="k">Site &amp; safety</td><td class="k">Site walk</td><td>A walk of the site: safety, housekeeping, access and welfare, each with a time to fix.</td></tr>
+
+    <tr><td class="k" rowspan="2">M&amp;E</td><td class="k">Electrical installation</td><td>Defects graded against BS 7671, with the board or circuit for each item.</td></tr>
+    <tr><td class="k">Mechanical services</td><td>Plant defects, commissioning risks and efficiency losses, by system.</td></tr>
+
+    <tr><td class="k" rowspan="4">Records &amp; registers</td><td class="k">Property inventory</td><td>Rooms, contents and condition item by item, with quantities. Built for check-in and check-out.</td></tr>
+    <tr><td class="k">Certificate register</td><td>The register of certificates: what each one covers and when it runs out.</td></tr>
+    <tr><td class="k">Manual photographic report</td><td>Photographs you label yourself. Issued as a PDF, never a review page.</td></tr>
+    <tr><td class="k">Photo condition record</td><td>One photograph per item, marked sound or as an issue. No severity ladder, nothing analysed.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <span class="h">Two things that change how you work, not what the document says</span>
+  <p><strong>Some templates ask who is responsible for the fix, and some never do.</strong> The snagging family, the site walk and the two M&amp;E templates ask you to name a trade. The rest do not — a Schedule of Condition deliberately does not: it records the condition of an element, and inventing a trade for it would be wrong.</p>
+  <p><strong>Two templates are not analysed at all.</strong> A manual photographic report and a photo condition record are your own words and your own call. Nothing is read by the app and nothing is graded, which is why the manual photographic report is only ever issued as a PDF.</p>
+</div>
+
+<h2><span class="n">3</span>The life of a report</h2>
+
+<p>A report is always in exactly one of six states. The state decides what you can do to it, and — more importantly — what anybody outside your organisation can see.</p>
+
+<table class="data">
+  <thead><tr><th style="width:26mm">State</th><th style="width:70mm">What it means and what you can do</th><th>What an outsider sees</th></tr></thead>
+  <tbody>
+    <tr><td class="k">Draft</td><td>Started, not finished. Capture, edit, analyse, set details, delete items — the working document. Nothing is frozen.</td><td>Nothing. There is no link yet, and a link cannot be made.</td></tr>
+    <tr><td class="k">Analysing</td><td>The app is reading the photographs. Do not close the tab mid-pass; analysis runs in the browser and closes with it.</td><td>Nothing.</td></tr>
+    <tr><td class="k">In review</td><td>All the items are in. You confirm each one, assign trades, and clear whatever the publish gate is waiting on.</td><td>Nothing.</td></tr>
+    <tr><td class="k">Published <span class="pill g">issued</span></td><td>Version 1 exists and is frozen. The document is read-only. A client link can now be created and a client PDF can be sent.</td><td>The finished PDF, by link. Nothing else.</td></tr>
+    <tr><td class="k">Reopened</td><td>You pressed <em>Reopen for editing</em> to correct something. The published version is untouched while you work.</td><td>Still the frozen published copy they were sent — their link keeps working.</td></tr>
+    <tr><td class="k">Withheld</td><td>A deliberate withdrawal. Treat it as a stop, not a pause.</td><td>Nothing. Links to it stop answering.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout amber">
+  <span class="h">Publishing is a one-way door, and that is the point</span>
+  <p>You cannot publish over a published report. The route to a corrected version is: <em>Reopen for editing</em>, fix it, then <em>Publish</em> — which creates version 2 and leaves version 1 alone. A report is evidence. If it could be edited after issuing, it would not be evidence.</p>
+</div>
+
+<h2 class="pagebreak"><span class="n">4</span>Start to finish</h2>
+
+<h3>4.1 Choose the template</h3>
+<ol>
+  <li>From the dashboard, press <span class="kv">Start a report</span>. You land on the chooser.</li>
+  <li>Pick the family, then the template. Each line tells you what that template is for in plain words, so you can choose without knowing the product.</li>
+  <li>The one you used last is offered first — it remembers, so a routine weekly walk is one tap.</li>
+  <li>Press <span class="kv">Use this template</span>. That creates the report and takes you to capture.</li>
+</ol>
+
+<h3>4.2 Capture it</h3>
+<ol>
+  <li>Name the project if it belongs to one. A report with no project is a <em>Standalone report</em>, which is fine — you can attach it to a project later.</li>
+  <li>Fill in whatever the template asks for at the top. A Schedule of Condition asks for the element and the location; a site walk asks for where you are. If a template asks for a detail, it is because the finding is worth less without it.</li>
+  <li>Press <span class="kv">Start site walk</span> and shoot. Photographs upload as you take them — the thin bar shows how many are stored, and it counts them as they land.</li>
+  <li>If a photograph fails to upload, the app says so and offers <em>Retry</em>. Use it. A photograph that did not reach storage is not in the report, and a silent failure is exactly how one goes missing.</li>
+  <li>If you lose signal, keep shooting. The uploads catch up when you have signal again.</li>
+</ol>
+
+<div class="callout">
+  <span class="h">On a manual photographic report, write the focus statement first</span>
+  <p>That template asks for a written statement of what the report is covering before it will accept a photograph. It is deliberate: a photographic report with no stated scope is a folder of pictures.</p>
+</div>
+
+<h3>4.3 Let the app read them</h3>
+<ol>
+  <li>Press the analyse control — it reads <em>Analyse N photographs</em> and it looks like a link, not a button.</li>
+  <li>Keep the page open while it runs. It works through the photographs a few at a time; if you close the tab the pass stops where it got to, and the report sits part-analysed.</li>
+  <li>Under each photograph you get a draft finding: the observation, a severity, the remedial action, a responsible trade and, where one applies, the regulation it comes from.</li>
+</ol>
+
+<h3>4.4 Review it — the part that is yours</h3>
+<p>Nothing the app writes is published on its own. Every item has to be confirmed by a person, and the app is built so that the number it shows you as "done" is the same number the publish gate checks. Work in this order:</p>
+<ol>
+  <li><strong>Finish the analysis.</strong> An unanalysed photograph is an item with nothing in it.</li>
+  <li><strong>Clear the trades in bulk.</strong> Open the trades panel and use the bulk accept for the suggestions. Accepting a trade is also a confirmation, which is why one press can clear a lot at once.</li>
+  <li><strong>Confirm the rest.</strong> Accept items one scope at a time, reading as you go. Read the wording — this is the only point at which a wrong line is cheap to fix.</li>
+  <li><strong>Use the unidentified-item filter.</strong> That is where the app could not read the photograph. Those are the items that need your judgement, not a bulk button.</li>
+</ol>
+
+<div class="callout red">
+  <span class="h">If an item cannot be judged from the evidence, bin it</span>
+  <p>Every template expects one of its own set of calls, and none of them means "this photograph does not tell us". So an item the evidence cannot support has no honest classification. It can only be forced into a finding the evidence does not support, or removed. Remove it. Never classify an unassessable item just to clear the gate, and never do it quietly — the item count is part of the record.</p>
+</div>
+
+<h3>4.5 Publish it</h3>
+<ol>
+  <li>Open the report's second tab — <span class="kv">2 Get PDF</span>. The document actions live there, not on the capture tab.</li>
+  <li>Read the line above the button. If it still names something outstanding, the gate is not clear; if it is clear the publish dialog tells you how many findings will be included.</li>
+  <li>Press <span class="kv">Publish report</span> and confirm. The cover then reads <em>Published as version 1 on &lt;date&gt;</em> instead of <em>Draft — not yet published</em>.</li>
+</ol>
+
+<h2 class="pagebreak"><span class="n">5</span>The publish gate</h2>
+
+<p>The gate is the app refusing to let an unfinished report leave the building. It is shown in the app's own words, and it is the fastest way to know what is left:</p>
+
+<div class="callout">
+  <p><em>Not ready to publish yet: N still not assessed, N with no responsible trade, N not confirmed by a person.</em></p>
+</div>
+
+<table class="data">
+  <thead><tr><th style="width:52mm">What it is waiting on</th><th>How it is cleared</th></tr></thead>
+  <tbody>
+    <tr><td class="k">Items still not assessed</td><td>Give every item one of the template's own calls — pass, defect, monitor, or whatever that template offers. An item left at "not assessed" can never be confirmed, by design.</td></tr>
+    <tr><td class="k">Items with no responsible trade</td><td>Only for the templates that ask for a trade. Accept the suggestions, or set the trade yourself. The bulk accept inside the trades panel does this in one press.</td></tr>
+    <tr><td class="k">Items not confirmed by a person</td><td>Confirm them. Confirming means you have read the line and you stand behind it. Accepting a suggested trade or grade counts as a confirmation — that is the app's model, and it is why the count can drop fast.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout green">
+  <span class="h">Two numbers that must never disagree</span>
+  <p>What the screen says is finished, and what the gate is waiting on, are computed from the same fields. If they ever look out of step, stop and report it rather than working around it — the gate is the only thing standing between an unfinished report and a client.</p>
+</div>
+
+<h2><span class="n">6</span>The doors out of the app</h2>
+
+<p>Every way a report can leave is in one menu: the <span class="kv">Share</span> control beside the publish button on the report's second tab. Six doors, and each has one job.</p>
+
+<table class="data">
+  <thead><tr><th style="width:44mm">Door</th><th style="width:30mm">Needs published?</th><th>What it gives and who it is for</th></tr></thead>
+  <tbody>
+    <tr><td class="k">Open the report PDF</td><td>No</td><td>The document as it reads now, on screen. For you, while you are still working.</td></tr>
+    <tr><td class="k">Create link</td><td class="k">Yes</td><td>A link a client can open with no account. Before publishing it reads <em>Publish before creating a link</em> and does nothing — that is the gate, not a fault.</td></tr>
+    <tr><td class="k">Download report</td><td>No</td><td>The file. On a published report this is the frozen published PDF; on a draft it is built live and named <em>Download draft PDF</em>.</td></tr>
+    <tr><td class="k">Email PDF</td><td class="k">Yes</td><td>Available on the photographic templates: sends the frozen published PDF as an attachment to a named recipient.</td></tr>
+    <tr><td class="k">Share via device</td><td>n/a</td><td>Hands the file to your phone's own share sheet.</td></tr>
+    <tr><td class="k">Add to / detach from project</td><td>n/a</td><td>Files the report against a job, or takes it out of one. Nothing about the document changes.</td></tr>
+  </tbody>
+</table>
+
+<h3>6.1 The client link</h3>
+<ul>
+  <li>It opens the <strong>finished PDF</strong> — the frozen published copy — with the option to open it or download it. It never opens a working draft, and it never opens the live rows behind the report.</li>
+  <li>A link is <strong>pinned to the version it was made against</strong>. Publish version 2 later and the copy already sitting in a client's inbox does not change under them. If you want them to have version 2, make a fresh link.</li>
+  <li>Links expire. The app tells you the window when it makes one; after that it stops answering.</li>
+  <li>A link can be withdrawn. Revoking it stops it immediately — that is the control to reach for if something was sent to the wrong person.</li>
+  <li>Confidential items are never in anything that leaves the organisation — not the PDF, not the link, not an extract.</li>
+</ul>
+
+<h3>6.2 Distribution to subcontractors</h3>
+<p>On a report that asks for trades, the distribution screen turns the report into one extract per trade, paired with the contact who should get it.</p>
+<ul>
+  <li>Each subcontractor gets <strong>their own items only</strong>, by a trade link that needs no account, and they can mark progress against each item and upload a close-out photograph. Confidential items and other trades' work are filtered out on the server, not just hidden on the screen.</li>
+  <li>Rows that cannot be sent say why in plain words — usually a contact with no email address. Those rows are excluded from the bulk action and the reason is shown rather than swallowed.</li>
+  <li>The screen states who is getting which items before anything sends. <strong>Read it.</strong> Items with no trade go to the project's fallback recipient, and that fallback is usually the client — so an unrouted item can land with the client rather than a subcontractor.</li>
+</ul>
+
+<div class="callout amber">
+  <span class="h">Two cautions on sending, until they are changed</span>
+  <p><strong>There is no confirmation before a bulk send.</strong> Pressing <em>Send all included</em> emails every eligible subcontractor on the job straight away. The per-row buttons are the safe way to start.</p>
+  <p><strong>The closing message always reads as a success</strong>, even if no extract went out. If you need to know whether something was sent, read the delivery record on the row, not the toast. And before a first live send on any job, send one extract to your own address and watch the delivery record appear.</p>
+</div>
+
+<h2 class="pagebreak"><span class="n">7</span>Photographs and what they may claim</h2>
+
+<ul>
+  <li><strong>Photographs are the evidence.</strong> They attach to the report as you shoot, keep their capture time, and are stored untouched. Nothing the app produces replaces them.</li>
+  <li><strong>Marking up a photograph.</strong> You can mark an area on a photograph — a pin, a box, a number — and the report refers to the marked area for that item.</li>
+  <li><strong>Nothing is claimed that the photograph cannot show.</strong> If a photograph could not be read, the report says so instead of pointing at a pin. If no area was marked, the report says no marked area was recorded. That wording is deliberate: a document must never describe a mark that is not on the picture.</li>
+  <li><strong>Close-out photographs</strong> come back from subcontractors through their trade link and sit against the item, separate from the original evidence.</li>
+  <li><strong>Page cost.</strong> A report that never splits an item across two pages and gives every photograph its own room runs to more pages than a dense one. A 50-item report can run to 40-plus pages. That is the price of readable evidence, and it is worth knowing before a client asks.</li>
+</ul>
+
+<h2><span class="n">8</span>Versions</h2>
+<ul>
+  <li><strong>Publishing creates a numbered version.</strong> Version 1 is created the first time you publish. Every published version is kept exactly as it was published — nothing is overwritten, ever.</li>
+  <li><strong>To correct a published report:</strong> open it, press <em>Reopen for editing</em>, make the change, then publish. The app answers <em>Published as version 2</em>. The published version is unchanged while you work, so a client link made earlier keeps serving what it was made against.</li>
+  <li><strong>Who gets version 2?</strong> A fresh link, sent deliberately. Existing links stay pinned to the version they were made against — the client's copy does not move under them.</li>
+  <li><strong>Order matters when the app itself has changed.</strong> A version freezes the document as the app renders it at that moment, so any app update must be live before you re-issue a report.</li>
+</ul>
+
+<h2><span class="n">9</span>The words in the report</h2>
+
+<table class="data">
+  <thead><tr><th style="width:48mm">Control</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td class="k">AI tone</td><td>Sets how the drafting is written — easy-going, plain, formal. It changes the wording the app produces, not the facts. Whatever it produces, you are the one confirming it.</td></tr>
+    <tr><td class="k">Executive summary</td><td>Drafted for you to edit. Read it: it is the only part of the report a senior reader may read in full, and it is never sent unreviewed.</td></tr>
+    <tr><td class="k">Report language</td><td>The language the document is issued in. English remains the record copy; a crew can be given their own language, including on their trade link.</td></tr>
+    <tr><td class="k">Grouping — by trade, by severity, by deadline</td><td>How the findings are ordered in the document. One grouping is chosen for the report and the PDF follows the report's own grouping rather than whichever tab you happen to be on.</td></tr>
+    <tr><td class="k">Regulatory references</td><td>Where a finding quotes a regulation, the reference is tied to a citation set that was checked when it was written. The app does not invent a regulation to fill a gap.</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">10</span>The compliance register</h2>
+<p>Some work is not a survey but a cycle of checks — the weekly fire, lifting and plant registers. Those live under the project rather than on your own list:</p>
+<ul>
+  <li>Open the project, then its register. Each run of checks is recorded against the project with its date and who did it.</li>
+  <li>A register run produces a report of the same kind as any other — it has a reference, it goes through the same gate, and it is published and sent the same way.</li>
+  <li>An empty register says so plainly rather than showing a blank chart. If nothing has been recorded, that is the finding.</li>
+</ul>
+
+<h2><span class="n">11</span>The evidence rules</h2>
+<table class="data">
+  <thead><tr><th style="width:52mm">Rule</th><th>Why it is built that way</th></tr></thead>
+  <tbody>
+    <tr><td class="k">Nothing publishes without a person</td><td>The app drafts; a human confirms. The publish gate blocks on unconfirmed items whatever else is ready.</td></tr>
+    <tr><td class="k">A published version cannot be edited</td><td>So the copy a client holds can always be reproduced exactly, months later.</td></tr>
+    <tr><td class="k">Confidential items never leave</td><td>Filtered out of the PDF, the client link, the extracts and the trade links — on the server, not on the screen.</td></tr>
+    <tr><td class="k">Every action is recorded</td><td>Publishing, reopening, creating and revoking a link, confirming an item, a subcontractor's progress — all written to an activity record with who and when.</td></tr>
+    <tr><td class="k">Photographs are stored as taken</td><td>The original file is kept; anything the app displays is a rendering of it.</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="n">12</span>Words used in the app</h2>
+<table class="data">
+  <thead><tr><th style="width:40mm">Word</th><th>What it means here</th></tr></thead>
+  <tbody>
+    <tr><td class="k">Finding / item</td><td>One thing recorded under one photograph. The unit a report is built from.</td></tr>
+    <tr><td class="k">Reference</td><td>The report's own number, e.g. SW-2026-10-001. It is how a report is identified in correspondence and it is printed on the cover.</td></tr>
+    <tr><td class="k">Status</td><td>The call you make on an item — pass, defect, monitor, and so on, per template.</td></tr>
+    <tr><td class="k">Severity / grade</td><td>How serious it is. The scale belongs to the template; a Schedule of Condition grades condition A–D, an electrical report grades against BS 7671.</td></tr>
+    <tr><td class="k">Trade</td><td>Who is responsible for the fix. Asked for only where it makes sense.</td></tr>
+    <tr><td class="k">Lifecycle</td><td>The progress a subcontractor reports on their own item — not started, in progress, complete — separate from the report's own state.</td></tr>
+    <tr><td class="k">Published / issued</td><td>Frozen. Version created. The words are used interchangeably; the app's own label is <em>issued</em>.</td></tr>
+    <tr><td class="k">Extract</td><td>The per-trade slice of a report sent to a subcontractor.</td></tr>
+    <tr><td class="k">Register</td><td>A repeating cycle of checks on a project, produced as a report.</td></tr>
+  </tbody>
+</table>
+
+<h2 class="pagebreak"><span class="n">13</span>Common questions</h2>
+
+<h4>I published and my client's link shows a draft. What went wrong?</h4>
+<p>It should not be possible. A published report's link serves the frozen PDF; a draft cannot produce a link at all. If you see anything else, note the report reference and the time and report it — it is a defect, not a setting.</p>
+
+<h4>My client's link stopped working after I reopened the report.</h4>
+<p>Corrected on 14 October 2026: reopening a published report no longer takes its links down. Their copy is a published version, so the link keeps serving it. If a link does stop answering, the cause is more likely expiry or revocation.</p>
+
+<h4>Can I send the same report twice?</h4>
+<p>Yes, and the app records each send with who sent it and when. Note that the bulk send does not confirm first and does not skip rows it has already sent.</p>
+
+<h4>Can somebody change a report after it has gone out?</h4>
+<p>No. The published version is frozen and the only route forward is a new version. That is deliberate: it is what makes the document usable as evidence.</p>
+
+<h4>What if I need a report for something the templates do not cover?</h4>
+<p>Use the closest template and say in the summary what it is, rather than forcing a template that grades something it was not written to grade. A manual photographic report with a written scope is the honest home for anything that does not fit.</p>
+
+<div class="callout red">
+  <span class="h">Limits — read this before relying on the app for anything formal</span>
+  <p><strong>The app does not certify anything.</strong> It records what was seen and what a person confirmed. It is not a legal opinion, not a building-safety certificate, and not a substitute for a competent person's judgement.</p>
+  <p><strong>The AI drafts, you decide.</strong> Every finding is a draft until a person confirms it. An unconfirmed line is the app's suggestion, and nobody should act on the document as though it were an inspection by an expert.</p>
+  <p><strong>The subcontractor list stays live.</strong> A trade link is a working list, not a frozen document: the item text can change if the report is corrected, and the list follows the report rather than the version. What the client receives is frozen; what a subcontractor works on is current.</p>
+  <p><strong>Email sending depends on the platform's mail being configured.</strong> If it is not, every send fails with a named reason rather than silently — but on a new deployment, test one extract to your own address before sending to anybody on site.</p>
+  <p><strong>Known open items at the date of this revision:</strong> the bulk send does not confirm before firing and does not skip rows already sent, and its closing message reads as a success even when nothing went out. Both are recorded as defects; the per-row buttons are unaffected.</p>
+</div>
+
+<h2><span class="n">14</span>Getting help</h2>
+<ul>
+  <li><strong>Something looks wrong in a report:</strong> note the reference (e.g. SW-2026-10-001), the screen, and the time. Every action in the app is recorded, so the reference is enough to trace what happened.</li>
+  <li><strong>Something is missing from the app:</strong> say what you were trying to do and where you got stuck. The gates and the doors are deliberately narrow — a mismatch between what you expect and what the app allows is usually worth reporting rather than working around.</li>
+  <li><strong>Never</strong> work around a gate, a link, or a version by editing the record directly. If the app will not let something happen, that is usually the feature.</li>
+</ul>
+
+<div class="foot">
+  IB-MAN-001 · Revision 1 · Issued 14 October 2026 · Owner: Darren Hopwood · Product: instructBrain (instructbrain.com)<br />
+  Written against the product as at 14 October 2026. Where this manual and the app disagree, the app is right — tell us and the manual gets corrected.
+</div>
+
+</div>
+</body>
+</html>
