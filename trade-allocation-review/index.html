@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>instructBrain - trade and subcontractor allocation review</title>
+<meta name="description" content="Independent read-only review of instructBrain's trade allocation and subcontractor distribution, ahead of 15 October 2026." />
+<style>
+@font-face { font-family:"Sora"; font-style:normal; font-weight:700; font-display:block; src:url("fonts/sora-700.woff2") format("woff2"); }
+@font-face { font-family:"Manrope"; font-style:normal; font-weight:400; font-display:block; src:url("fonts/manrope-400.woff2") format("woff2"); }
+@font-face { font-family:"Manrope"; font-style:normal; font-weight:600; font-display:block; src:url("fonts/manrope-600.woff2") format("woff2"); }
+@font-face { font-family:"Manrope"; font-style:normal; font-weight:700; font-display:block; src:url("fonts/manrope-700.woff2") format("woff2"); }
+@font-face { font-family:"Audiowide"; font-style:normal; font-weight:400; font-display:block; src:url("fonts/audiowide-400.woff2") format("woff2"); }
+:root{ --navy:#203c72; --navy2:#16294d; --ink:#111a2b; --body:#2c3a51; --green:#57FF00; --greenink:#2c6b12;
+       --grey:#f3f6fa; --line:#dfe6ef; --amber:#b45309; --red:#b42318; }
+*{ box-sizing:border-box; }
+body{ margin:0; background:#eef2f7; color:var(--body);
+      font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; font-size:17px; line-height:1.55; }
+h1,h2,h3,.wm{ font-family:"Sora","Manrope",system-ui,sans-serif; color:var(--ink); font-weight:700; }
+.wrap{ max-width:820px; margin:0 auto; padding:0 14px 60px; }
+header.mast{ background:linear-gradient(160deg,var(--navy),var(--navy2)); color:#fff; padding:26px 18px 22px; }
+header.mast .inner{ max-width:820px; margin:0 auto; }
+.wm{ font-family:"Audiowide",sans-serif; font-size:26px; line-height:1; }
+.wm .b{ color:var(--green); }
+header.mast h1{ color:#fff; font-size:26px; margin:12px 0 6px; line-height:1.15; }
+header.mast p{ margin:0; color:#c9d5e8; font-size:15px; }
+h2{ font-size:20px; margin:30px 0 10px; padding-bottom:8px; border-bottom:3px solid var(--green); }
+h3{ font-size:17px; margin:22px 0 6px; }
+p,li{ font-size:16.5px; }
+table{ width:100%; border-collapse:collapse; margin:12px 0 6px; background:#fff; font-size:14.5px; }
+th{ background:#0f172a; color:#fff; text-align:left; padding:8px 9px; font-size:13px; }
+td{ padding:8px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:nth-child(even) td{ background:var(--grey); }
+code{ background:#f1f4f9; border:1px solid #e2e8f2; border-radius:3px; padding:1px 4px; font-size:13px; }
+blockquote{ margin:14px 0; padding:10px 14px; background:#f4fde9; border-left:4px solid var(--greenink); border-radius:0 8px 8px 0; }
+hr{ border:0; border-top:1px solid var(--line); margin:26px 0; }
+strong{ color:var(--ink); }
+.foot{ margin-top:26px; border-top:1px solid var(--line); padding-top:10px; font-size:13px; color:#5b6b82; }
+@media print{
+  body{ background:#fff; font-size:10.2pt; }
+  header.mast{ padding:14mm 12mm 10mm; }
+  table, blockquote{ break-inside:avoid; }
+  h2,h3{ break-after:avoid; }
+  .wrap{ max-width:none; padding:0 12mm; }
+}
+</style>
+</head>
+<body>
+<header class="mast"><div class="inner">
+  <div class="wm">instruct<span class="b">Brain</span></div>
+  <h1>Trade &amp; subcontractor allocation</h1>
+  <p>An independent review of what is built, what is not, and what it would take - read-only, 14 October 2026.</p>
+</div></header>
+<div class="wrap">
+<h1>Trade &amp; Subcontractor Allocation - Independent Review</h1>
+<p><strong>Prepared for:</strong> Darren Hopwood - ahead of the CBRE EMEA Technical Directors meeting, 15 October 2026
+<strong>Prepared by:</strong> Banksy (Hermes agent), 14 October 2026
+<strong>Basis:</strong> read-only review of the current branch (<code>main</code>, HEAD <code>2900dac</code>) and the live application at instructbrain.com. Supersedes nothing; the typecheck gate was cleared in <code>2900dac</code>+1 (test file only, no deploy needed)
+<strong>Status:</strong> review and recommendations only. No code, data, settings or migrations were changed for this review.</p>
+<hr />
+<h2>Headline</h2>
+<p>The brief's eight risks all point at something real. Six are <strong>confirmed</strong> against the code and the
+live database, two are <strong>partially confirmed</strong> - the guard exists but cannot check a concept that
+does not yet exist.</p>
+<p>The machinery is in better shape than the brief assumes. What is genuinely missing is one layer:
+<strong>the mapping between a trade and the company appointed to do it.</strong> Everything else - the directory,
+the per-trade extract, the send log, the frozen published copy, the database-level confidentiality
+block - is built and working today.</p>
+<hr />
+<h2>1. Current-state map</h2>
+<h3>Tables (live <code>public</code> schema)</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Tables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Directory</td>
+<td><code>project_directory</code> (project_id, trade, company_name, is_active, notes), <code>directory_contacts</code> (directory_id, name, email, phone, is_primary, receives_copies), <code>directory_templates</code>, <code>directory_template_entries</code></td>
+</tr>
+<tr>
+<td>Allocation</td>
+<td><code>findings</code> (ai_suggested_trade, ai_trade_reasoning, ai_trade_confidence, ai_abstain_reason, assigned_trade, assigned_contact_id, confirmed_by, confirmed_at, is_confidential, lifecycle_state)</td>
+</tr>
+<tr>
+<td>Distribution</td>
+<td><code>distributions</code>, <code>trade_access</code></td>
+</tr>
+<tr>
+<td>Reports</td>
+<td><code>reports</code>, <code>report_versions</code>, <code>report_shares</code>, <code>photos</code>, <code>finding_photos</code>, <code>photo_markups</code>, <code>audit_log</code>, <code>ai_usage_events</code></td>
+</tr>
+<tr>
+<td>Definitions</td>
+<td><code>survey_type_definitions</code>, <code>report_templates</code></td>
+</tr>
+<tr>
+<td>Compliance</td>
+<td><code>compliance_runs</code>, <code>compliance_points</code>, <code>compliance_entries</code>, <code>compliance_actions</code></td>
+</tr>
+<tr>
+<td>Tenancy</td>
+<td><code>organisations</code>, <code>memberships</code>, <code>platform_admins</code>, <code>plan_limits</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>There is no <code>subcontractors</code> table, no <code>project_trades</code> table and no <code>trade_packages</code> table.</strong> A
+<code>trade</code> is stored as text on a directory row, keyed by string. This is the gap the brief identifies,
+and it is confirmed.</p>
+<h3>Code and routes</h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grouping and extract documents</td>
+<td><code>src/lib/distribution.ts</code> - <code>groupKeyOf</code>, <code>groupForDistribution</code>, <code>groupLabelOf</code>, <code>selectDistributionFindings</code>, <code>buildExtractDocument</code>, <code>UNASSIGNED_GROUP</code>, groupings <code>trade \| area \| severity</code></td>
+</tr>
+<tr>
+<td>Building the send plan</td>
+<td><code>src/lib/distribution/distribution-data.ts</code> - matches a directory row by <strong>exact trade string</strong>, picks the <code>is_primary</code> contact else the first, falls back to the project fallback recipient</td>
+</tr>
+<tr>
+<td>Directory operations</td>
+<td><code>src/lib/directory/directory-data.ts</code> - <code>addDirectoryContact</code>, <code>copyDirectoryFromProject</code>, <code>importDirectoryGroups</code> (CSV), <code>saveDirectoryAsTemplate</code>, <code>applyDirectoryTemplate</code>, <code>updateFallbackRecipient</code></td>
+</tr>
+<tr>
+<td>Trade vocabulary</td>
+<td><code>src/lib/trades/known-trades.ts</code> - <code>knownTrades()</code> derived from the survey definitions; <code>tradeOptions(existing)</code> puts the project's own trades first</td>
+</tr>
+<tr>
+<td>Bulk trade confirmation</td>
+<td><code>src/lib/findings/bulk-trade.ts</code> (<code>bulkTradeEligible</code>), <code>src/lib/review/bulk-accept.ts</code> (<code>AcceptPlan</code>)</td>
+</tr>
+<tr>
+<td>Review UI</td>
+<td><code>src/components/review/trade-organiser.tsx</code>, <code>trade-assignment-card.tsx</code>, <code>condition-grade-organiser.tsx</code></td>
+</tr>
+<tr>
+<td>Trade layer switch</td>
+<td><code>src/components/report/trade-allocation-switch.tsx</code>; org default <code>organisations.trade_allocation_enabled</code>, per-report override <code>reports.trade_allocation_enabled</code></td>
+</tr>
+<tr>
+<td>Distribution entry point</td>
+<td><code>src/components/report/report-actions.tsx</code> - the <strong>Distribute</strong> button (commit <code>2900dac</code>)</td>
+</tr>
+<tr>
+<td>Routes</td>
+<td><code>/reports/$id/distribute</code>, <code>/reports/$id/extract/$group</code>, <code>/projects/$id/directory</code>, <code>/settings/directory</code>, <code>/api/public/trade-access/$token</code>, <code>/api/public/shared-report(-pdf)/$token</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Database-level guards (verified via <code>pg_trigger</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Table</th>
+<th>What it enforces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>distributions_block_confidential</code></td>
+<td>distributions</td>
+<td>Confidential findings can never enter a subcontractor distribution - enforced in the database, not the UI</td>
+</tr>
+<tr>
+<td><code>findings_locked_when_issued</code></td>
+<td>findings</td>
+<td>An issued report's findings cannot be edited</td>
+</tr>
+<tr>
+<td><code>findings_confidentiality_transition</code></td>
+<td>findings</td>
+<td>Guards a change in confidentiality state</td>
+</tr>
+<tr>
+<td><code>findings_ref_immutable</code></td>
+<td>findings</td>
+<td>Item references cannot be re-pointed</td>
+</tr>
+<tr>
+<td><code>reports_reference_immutable</code>, <code>reports_assign_reference</code></td>
+<td>reports</td>
+<td>References are assigned once and never rewritten</td>
+</tr>
+<tr>
+<td><code>reports_enforce_allowance</code>, <code>photos_enforce_cap</code></td>
+<td>reports, photos</td>
+<td>Plan allowances</td>
+</tr>
+</tbody>
+</table>
+<h3>Row-level security (verified via <code>pg_policies</code>)</h3>
+<p>Every table in the directory, allocation, distribution and report set carries per-command policies
+built from <code>is_org_member()</code>, <code>has_org_role(..., ARRAY['owner','admin','surveyor','supervisor'])</code> and
+<code>is_platform_admin()</code>, resolved through <code>project_org()</code>, <code>report_org()</code>, <code>directory_org()</code> and
+<code>directory_template_org()</code>. Deletes are restricted to owner and admin. Inserts are guarded by
+<code>WITH CHECK</code> on the same role helper - verified, not assumed. <strong>Multi-tenant boundaries are enforced
+in the database.</strong></p>
+<hr />
+<h2>2. Recent-change review</h2>
+<p>Six changes landed in the last two days. All were verified on the live application rather than in the
+test suite alone.</p>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Commit</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Share links serve the frozen issued PDF, never the live working copy</td>
+<td><code>ae9cb4c</code></td>
+<td>Verified live: the PDF door returns <code>application/pdf</code> with a <code>%PDF-</code> header; drafts return 404</td>
+</tr>
+<tr>
+<td>Menus, selects, dialogs white on the working screens</td>
+<td><code>944e0c2</code></td>
+<td>Verified live: panel computed to <code>oklch(1 0 0)</code> with dark text and a blue-grey edge</td>
+</tr>
+<tr>
+<td>One publication rule for every door a report leaves by</td>
+<td><code>b0e23e5</code></td>
+<td>Verified live across the report read paths</td>
+</tr>
+<tr>
+<td>Health, safety &amp; housekeeping inspection template</td>
+<td><code>c79c4a1</code></td>
+<td>Verified live in the template chooser; six sections, four outcomes, no regulatory citation by design</td>
+</tr>
+<tr>
+<td>A "short and sweet" report tone</td>
+<td><code>76c4314</code></td>
+<td>Verified live in the tone selector: Formal, Easy-going, Sharp, <strong>Short and sweet</strong>, Meticulous, Sarcastic</td>
+</tr>
+<tr>
+<td>A distribution entry point</td>
+<td><code>2900dac</code></td>
+<td>Verified live by pressing it - it lands on the distribution screen</td>
+</tr>
+</tbody>
+</table>
+<h3>The gate, and what it missed</h3>
+<p>Re-run on the current branch, read-only:</p>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bun run test</code></td>
+<td><strong>942 passed</strong>, 4 skipped (946 across 98 files, 2 skipped) - matches the recorded figure exactly</td>
+</tr>
+<tr>
+<td><code>bun run lint</code></td>
+<td><strong>0 errors</strong>, 246 warnings (all pre-existing <code>no-explicit-any</code>) - matches</td>
+</tr>
+<tr>
+<td><code>bun run typecheck</code></td>
+<td><strong>2 errors</strong> - RED</td>
+</tr>
+</tbody>
+</table>
+<p>The two typecheck errors are both in <code>src/lib/__tests__/health-safety-housekeeping.test.ts</code>, the test
+file added with the H&amp;S template this afternoon:</p>
+<ul>
+<li>line 21 - <code>purposeOf(definition.id).length</code>: <code>purposeOf</code> may return null.</li>
+<li>line 49 - <code>definition.statuses[3].tone</code>: the index may be undefined.</li>
+</ul>
+<p>Two lines, no production code involved - but it means "tests and lint are green" was being read as
+"the branch is green" when it is not. Testing and lint alone were the gate that was run; typecheck
+was not. Worth noting precisely because the brief itself warns that green tests do not prove a
+working product.</p>
+<p><strong>Fragile, and worth knowing:</strong> the distribution screen was unreachable by any link in the codebase
+before <code>2900dac</code> - the only way in was to append <code>/distribute</code> to a report URL by hand. And the
+<strong>Directory</strong> item still disappears from the main navigation whenever the trade layer is switched off
+(<code>src/components/app-shell.tsx</code>), so a new account cannot find the address book it needs to fill in
+in order to switch the layer on. Same class of defect as the missing door, still open.</p>
+<hr />
+<h2>3. Risk verification</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Risk from the brief</th>
+<th>Verdict</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Company and trade mapping conflated; duplicated contacts drift</td>
+<td><strong>Confirmed</strong></td>
+<td><code>project_directory</code> holds <code>trade</code> and <code>company_name</code> on the same row. No company entity exists. One firm across five trades = five rows repeating the same name and contact</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Multiple subcontractors for one trade ambiguous; first match taken</td>
+<td><strong>Confirmed</strong></td>
+<td><code>distribution-data.ts</code>: <code>directoryRows.find(candidate =&gt; candidate.trade === group.key)</code> then <code>contacts.find(is_primary) ?? contacts[0]</code>. Findings are grouped by trade, so a second firm on the same trade never appears as its own row and nothing warns</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Case-insensitive in the UI, exact in distribution</td>
+<td><strong>Confirmed</strong></td>
+<td><code>groupKeyOf</code> trims but does not case-fold; the directory lookup is <code>===</code>. The picker's dedupe <em>is</em> case-insensitive, and <code>known-trades.ts</code> comments claim identity is case-insensitive "matching how allocation groups trades" - the comment does not match the grouping code</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AI uses template trades, not the project's register</td>
+<td><strong>Confirmed</strong></td>
+<td>No project trade register exists. The suggestion vocabulary is <code>tradesOf(snapshot)</code> - the report template's own list</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Free-text trade entry creates drift</td>
+<td><strong>Confirmed, with live evidence</strong></td>
+<td>Stored trades observed in the database included whole sentences, e.g. <em>"Lifting equipment inspection body (LOLER competent person) with the plant hirer for the MEWP"</em>. Nothing in a directory can ever match that, so those items fall to the fallback. These are live in the weekly register drafts <strong>FC-LI-001</strong> and <strong>FC-WE-001</strong> in the Demonstration account, so the evidence is checkable today rather than taken on trust</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Package boundaries and exclusions unmodelled</td>
+<td><strong>Confirmed</strong></td>
+<td>No scope, zone, floor, block or exclusion columns exist on any mapping. <code>project_directory.notes</code> is the only free text. Findings carry a location, and distribution can group by area, but that is finding-side, not appointment-side</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Unmapped or ambiguous items need visible triage; the fallback must not look like an answer</td>
+<td><strong>Partially confirmed</strong></td>
+<td>Verified live: the unassigned row is labelled <em>"No trade assigned"</em> with <em>"(fallback recipient)"</em>, and blocked rows print plain-word reasons ("Groundworks has no contact with an email address in the project directory"). The review screen carries <code>unsure_trade</code> and <code>no_trade_suggested</code> attention reasons. <strong>Not verified:</strong> whether an extract delivered through the fallback is itself marked as unallocated - that needs a fixture and a send</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Bulk confirmation needs strict limits</td>
+<td><strong>Partially confirmed</strong></td>
+<td><code>bulkTradeEligible</code> requires no trade assigned, a non-empty suggestion and confidence at or above <code>BULK_TRADE_CONFIRM_THRESHOLD</code> (0.80 - the test pins 0.8 eligible, 0.79 not). <code>bulk-accept.ts</code> separates what one press may settle from what a person must decide, and ties its <code>blocked</code> flag to the publish gate. <strong>But</strong> it cannot check "trade is in the project register" or "package is unambiguous", because neither concept exists</td>
+</tr>
+</tbody>
+</table>
+<p>The brief's checklist of "existing concepts observed" is accurate in every particular: the template
+supplies the trade list; AI suggestion and human confirmation are stored in separate columns
+(<code>ai_suggested_trade</code>, <code>assigned_trade</code>); directory rows carry trade, company, active state and a
+primary contact; distribution groups by assigned trade and uses the primary contact; a project-level
+fallback exists; confidential findings are blocked at database level; and the one-press confirmation
+uses a real 80% threshold.</p>
+<hr />
+<h2>4. Recommended user journey</h2>
+<ol>
+<li><strong>Project setup - one screen.</strong> Tick the trades this job actually has, from a standard library.
+   Project-specific trades can be added deliberately, never typed by accident. Mark one firm as
+   covering Groundworks, Drainage, Reinforced concrete and Below-ground utilities, and the project
+   knows the structure rather than a list of labels.</li>
+<li><strong>Add each subcontractor once.</strong> One company record, many trades. Save the whole thing as a
+   template so the next project starts in one click.</li>
+<li><strong>AI suggests, from the project's list only.</strong> Confidence and reasoning shown; it abstains when
+   uncertain, and it never names a company as a fact.</li>
+<li><strong>A person confirms the trade</strong>, and where two packages could apply, chooses the package. Ambiguity
+   is never resolved by taking the first match.</li>
+<li><strong>Pre-flight before anything sends</strong> - unassigned items, missing mappings, ambiguous packages,
+   missing or invalid contacts, excluded scope, unconfirmed findings, confidential findings.</li>
+<li><strong>One extract per subcontractor</strong>, covering every trade that firm holds, with each line still
+   showing its trade so their own crews know. Not five emails to the same firm.</li>
+<li><strong>Send deliberately.</strong> A person presses the button. Every send is recorded against the report and
+   the issued version.</li>
+<li><strong>Issued reports stay frozen.</strong> Changing an appointment afterwards never rewrites an issued report
+   or the PDF an existing share link serves.</li>
+</ol>
+<hr />
+<h2>5. Data model proposal - smallest safe change</h2>
+<p>Keep everything that works. Add the missing layer beside it.</p>
+<p><strong>New tables</strong></p>
+<ul>
+<li><code>subcontractors</code> - organisation-scoped company record: id, organisation_id, name, notes, is_active.</li>
+<li><code>project_trades</code> - the project's active register: project_id, trade_id, label, is_active, sort_order.</li>
+<li><code>trade_packages</code> - the mapping: project_id, trade_id, subcontractor_id, zone_or_floor, scope_note,
+  exclusion_note, is_active, effective_from, effective_to.</li>
+<li><code>trade_library</code> - canonical trades: id, label, aliases. Seed it from the trades the survey
+  definitions already carry in <code>survey_type_definitions</code> rather than inventing a new vocabulary.</li>
+<li><code>findings.confirmed_package_id</code> - nullable foreign key. Keep <code>assigned_trade</code> exactly as it is.</li>
+</ul>
+<p><strong>Migration and backfill</strong></p>
+<ol>
+<li>Derive <code>project_trades</code> from the distinct trades already present per project (findings plus
+   directory rows).</li>
+<li>Derive <code>subcontractors</code> from distinct <code>company_name</code> within each organisation.</li>
+<li>Derive <code>trade_packages</code> from each existing <code>project_directory</code> row - one package per row.</li>
+<li>Leave <code>project_directory</code> in place and keep it working; move the UI to the new tables first, then
+   retire the old rows. No downtime, no rewrite of any issued report or version document.</li>
+</ol>
+<p><strong>Security</strong></p>
+<p>New tables take the same policy pattern as the existing ones: <code>is_org_member()</code> for reads,
+<code>has_org_role(..., ARRAY['owner','admin','surveyor','supervisor'])</code> for writes, owner/admin for
+deletes, <code>WITH CHECK</code> on insert, and a <code>project_org()</code>-style resolver. Verified as the house pattern
+across fourteen existing tables.</p>
+<p><strong>Compatibility</strong></p>
+<p>Issued reports, version documents and existing share links are untouched by any of this. The
+<code>findings_locked_when_issued</code> trigger already prevents post-issue edits; mapping changes are
+project-level and must never reach a version document.</p>
+<hr />
+<h2>6. Acceptance criteria and tests</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Scenario</th>
+<th>Must be true</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>One subcontractor, four trades</td>
+<td>One extract to that firm containing all four trades' items, each line stamped with its trade</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Two subcontractors, one trade, different floor ranges</td>
+<td>Two package rows; items resolve by zone; an item matching neither zone is flagged, never silently assigned</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Valid trade, no mapped company</td>
+<td>Pre-flight blocks the row with a plain-word reason</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Null or low-confidence suggestion</td>
+<td>Not bulk-eligible; appears as an attention item</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Suggestion not in the project register</td>
+<td>Not bulk-eligible; surfaced, not written</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Case and spacing variations</td>
+<td>Both resolve to one canonical trade id; one package, one extract</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Exclusion that appears to match</td>
+<td>Flagged ambiguous; not sent</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Missing recipient email</td>
+<td>Row blocked before sending (already true live)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Confidential finding involving a person</td>
+<td>Absent from every extract - asserted at the database level, not the UI</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Report reopened while a share link is live</td>
+<td>The link still serves the frozen issued PDF (verified live today)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Mapping changed after issue</td>
+<td>Issued version and audit trail byte-identical</td>
+</tr>
+<tr>
+<td>12</td>
+<td>High-confidence suggestion, ambiguous package</td>
+<td>Not bulk-confirmed</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Pre-flight</td>
+<td>Lists every unresolved mapping before any send</td>
+</tr>
+<tr>
+<td>14</td>
+<td>New tables</td>
+<td>RLS tests per role: member reads, surveyor writes, admin deletes, another organisation sees nothing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7. Prioritised plan</h2>
+<p><strong>First, before anything else</strong></p>
+<ol start="0">
+<li>Clear the two typecheck errors on <code>main</code>, and make <code>test + lint + typecheck</code> the gate every future
+   change is measured against. Two lines; it should not sit red.</li>
+</ol>
+<p><strong>Must fix before this is promised to a client</strong></p>
+<ol>
+<li>Package model with boundaries and exclusions - risks 1, 2 and 6. This is the whole point of the brief.</li>
+<li>Project trade register, closed AI vocabulary and stable trade ids - risks 3, 4 and 5.</li>
+<li>One extract per subcontractor rather than per trade.</li>
+<li>Pre-flight completeness, and bulk confirmation that refuses an ambiguous package or an unregistered trade - risks 7 and 8.</li>
+<li>The fallback labelled as triage, never as an answer.</li>
+</ol>
+<p><strong>Next, once the above is settled</strong></p>
+<ol start="6">
+<li>Directory and package setup UI, with the template/CSV path moved onto the new model.</li>
+<li>Effective dating on packages, so a change of appointment is recorded rather than overwritten.</li>
+<li>The <strong>Directory</strong> navigation item shown whenever the trade layer is on, with a line explaining it
+   when it is off.</li>
+</ol>
+<p><strong>Not doing, deliberately</strong> - per the brief, no trade scoring, no subcontractor league tables, no
+performance rankings. The tool documents and distributes observations; it does not rate companies.</p>
+<hr />
+<h2>8. Meeting-ready summary</h2>
+<p><strong>What is already true today, and can be shown</strong></p>
+<ul>
+<li>A project can hold its trades, with a company and a named contact against each, and that setup can
+  be saved as a template so the next project starts in one click.</li>
+<li>Each item can be attributed to a trade, with the AI's suggestion, its confidence and its reasoning
+  shown, and a person confirming before anything is treated as final.</li>
+<li>Each trade receives <strong>only its own items</strong> - verified live: the extract carries the line <em>"This
+  extract lists only the items attributed to Groundworks on this report. It is not the full report."</em></li>
+<li>Nothing sends automatically. Every send is one deliberate press and is recorded.</li>
+<li>Published reports and their links serve a frozen copy. Reopening a report does not disturb a link.</li>
+<li>Findings involving a person cannot reach a subcontractor - blocked in the database, not just hidden
+  in the interface.</li>
+<li>Menus, screens and the published PDF are one coherent piece of software, not a prototype.</li>
+</ul>
+<p><strong>What is proposed, and would be built</strong></p>
+<ul>
+<li>A project-level map of <strong>trades to subcontractors</strong>: twenty trades, five firms, one firm covering
+  groundworks, drainage, civils and concrete - set up once, reused on every project.</li>
+<li>The AI choosing only from that approved register, never inventing a trade that no firm covers.</li>
+<li>Where one trade is split between firms by floor, zone or block, the split is recorded and a person
+  resolves it - ambiguity is shown, never silently guessed.</li>
+<li><strong>One extract per firm</strong>, not one per trade.</li>
+<li>A pre-flight check before any send, so missing mappings and missing contacts are visible before
+  anything leaves the building.</li>
+</ul>
+<p><strong>Two honest limits for the room</strong></p>
+<ul>
+<li>Where a project has no mapping yet, the tool will say so. It does not know who is responsible, and
+  it will not guess.</li>
+<li>Nothing in this rates a subcontractor. It records what was observed and who was appointed.</li>
+</ul>
+<p><strong>Questions worth asking CBRE</strong> - the brief lists the right ones: whether responsibility is managed by
+trade, package, or zone; whether one firm covers several trades and one trade splits across firms;
+where scope boundaries and exclusions are recorded; who may confirm responsibility; what should happen
+when an issue cannot be allocated confidently; and what audit evidence is required when an issue is
+allocated, changed or distributed.</p>
+<hr />
+<p><em>Prepared read-only. No code, data, settings or migrations were changed for this review. Running
+tests, lint and type checks was the only execution performed.</em></p>
+<div class="foot">Prepared by Banksy (Hermes agent) for Darren Hopwood, 14 October 2026. Read-only review: no code, data, settings or migrations were changed. Re-verified against <code>main</code> at <code>2900dac</code>.</div>
+</div>
+</body>
+</html>
