@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>instructBrain — demo run sheet (IB-DEMO-001)</title>
+<style>
+@font-face { font-family:"Sora"; font-style:normal; font-weight:700; font-display:block; src:url("fonts/sora-700.woff2") format("woff2"); }
+@font-face { font-family:"Manrope"; font-style:normal; font-weight:400; font-display:block; src:url("fonts/manrope-400.woff2") format("woff2"); }
+@font-face { font-family:"Manrope"; font-style:normal; font-weight:600; font-display:block; src:url("fonts/manrope-600.woff2") format("woff2"); }
+@font-face { font-family:"Manrope"; font-style:normal; font-weight:700; font-display:block; src:url("fonts/manrope-700.woff2") format("woff2"); }
+@font-face { font-family:"Audiowide"; font-style:normal; font-weight:400; font-display:block; src:url("fonts/audiowide-400.woff2") format("woff2"); }
+
+:root{ --navy:#203c72; --navy2:#16294d; --ink:#111a2b; --body:#2c3a51; --green:#57FF00; --greenink:#2c6b12;
+       --grey:#f3f6fa; --line:#dfe6ef; --amber:#b45309; --red:#b42318; }
+*{ box-sizing:border-box; }
+body{ margin:0; background:#eef2f7; color:var(--body);
+      font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif; font-size:17px; line-height:1.5; }
+h1,h2,h3,.wm,.big{ font-family:"Sora","Manrope",system-ui,sans-serif; color:var(--ink); font-weight:700; }
+.wrap{ max-width:760px; margin:0 auto; padding:0 14px 60px; }
+header.mast{ background:linear-gradient(160deg,var(--navy),var(--navy2)); color:#fff; padding:26px 18px 22px; }
+header.mast .inner{ max-width:760px; margin:0 auto; }
+.wm{ font-family:"Audiowide",sans-serif; font-size:26px; line-height:1; }
+.wm .b{ color:var(--green); }
+header.mast h1{ color:#fff; font-size:27px; margin:12px 0 6px; line-height:1.15; }
+header.mast p{ margin:0; color:#c9d5e8; font-size:15px; }
+.meta{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:16px 0 22px; font-size:14.5px; }
+.meta b{ color:var(--ink); }
+
+h2{ font-size:20px; margin:30px 0 10px; padding-bottom:8px; border-bottom:3px solid var(--green); }
+.card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 16px 14px; margin:0 0 18px; }
+.card .top{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+.card .num{ display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; flex:0 0 34px;
+            border-radius:9px; background:var(--navy); color:#fff; font-family:"Sora",sans-serif; font-size:16px; font-weight:700; }
+.card h3{ font-size:19px; margin:0; flex:1 1 auto; }
+.card .clock{ font-size:13.5px; font-weight:700; color:var(--navy); background:var(--grey); border-radius:20px; padding:2px 10px; }
+.row{ margin:9px 0 0; padding-left:76px; position:relative; }
+.row .lbl{ position:absolute; left:0; top:0; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--navy); }
+.row.show .lbl{ color:var(--greenink); }
+.row.trap{ background:#fff7ed; border-left:3px solid var(--amber); padding:8px 10px 8px 76px; border-radius:0 8px 8px 0; margin-top:10px; }
+.row.trap .lbl{ color:var(--amber); }
+.row.ask{ background:var(--grey); border-left:3px solid var(--navy); padding:8px 10px 8px 76px; border-radius:0 8px 8px 0; margin-top:10px; }
+ol,ul{ margin:8px 0 0; padding-left:22px; }
+li{ margin-bottom:6px; }
+.say{ font-style:italic; color:var(--ink); }
+.kv{ font-weight:700; color:var(--ink); }
+table{ width:100%; border-collapse:collapse; margin:10px 0 4px; background:#fff; font-size:14.5px; }
+th{ background:#0f172a; color:#fff; text-align:left; padding:8px 9px; font-size:13px; }
+td{ padding:8px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr:nth-child(even) td{ background:var(--grey); }
+.pill{ display:inline-block; font-size:12px; font-weight:800; padding:2px 8px; border-radius:20px; background:#e6edf8; color:var(--navy); }
+.pill.g{ background:var(--green); color:#12310a; } .pill.a{ background:#fde8c8; color:#7a4b00; }
+.box{ background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:10px; padding:13px 14px; margin:14px 0; }
+.box.green{ border-left-color:var(--greenink); background:#f4fde9; }
+.box.red{ border-left-color:var(--red); background:#fdf3f2; }
+.box.amber{ border-left-color:var(--amber); background:#fff8ec; }
+.box .h{ display:block; font-weight:700; color:var(--ink); margin-bottom:5px; }
+.spine{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:6px 8px; }
+.spine div{ display:flex; gap:10px; padding:8px 8px; border-bottom:1px solid var(--line); font-size:15.5px; }
+.spine div:last-child{ border-bottom:0; }
+.spine b{ flex:0 0 26px; color:var(--navy); font-family:"Sora",sans-serif; }
+.foot{ margin-top:26px; border-top:1px solid var(--line); padding-top:10px; font-size:13px; color:#5b6b82; }
+@media print{
+  body{ background:#fff; font-size:10.2pt; }
+  header.mast{ padding:14mm 12mm 10mm; }
+  .card, .box, .spine, .meta{ break-inside:avoid; }
+  h2{ break-after:avoid; }
+  .wrap{ max-width:none; padding:0 12mm; }
+  .row{ padding-left:64px; }
+}
+</style>
+</head>
+<body>
+<header class="mast"><div class="inner">
+  <div class="wm">instruct<span class="b">Brain</span></div>
+  <h1>The demo run sheet</h1>
+  <p>Card per slide. Card 6 is slide 6. If you are lost, look at the clock and read the card with that number.</p>
+</div></header>
+
+<div class="wrap">
+
+<div class="meta">
+  <b>IB-DEMO-001 · Rev 1 · 14 October 2026</b><br />
+  Companion to IB-PRES-001 (12 slides, five minutes). Sign in as <b>Demonstration account</b> before they arrive.<br />
+  Every figure here was read from the product — twelve templates, thirty languages, and the reports listed in the demo index are real rows in that account.
+</div>
+
+<h2>Before they walk in — two minutes</h2>
+<ol>
+  <li>Sign in at <span class="kv">instructbrain.com</span> as the <span class="kv">Demonstration account</span>. Check the header says <em>Demonstration account</em> — if it says anything else you are in the wrong organisation and the demo data is not there.</li>
+  <li>Open three tabs, in this order: <span class="kv">Reports</span> (the list), <span class="kv">SW-2026-10-001</span> (Site condition 11 – 13 Bruton Street), and the register from <span class="kv">Projects</span>.</li>
+  <li>Open SW-2026-10-001 on its <span class="kv">second tab — “2 Get PDF”</span>. That is where Publish and Share live. Nine demos out of ten go wrong here: they are not on the first tab.</li>
+  <li>Have one printed report page in your hand. A paper report in the air beats any slide.</li>
+</ol>
+
+<h2>The whole thing on one screen</h2>
+<div class="spine">
+  <div><b>1</b><span>Title — <em>“what happens to a photograph after you take it”</em>. No screen.</span></div>
+  <div><b>2</b><span>The problem — six versions in six inboxes. No screen.</span></div>
+  <div><b>3</b><span>The six-step flow — capture, draft, confirm, issue, distribute, keep. Slide only.</span></div>
+  <div><b>4</b><span>Capture — phone in hand, or the cockpit screen. <span class="pill">show</span></span></div>
+  <div><b>5</b><span>Draft — a finding with its drafted text and severity. <span class="pill">show</span> SW-2026-10-001, one item</span></div>
+  <div><b>6</b><span>The gate — unconfirmed items, and the line the app shows. <span class="pill">show</span></span></div>
+  <div><b>7</b><span>The citation rule — 12 + 6 + 6, and nothing outside the list. <span class="pill">show</span> a cited item</span></div>
+  <div><b>8</b><span>The output — the printed page, cover and items. <span class="pill">show</span> the PDF</span></div>
+  <div><b>9</b><span>Frozen — versions list. <span class="pill">show</span></span></div>
+  <div><b>10</b><span>The register — week by week, already built. <span class="pill">show</span></span></div>
+  <div><b>11</b><span>Breadth — twelve templates, thirty languages. Slide only.</span></div>
+  <div><b>12</b><span>The limits, and “thank you”. Slide only. Stop talking.</span></div>
+</div>
+
+<h2>The cards</h2>
+
+<div class="card">
+  <div class="top"><span class="num">1</span><h3>Title</h3><span class="clock">0:00–0:15</span></div>
+  <div class="row show"><span class="lbl">Show</span>Nothing. Stand still, no notes in your hand. This line buys you the room.</div>
+  <div class="row"><span class="lbl">Say</span><span class="say">“Morning. Five minutes, and I’ll spend most of it on one thing: what happens to a photograph after you take it.”</span></div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">2</span><h3>The problem</h3><span class="clock">0:15–0:50</span></div>
+  <div class="row show"><span class="lbl">Show</span>Slide only. No screen.</div>
+  <div class="row"><span class="lbl">Say</span>The re-file at nine at night, the write-up from memory, the typed references, the regulation quoted from memory — then <span class="say">“six versions, and the one in somebody’s inbox is the version.”</span></div>
+  <div class="row trap"><span class="lbl">Careful</span>Slow right down on “six versions”. That is the line the room nods at. Don’t rush into the next slide.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">3</span><h3>What it is — the six steps</h3><span class="clock">0:50–1:15</span></div>
+  <div class="row show"><span class="lbl">Show</span>Slide 3, and tap each box as you say it: capture, draft, confirm, issue, distribute, keep.</div>
+  <div class="row"><span class="lbl">Say</span>Same walk, paper moved to where the information already is. <span class="kv">A person confirms every one</span> — say that part slowly, it is the whole pitch.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">4</span><h3>Capture — starts where you are standing</h3><span class="clock">1:15–1:45</span></div>
+  <div class="row show"><span class="lbl">Show</span>Your phone, on the <span class="kv">On site</span> screen — or slide 4 if you are not holding it. If the app is open on the laptop: <em>On site</em> → the project picker → <em>Start site walk</em>.</div>
+  <div class="row"><span class="lbl">Say</span>Opens from a QR code, installs to the home screen, used one-handed in the rain with gloves. <span class="kv">Filed against the element, room or location as you take it.</span> Nothing renamed or emailed to yourself afterwards.</div>
+  <div class="row ask"><span class="lbl">If asked</span><em>“Does it work with no signal?”</em> — Yes, keep shooting. Uploads catch up when you have signal again.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">5</span><h3>Draft — the photograph becomes the writing</h3><span class="clock">1:45–2:10</span></div>
+  <div class="row show"><span class="lbl">Show</span>SW-2026-10-001 → tab <span class="kv">1 Photos &amp; findings</span> → open one item. Point at the drafted finding text, the severity and the suggested trade.</div>
+  <div class="row"><span class="lbl">Say</span>It drafts what’s there, what it means, what to do, and the likely cause <em>when the picture supports one</em>. It sets a severity and suggests a trade. <span class="say">“And everything it writes is marked as a draft, because that’s what it is.”</span></div>
+  <div class="row trap"><span class="lbl">Careful</span>Do not call it “the AI decides”. Say “it drafts; a person decides”. They will quote you back.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">6</span><h3>The gate — nothing issues unconfirmed</h3><span class="clock">2:10–2:45</span></div>
+  <div class="row show"><span class="lbl">Show</span>The confirm controls on the findings list — and if you have a draft open, the line the app itself shows: <em>“Not ready to publish yet: N still not assessed, N with no responsible trade, N not confirmed by a person.”</em></div>
+  <div class="row"><span class="lbl">Say</span>Every item is confirmed, corrected or deleted <span class="kv">by somebody with a name</span>. It will not publish while anything is unassessed — a hard gate, not a warning banner. Where the evidence doesn’t support a judgement it says <em>not assessed</em> and a person has to resolve it.</div>
+  <div class="row trap"><span class="lbl">Careful</span>This is the slide to slow down for. Two beats longer than feels natural. Never drop this one, whatever the clock says.</div>
+  <div class="row ask"><span class="lbl">If asked</span><em>“What if the AI is wrong?”</em> — It can’t publish anything by itself. A wrong line is caught by the person confirming it, and that is the point of the gate.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">7</span><h3>The citation rule</h3><span class="clock">2:45–3:20</span></div>
+  <div class="row show"><span class="lbl">Show</span>An item in SW-2026-10-001 that carries a reference — point at the regulation line.</div>
+  <div class="row"><span class="lbl">Say</span><span class="kv">It may only cite what is on the list.</span> Twelve Approved Documents, six British and EN standards, six HSE and statutory instruments. It picks the single most relevant, from that list and nowhere else — and <span class="say">“if nothing on the list fits, it cites nothing at all.”</span></div>
+  <div class="row trap"><span class="lbl">Careful</span>Pause before “no invented clauses” and let the room be quiet. This is the sentence the whole product rests on.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">8</span><h3>The output</h3><span class="clock">3:20–3:45</span></div>
+  <div class="row show"><span class="lbl">Show</span>The printed page in your hand. On screen: SW-2026-10-001, tab <span class="kv">2 Get PDF</span> → <em>Open the report PDF</em>. Cover first: project, client, address, reference, date, status, item count.</div>
+  <div class="row"><span class="lbl">Say</span>Then item by item — numbered, graded, the action required, <span class="kv">the photograph it was written from</span>, and a pin marking the area. Whatever the job runs to.</div>
+  <div class="row ask"><span class="lbl">If asked</span><em>“How many pages?”</em> — Say what you’re holding. Real reports run 20 to 40-plus pages, and more pages is the price of never splitting an item across a page break.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">9</span><h3>Frozen — what was issued stays issued</h3><span class="clock">3:45–4:05</span></div>
+  <div class="row show"><span class="lbl">Show</span>The report’s published version, and the line on its cover: <span class="kv">“Published as version 1 on &lt;date&gt;”</span>. Point at that, and at the version list beside it.</div>
+  <div class="row"><span class="lbl">Say</span>Publishing locks it. Change something later and it starts a <span class="kv">new version</span> — the issued one stays exactly as it went out, with its number and its date. <span class="say">“If somebody asks in three years what that report said, that’s what it said.”</span></div>
+  <div class="row ask"><span class="lbl">If asked</span><em>“So which version does my client have?”</em> — The one you sent them. A share link hands back the version it was made against, so a reissue never moves the copy in their inbox. Making them a new version means sending a fresh link, deliberately.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">10</span><h3>Compliance — built, not typed</h3><span class="clock">4:05–4:25</span></div>
+  <div class="row show"><span class="lbl">Show</span><span class="kv">Projects</span> → the project → its <span class="kv">compliance register</span>. In the demo account the weekly registers are there (fire, housekeeping, scaffold, welfare, excavation, lifting).</div>
+  <div class="row"><span class="lbl">Say</span>Week by week, the checks that were done, built from the same evidence as the reports — not reconstructed into a spreadsheet the week before an audit. <span class="say">“It’s the screen an auditor asks for, and it’s already there when they ask.”</span></div>
+  <div class="row trap"><span class="lbl">Careful</span>The register is a list of weeks and checks — not a chart that draws itself. Do not promise a graph.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">11</span><h3>Breadth</h3><span class="clock">4:25–4:45</span></div>
+  <div class="row show"><span class="lbl">Show</span>Slide 11 — or, better, the template chooser on screen: <span class="kv">Start a report</span> → the chooser, five families, twelve templates.</div>
+  <div class="row"><span class="lbl">Say</span><span class="kv">Twelve templates in five families</span> — condition, snagging and handover, site and safety, M&amp;E, and records and registers. <span class="kv">Thirty languages</span>, including Arabic and Hebrew right to left, with English always kept as the record copy. Plus the trade and recipient directory, distribution, per-trade links, your own branding on the document.</div>
+  <div class="row trap"><span class="lbl">Careful</span><span class="kv">Your slide says “eleven report types”. The app now shows twelve templates in five families</span> — the twelfth is the certificate register. If somebody is counting, say twelve templates, or say “eleven report types plus the certificate register”. Don’t get caught on your own number.</div>
+  <div class="row trap"><span class="lbl">Careful</span>It is a list. Keep it moving — don’t let the breadth slide become the speech.</div>
+</div>
+
+<div class="card">
+  <div class="top"><span class="num">12</span><h3>The limits, and the close</h3><span class="clock">4:45–5:00</span></div>
+  <div class="row show"><span class="lbl">Show</span>Slide 12. Then stop.</div>
+  <div class="row"><span class="lbl">Say</span>Not a drawing tool — no CAD, no BIM, no estimating. It doesn’t decide engineering: severity, trade and sign-off are a person’s. It won’t invent a citation. And <span class="kv">it sends nothing by itself</span> — distribution is an action somebody takes.</div>
+  <div class="row trap"><span class="lbl">Careful</span>Land “thank you” and stop. Do not add a sentence after it. The limits are why they trust the rest.</div>
+</div>
+
+<h2>If you get cut to three minutes</h2>
+<p>Drop cards 9 and 11. Cut card 5 to one line: <span class="say">“the photograph becomes the writing, and everything it writes is a draft.”</span> <strong>Never drop card 6 or card 7</strong> — the gate and the citation rule are the two things nobody else in the room can say.</p>
+
+<h2>Questions you will get</h2>
+<table>
+  <tr><th style="width:44%">They ask</th><th>You say</th></tr>
+  <tr><td>Is it just ChatGPT writing my reports?</td><td>No. It drafts, and a person confirms every item before anything can be published. The gate is hard: unassessed or unconfirmed, it will not issue.</td></tr>
+  <tr><td>How do I know it isn’t making the regulation up?</td><td>It can only cite from a fixed list — twelve Approved Documents, six standards, six HSE and statutory. Outside that list it cites nothing at all. That is the rule the product is built on.</td></tr>
+  <tr><td>What if the AI gets something wrong?</td><td>It cannot publish by itself. The person confirming is the control, and the item is confirmed by name.</td></tr>
+  <tr><td>Can somebody edit it after it’s gone out?</td><td>No. What was issued stays issued, byte for byte. A change is a new version, and you decide whether the client gets it.</td></tr>
+  <tr><td>How many report types?</td><td><span class="kv">Twelve templates in five families</span> — condition, snagging, site and safety, M&amp;E, records and registers. Thirty languages.</td></tr>
+  <tr><td>Does it work offline / on site?</td><td>It’s built for a phone in one hand, in the rain. Photographs keep uploading as you go, and catch up when you have signal.</td></tr>
+  <tr><td>What about the client’s own branding?</td><td>Your organisation branding goes on the document. The report is yours.</td></tr>
+  <tr><td>Will it send to subcontractors for me?</td><td>It prepares each trade’s own extract with their own items only, and it does not send anything by itself — somebody presses send.</td></tr>
+  <tr><td>How much does it cost?</td><td>Do not invent a figure. Say you will send the commercial detail, and move on.</td></tr>
+  <tr><td>Does it do drawings, CAD, take-off, estimating?</td><td>No, and it isn’t trying to. It replaces the paperwork after the walk, not the drawing office.</td></tr>
+</table>
+
+<h2>If it goes wrong, in front of people</h2>
+<div class="box red">
+  <span class="h">They are all recoverable. Stay calm, and say the honest line.</span>
+  <p><span class="kv">The Share menu “isn’t there”.</span> You are on the first tab. It lives on <em>2 Get PDF</em>. Say “let me get to the document view” and carry on.</p>
+  <p><span class="kv">“Create link” is greyed out.</span> That report is not published yet — the app will not make a client link to a draft. Publish it first, or switch to SW-2026-10-001 which is published. Say: “it won’t link a draft, by design.”</p>
+  <p><span class="kv">A link opens a web page instead of the PDF.</span> That is the one fix still waiting on your publish. Say: “the link hands over the finished document” and show the PDF from <em>Open the report PDF</em> instead. Rehearse the link demo after you publish.</p>
+  <p><span class="kv">Publish is refused.</span> Something is unassessed or unconfirmed. Read the line out loud — it names what is missing — and turn it into a feature: “this is the gate.”</p>
+  <p><span class="kv">Something is slow or refuses to load.</span> Say “give it a moment, it’s a live system”, then talk to slide 3 while it catches up. Never tap a control twice in front of an audience.</p>
+</div>
+
+<h2>Demo data — what is in the account, and what to open</h2>
+<p>Read from the Demonstration account on 14 October 2026. These are real reports; open one by name so you never hunt mid-demo.</p>
+<table>
+  <tr><th style="width:26%">Reference</th><th style="width:40%">What it is</th><th>Use it for</th></tr>
+  <tr><td class="kv">SW-2026-10-001</td><td>Site condition 11 – 13 Bruton Street · 10 items · 9 photographs · <span class="pill g">published</span></td><td><span class="kv">Your main demo report.</span> Draft text, a citation, the published PDF, a share link.</td></tr>
+  <tr><td class="kv">DEMO-INV-001</td><td>Property inventory and schedule of condition · 12 items · 25 photographs · <span class="pill g">published</span></td><td>Volume and page count. The “how long does a report run to” question.</td></tr>
+  <tr><td class="kv">DEMO-SN-001</td><td>Snag identification and remedial schedule · 10 items · <span class="pill g">published</span></td><td>A snagging list, with trades and deadlines.</td></tr>
+  <tr><td class="kv">DEMO-EL-001</td><td>Electrical installation condition · 8 items · <span class="pill g">published</span></td><td>Grading against BS 7671.</td></tr>
+  <tr><td class="kv">DEMO-MS-001</td><td>Mechanical and HVAC installation · 8 items · <span class="pill g">published</span></td><td>Plant, commissioning risks.</td></tr>
+  <tr><td class="kv">DEMO-DM-001 / WP-002 / FQ-001</td><td>Damp · weatherproofing · fit-out quality · <span class="pill g">published</span></td><td>Breadth if someone wants a second example.</td></tr>
+  <tr><td class="kv">DEMO-MP-001</td><td>Manual photographic record · 6 items · <span class="pill g">published</span></td><td>Photographs you label yourself, issued as a PDF only.</td></tr>
+  <tr><td class="kv">Weekly registers</td><td>Fire, lifting and plant, welfare, scaffold, excavation, housekeeping · <span class="pill a">draft</span></td><td>Card 10. They are <span class="kv">drafts</span> — show the register as the record of checks, do not try to publish one live.</td></tr>
+</table>
+
+<div class="box amber">
+  <span class="h">Three things not to do</span>
+  <p><strong>Don’t publish live in the demo</strong> unless you mean to — it is a real record with your name on it, and a published version cannot be unpublished.</p>
+  <p><strong>Don’t promise that sending works end to end.</strong> Emailing extracts has not yet been used on a live job. If someone asks, say it is built and being proved on the first job — that is the honest answer and it costs you nothing.</p>
+  <p><strong>Don’t show a draft and call it finished.</strong> The register drafts and <em>DEMO-PC-001</em> (reopened, so not currently published) are the two places a sharp question could land.</p>
+</div>
+
+<h2>Three lines that must land</h2>
+<div class="box green">
+  <p><strong>1.</strong> <span class="kv">“Nothing issues that a person has not confirmed.”</span></p>
+  <p><strong>2.</strong> <span class="kv">“It may only cite what is on the list — and where nothing fits, it cites nothing at all.”</span></p>
+  <p><strong>3.</strong> <span class="kv">“What was issued stays issued.”</span></p>
+  <p style="margin-bottom:0">If you remember nothing else off this sheet, those three are the meeting.</p>
+</div>
+
+<div class="foot">
+  IB-DEMO-001 · Rev 1 · 14 October 2026 · Companion to IB-PRES-001 (12 slides, five minutes).<br />
+  Report references, item counts and states read from the Demonstration account on 14 October 2026. Figures quoted from the deck: 12 Approved Documents, 6 standards, 6 HSE/statutory. Verified from the product on 14 October 2026: twelve templates in five families, thirty languages.
+</div>
+
+</div>
+</body>
+</html>
