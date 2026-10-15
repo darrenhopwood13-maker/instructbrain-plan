@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>instructBrain - the manual</title>
+<meta name="description" content="A short manual for instructBrain: fourteen clips, one task each.">
+<style>
+  @font-face { font-family:'Audiowide'; src:url('fonts/Audiowide-Regular.ttf') format('truetype'); font-display:swap; }
+  @font-face { font-family:'Sora'; src:url('fonts/Sora.ttf') format('truetype'); font-display:swap; font-weight:100 800; }
+  :root{
+    --green:#57FF00; --navy:#203c72; --bg:#0b1220; --panel:#111c31; --panel2:#0e1729;
+    --line:#22314f; --ink:#ffffff; --dim:#a9b8d1; --dimmer:#7f8fae; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.6 'Sora',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       -webkit-font-smoothing:antialiased}
+  a{color:var(--green)}
+  header{background:linear-gradient(180deg,#203c72 0%,#182d57 100%);
+         padding:26px 20px 20px;border-bottom:1px solid #2b4a86;position:sticky;top:0;z-index:20}
+  .bar{max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+  .brand{font-family:'Audiowide',sans-serif;font-size:20px;letter-spacing:.02em}
+  .brand span{color:var(--green)}
+  .title{font-size:15px;color:#c9d6ea;letter-spacing:.16em;text-transform:uppercase;margin:0}
+  .search{position:relative}
+  .search input{background:#0e1a30;border:1px solid #2b4a86;border-radius:10px;color:#fff;
+                padding:11px 14px 11px 38px;font:inherit;font-size:14px;width:290px;max-width:70vw}
+  .search input:focus{outline:2px solid var(--green);outline-offset:1px}
+  .search svg{position:absolute;left:12px;top:11px;opacity:.6}
+  .lede{max-width:1400px;margin:14px auto 0;color:#c9d6ea;font-size:14.5px}
+  .lede b{color:#fff}
+  .layout{max-width:1400px;margin:0 auto;padding:24px 20px 80px;
+          display:grid;grid-template-columns:330px minmax(0,1fr);gap:26px;align-items:start}
+  nav{position:sticky;top:132px;background:var(--panel);border:1px solid var(--line);
+      border-radius:var(--radius);padding:10px;max-height:calc(100dvh - 170px);overflow:auto}
+  .navhead{color:var(--dimmer);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;padding:8px 10px 10px}
+  .ch{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;
+      color:var(--ink);font:inherit;font-size:14.5px;padding:10px 11px;border-radius:10px;cursor:pointer}
+  .ch:hover{background:#182541}
+  .ch[aria-current="true"]{background:#1b2c4d;box-shadow:inset 0 0 0 1px #33507f}
+  .ch .n{font-family:'Audiowide',sans-serif;font-size:12px;color:var(--green);min-width:22px;padding-top:2px}
+  .ch .t{flex:1;min-width:0}
+  .ch .t small{display:block;color:var(--dimmer);font-size:12.5px;margin-top:2px}
+  .ch .tick{color:var(--green);font-size:12px;opacity:0;padding-top:3px}
+  .ch.seen .tick{opacity:1}
+  main{min-width:0}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .stage .num{color:var(--green);font-family:'Audiowide',sans-serif;font-size:13px;letter-spacing:.14em;margin:0 0 6px}
+  h1{font-size:clamp(22px,2.4vw,30px);line-height:1.25;margin:0 0 6px}
+  .cap{color:var(--dim);margin:0 0 16px;font-size:15px}
+  .player{background:#000;border-radius:12px;overflow:hidden;position:relative}
+  .player video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+  .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;margin-top:20px}
+  h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);
+     margin:0 0 10px;font-weight:600}
+  ol.steps{margin:0;padding-left:0;list-style:none;counter-reset:s}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 12px 34px;font-size:15px}
+  ol.steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;
+    border-radius:50%;background:#1b2c4d;color:var(--green);font-family:'Audiowide',sans-serif;
+    font-size:11px;display:grid;place-items:center}
+  .watch{border-left:3px solid var(--green);background:#0e1a30;padding:13px 15px;border-radius:0 10px 10px 0;
+         font-size:14.5px;color:#dfe7f4}
+  .watch b{color:var(--green);display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
+  .pager button{background:#16233d;border:1px solid #2b4a86;color:#fff;font:inherit;font-size:14px;
+                padding:11px 15px;border-radius:10px;cursor:pointer;min-height:44px}
+  .pager button:hover:not(:disabled){background:#1c2c4c}
+  .pager button:disabled{opacity:.35;cursor:default}
+  footer{max-width:1400px;margin:0 auto;padding:0 20px 60px;color:var(--dimmer);font-size:13.5px;
+         border-top:1px solid #1d2a44;padding-top:18px}
+  .empty{color:var(--dimmer);padding:14px}
+  @media (max-width:1000px){
+    .layout{grid-template-columns:1fr;gap:18px}
+    nav{position:static;max-height:none}
+    .grid{grid-template-columns:1fr}
+  }
+  @media print{
+    header,nav,.pager,.search{display:none!important}
+    body{background:#fff;color:#111}
+    .layout{display:block;padding:0;max-width:none}
+    .stage{border:0;padding:0;break-inside:avoid;page-break-after:always}
+    .player{display:none}
+    h1,.cap{color:#111}
+    .cap,.watch,ol.steps li{color:#222}
+    .watch{background:#f3f5f8;border-left-color:#111}
+    .watch b,.stage .num{color:#111}
+    h3{color:#555}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div>
+      <div class="brand">instruct<span>Brain</span></div>
+      <p class="title">The manual</p>
+    </div>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"
+           stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>
+      <input id="q" type="search" placeholder="Search the manual" aria-label="Search the manual">
+    </div>
+  </div>
+  <p class="lede"><b>Fourteen clips, one task each.</b> Work down them in order the first time.
+     Every clip plays here - tap a chapter on the left, or use the arrows on your keyboard.</p>
+</header>
+
+<div class="layout">
+  <nav aria-label="Chapters">
+    <div class="navhead" id="navhead">14 chapters</div>
+    <div id="list"></div>
+  </nav>
+  <main>
+    <div class="stage" id="stage"></div>
+  </main>
+</div>
+
+<footer>
+  <p>Nothing in these clips created a report, changed a trade or sent anything.</p>
+  <p>Recorded against the live product. The clips stream from
+     <a href="../help/">the same files the help sheet uses</a>, so there is only one copy of each.</p>
+</footer>
+
+<script>
+const CHAPTERS = [
+  {
+    "slug": "01-set-up-the-project-directory",
+    "title": "Set up the project directory",
+    "caption": "Add the trades, the firms, and who receives what.",
+    "steps": [
+      "Add every firm you use. One firm holds as many trades as it does.",
+      "Give each row a contact - that is the address an extract is sent to later.",
+      "The directory belongs to the project, so two projects keep their own lists."
+    ],
+    "watch": "A trade with no firm behind it sits unallocated later, and the publish gate will say so."
+  },
+  {
+    "slug": "02-start-a-report",
+    "title": "Start a report",
+    "caption": "Choose how you're working, then a survey type.",
+    "steps": [
+      "Choose how you are working: a standalone report, or one inside a project.",
+      "Choose the survey type. That decides what the AI looks for and which fields exist.",
+      "Carry on to photographing - the type is set from here on."
+    ],
+    "watch": "The survey type is fixed when the report is created. Pick it before you photograph."
+  },
+  {
+    "slug": "03-capture-photos",
+    "title": "Capture photos",
+    "caption": "Take or add photos on site.",
+    "steps": [
+      "Take them in the app, keep shooting, or add them from your albums.",
+      "More than one photo can sit on an item, and one photo can carry more than one finding.",
+      "Photos stay attached to the item they were confirmed against."
+    ],
+    "watch": "A wide shot plus a close-up of the defect beats five near-identical frames."
+  },
+  {
+    "slug": "04-review-findings",
+    "title": "Review findings",
+    "caption": "Confirm or correct what the AI drafted.",
+    "steps": [
+      "Read what was drafted and correct the wording where it is wrong.",
+      "Confirm the items that are right, one by one.",
+      "Give each item a responsible trade."
+    ],
+    "watch": "The gate will not publish an item that nobody has confirmed or allocated, and it names the count."
+  },
+  {
+    "slug": "05-set-the-tone-and-language",
+    "title": "Set the tone and language",
+    "caption": "Pick the register, and the language it goes out in.",
+    "steps": [
+      "Choose the register - from formal through to plain.",
+      "Choose the language the report goes out in.",
+      "Set it in the AI brief before the report is drafted."
+    ],
+    "watch": "The tone governs the prose only. It never changes a fact, a status or an abstention."
+  },
+  {
+    "slug": "06-allocate-to-a-trade",
+    "title": "Allocate to a trade",
+    "caption": "Accept the suggested trade, or choose your own.",
+    "steps": [
+      "Each item carries a suggested trade, with the reasoning behind it.",
+      "Accept it, or pick your own from the project directory.",
+      "Where a single firm holds that trade, allocation is one press."
+    ],
+    "watch": "The suggestion is a suggestion. You are accountable for who is sent what."
+  },
+  {
+    "slug": "07-issue-the-report",
+    "title": "Issue the report",
+    "caption": "Freeze a version and generate the PDF.",
+    "steps": [
+      "Publishing freezes the version and generates the PDF.",
+      "The reference number is allocated by the system, not typed in.",
+      "Once issued, that version is fixed."
+    ],
+    "watch": "Publishing is the point of no return on that version. A later change becomes a correction, not an edit."
+  },
+  {
+    "slug": "08-share-it-with-a-client",
+    "title": "Share it with a client",
+    "caption": "Send a link that always serves the issued PDF.",
+    "steps": [
+      "Send a link rather than a file.",
+      "The link always serves the issued PDF.",
+      "A corrected report is served at the same link, as the latest version."
+    ],
+    "watch": "The link is the report. Treat it as you would the PDF itself."
+  },
+  {
+    "slug": "09-distribute-to-trades",
+    "title": "Distribute to trades",
+    "caption": "Check each extract, then send it yourself.",
+    "steps": [
+      "The plan groups items by the firm that holds the trade.",
+      "Read each extract before it goes - it shows exactly what that firm will get.",
+      "Send each one yourself. Nothing goes out on its own."
+    ],
+    "watch": "An item with no trade belongs to no firm, so it appears in no extract and nobody is told about it."
+  },
+  {
+    "slug": "10-run-a-weekly-register",
+    "title": "Run a weekly register",
+    "caption": "Fire, scaffold, welfare and the rest, week by week.",
+    "steps": [
+      "Registers are the recurring checks: fire, housekeeping, excavation, scaffold, lifting, welfare.",
+      "Each week's round is its own record, with its own points and outcomes.",
+      "Record the state you actually find, from compliant through to action required."
+    ],
+    "watch": "A register is a condition record. It reports what was found, week by week."
+  },
+  {
+    "slug": "11-capture-from-the-phone",
+    "title": "Capture from the phone",
+    "caption": "Scan the site QR and work without the dashboard.",
+    "steps": [
+      "Scan the site QR to open the field view on a handset.",
+      "Photograph and hand off, without opening the dashboard.",
+      "The photos land on the report they belong to."
+    ],
+    "watch": "The field view is deliberately just capture. The review stays on the dashboard."
+  },
+  {
+    "slug": "12-health-safety-and-housekeeping",
+    "title": "Health, safety & housekeeping",
+    "caption": "The site-safety inspection and its own outcomes.",
+    "steps": [
+      "The inspection runs on its own template, with its own outcomes.",
+      "Grade the condition you see and record the action it needs.",
+      "It feeds the site safety file as a condition record."
+    ],
+    "watch": "This one deliberately names no regulation. A condition on site is not, by itself, a legal finding."
+  },
+  {
+    "slug": "13-correct-an-issued-report",
+    "title": "Correct an issued report",
+    "caption": "Reopen, fix, reissue - the client's link stays as issued.",
+    "steps": [
+      "Reopen the report when something needs changing.",
+      "Fix it and reissue it as a new version.",
+      "The client's original link stays valid and serves the corrected issue."
+    ],
+    "watch": "The earlier version is not deleted. Both stay on the record."
+  },
+  {
+    "slug": "14-regulation-references",
+    "title": "Reference the building & H&S regulations",
+    "caption": "Which instruments a finding can name, and the switch in the AI brief.",
+    "steps": [
+      "Where a finding engages an instrument, it can name it.",
+      "The instruments come from the survey type's own list - nothing else, and never a clause number.",
+      "The AI brief carries the switch: regulation references on, or off."
+    ],
+    "watch": "Off withholds the list before the AI ever sees it. Items that already carry a reference keep it."
+  }
+];
+const CLIP_BASE = "../help/";
+const POSTER_BASE = "../help/posters/";
+const SEEN_KEY = "instructbrain.manual.seen";
+
+const list = document.getElementById("list");
+const stage = document.getElementById("stage");
+const navhead = document.getElementById("navhead");
+const q = document.getElementById("q");
+
+const seen = new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || "[]"));
+const pad = (i) => String(i + 1).padStart(2, "0");
+
+function drawList(filter) {
+  const needle = (filter || "").trim().toLowerCase();
+  list.innerHTML = "";
+  let shown = 0;
+  CHAPTERS.forEach((ch, i) => {
+    const hay = (ch.title + " " + ch.caption + " " + ch.steps.join(" ")).toLowerCase();
+    if (needle && !hay.includes(needle)) return;
+    shown++;
+    const b = document.createElement("button");
+    b.className = "ch" + (seen.has(ch.slug) ? " seen" : "");
+    b.setAttribute("aria-current", String(current === i));
+    b.innerHTML = `<span class="n">${pad(i)}</span>
+      <span class="t">${ch.title}<small>${ch.caption}</small></span>
+      <span class="tick">watched</span>`;
+    b.addEventListener("click", () => show(i));
+    list.appendChild(b);
+  });
+  navhead.textContent = needle
+    ? `${shown} of ${CHAPTERS.length} chapters`
+    : `${CHAPTERS.length} chapters`;
+  if (!shown) {
+    const p = document.createElement("p");
+    p.className = "empty";
+    p.textContent = "Nothing matches that.";
+    list.appendChild(p);
+  }
+}
+
+let current = 0;
+
+function show(i) {
+  current = Math.max(0, Math.min(CHAPTERS.length - 1, i));
+  const ch = CHAPTERS[current];
+  const src = CLIP_BASE + ch.slug + ".mp4";
+  const poster = POSTER_BASE + ch.slug + ".jpg";
+  stage.innerHTML = `
+    <p class="num">CHAPTER ${pad(current)}</p>
+    <h1>${ch.title}</h1>
+    <p class="cap">${ch.caption}</p>
+    <div class="player"><video id="v" src="${src}" poster="${poster}" controls playsinline
+      preload="metadata"></video></div>
+    <div class="grid">
+      <div><h3>What you do</h3><ol class="steps">${ch.steps.map((s) => `<li>${s}</li>`).join("")}</ol></div>
+      <div><h3>Watch out</h3><div class="watch"><b>Watch out</b>${ch.watch}</div></div>
+    </div>
+    <div class="pager">
+      <button id="prev" ${current === 0 ? "disabled" : ""}>&larr; Chapter ${pad(Math.max(0, current - 1))}</button>
+      <button id="next" ${current === CHAPTERS.length - 1 ? "disabled" : ""}>Chapter ${pad(Math.min(CHAPTERS.length - 1, current + 1))} &rarr;</button>
+    </div>`;
+  const v = document.getElementById("v");
+  const markSeen = () => {
+    if (!seen.has(ch.slug)) {
+      seen.add(ch.slug);
+      localStorage.setItem(SEEN_KEY, JSON.stringify([...seen]));
+      drawList(q.value);
+    }
+  };
+  v.addEventListener("playing", markSeen);
+  // A click is a gesture, so the browser allows sound. If it still refuses, the
+  // controls are right there and nothing is lost.
+  v.play().catch(() => {});
+  document.getElementById("prev").addEventListener("click", () => show(current - 1));
+  document.getElementById("next").addEventListener("click", () => show(current + 1));
+  history.replaceState(null, "", "#" + ch.slug);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+q.addEventListener("input", () => drawList(q.value));
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === "ArrowRight") show(current + 1);
+  if (e.key === "ArrowLeft") show(current - 1);
+});
+
+const fromHash = CHAPTERS.findIndex((c) => c.slug === location.hash.slice(1));
+drawList("");
+show(fromHash >= 0 ? fromHash : 0);
+</script>
+</body>
+</html>
