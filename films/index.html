@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Two films - instructBrain and instructSite</title>
+<title>The demo film, plus two product films - instructBrain</title>
 <meta name="theme-color" content="#0b1b3a">
-<meta name="description" content="Two new product films, built from real screens and real issued reports.">
+<meta name="description" content="The instructBrain demo film - the walkthrough replaced by a six and a half minute film - plus two product films, all built from real screens and real issued reports.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800" rel="stylesheet">
@@ -33,6 +33,12 @@
   .film{border-radius:16px;overflow:hidden;background:#000;aspect-ratio:9/16;max-height:70vh;margin:0 auto 14px;
         box-shadow:0 24px 60px -22px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.10)}
   .film video{width:100%;height:100%;display:block;object-fit:cover}
+  .film16{border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9;margin:0 0 16px;
+          box-shadow:0 30px 70px -26px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.10)}
+  .film16 video{width:100%;height:100%;display:block}
+  .card.demo{--a:var(--green);--ap:var(--greenp);margin:0 0 clamp(20px,3vw,40px)}
+  .tag{font-family:var(--font-s);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+       color:var(--ap);font-weight:700;vertical-align:middle;margin-left:10px}
   .cap{font-family:var(--font-d);font-weight:700;font-size:17px;line-height:1.45;margin:0 0 12px}
   .beats{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:7px}
   .beats li{display:flex;gap:10px;font-size:14px;line-height:1.5;color:rgba(255,255,255,.86)}
@@ -52,12 +58,35 @@
 <body>
 <div class="bar"></div>
 <header>
-  <h1>Two new films</h1>
-  <p class="sub">Rebuilt from real screens and real issued reports, not interface mockups. Both render at
-  2160&times;3840 and are delivered at 1080&times;1920, so text and product screens stay sharp. Captions are
-  burned in, so they read with the sound off.</p>
+  <h1>The demo film</h1>
+  <p class="sub">The film that opens a demo now, so the product does the talking and the live walkthrough
+  happens afterwards. Landscape, six and a half minutes, captions burned in so it reads with the sound
+  off. Below it, the two portrait product films - all three built from real screens and real issued
+  reports, not interface mockups.</p>
 </header>
 <main>
+  <section class="card demo">
+    <h3 class="wm"><i>instruct</i><b>Brain</b><span class="tag">demo film &middot; first cut</span></h3>
+    <p class="meta">6:30 &middot; landscape 1920&times;1080 &middot; captions burned in</p>
+    <div class="film16"><video src="instructbrain-demo-film.mp4" controls playsinline
+         preload="metadata" poster="instructbrain-demo-film-poster.jpg"></video></div>
+    <p class="cap">One film instead of eight minutes of talking. The hook, the live run on real screens,
+    the regulation spine, the firms, the close - then the demo goes live.</p>
+    <ul class="beats">
+      <li><span>01</span> The hook: how a site report usually happens</li>
+      <li><span>02</span> What it is, in one line</li>
+      <li><span>03</span> The live run: capture, the draft, the person checking it</li>
+      <li><span>04</span> The document: cover, index, schedule, one item page</li>
+      <li><span>05</span> The spine: real citations, a clause a person chooses</li>
+      <li><span>06</span> Subbies and close-out, per trade</li>
+      <li><span>07</span> The close, then hand over to the live product</li>
+    </ul>
+    <div class="links">
+      <a href="instructbrain-demo-film.mp4" download>Download &middot; 1920&times;1080</a>
+      <a href="https://instructbrain.com" target="_blank" rel="noreferrer">instructbrain.com</a>
+    </div>
+  </section>
+
   <div class="pair">
     <section class="card brain">
       <h3 class="wm"><i>instruct</i><b>Brain</b></h3>
@@ -103,6 +132,13 @@
 
   <h2>What is real, and what is not</h2>
   <ul class="notes">
+    <li><b>The demo film.</b> Cut to its narration: every shot's length is derived from the measured
+    voice, so the picture follows the voice rather than the voice being squeezed onto the pictures. The
+    narration is machine-generated with a free British voice, and the music bed is Creative Commons Zero
+    (Freesound 345010 - public domain, no attribution required). Every screen is the live product, every
+    report page is rendered from a real issued PDF at 300 DPI, and the sample report is demo-account
+    data. No client is named. It is a <b>first cut</b>: the words are the thing to settle before it is
+    voiced with the product's own voice.</li>
     <li><b>Real product screens.</b> Every instructSite frame is the live instructsite.ai, captured at
     double resolution. The instructBrain frames are the product's own pages and its real issued report
     pages, rendered from the source PDFs at 300&nbsp;DPI.</li>
