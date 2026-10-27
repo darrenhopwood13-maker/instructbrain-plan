@@ -22,6 +22,12 @@
   .cap { color:#a9b8d1; font-size:14px; margin:0 0 14px; }
   video { width:100%; border-radius:10px; background:#000; display:block; }
   .pending { color:#7f8fae; font-size:14px; margin:0; }
+  .hero { background:#131f36; border:1px solid #2f5c17; border-radius:14px;
+          padding:20px; margin:0 0 26px; }
+  .hero h2 { font-size:24px; margin:0 0 6px; }
+  .hero .dl { display:inline-block; margin:12px 0 0; color:var(--green); font-size:14px;
+              text-decoration:none; border-bottom:1px solid rgba(87,255,0,.45); }
+  .note-film { color:#7f8fae; font-size:13px; margin:10px 0 0; }
   footer { color:#7f8fae; font-size:13px; border-top:1px solid #1d2a44; margin-top:26px; padding-top:16px; }
 </style>
 </head>
@@ -31,6 +37,20 @@
   <p>Fourteen help clips. One task each, narrated.</p>
 </div></header>
 <main>
+  <article class="hero">
+    <p class="num">The film</p>
+    <h2>instructBrain, in ninety seconds</h2>
+    <p class="cap">Photograph the site, review what the AI drafts, and publish a report whose
+    findings can name the regulation behind them. Cut from the clips below and from the
+    report&#x27;s own printed pages.</p>
+    <video controls playsinline preload="metadata" poster="instructbrain-promo-poster.jpg">
+      <source src="instructbrain-promo-90s.mp4" type="video/mp4">
+    </video>
+    <a class="dl" href="instructbrain-promo-90s.mp4" download>Download &middot; 1920&times;1080, 14 MB</a>
+    <p class="note-film">Every screen in this film is the live product, and the printed pages are
+    its own output rendered from the PDF. No client is named. Narration and music are
+    machine-generated. Captions are burned in, so it plays muted.</p>
+  </article>
   <article class="clip">
     <p class="num">01</p>
     <h2>Set up the project directory</h2>
